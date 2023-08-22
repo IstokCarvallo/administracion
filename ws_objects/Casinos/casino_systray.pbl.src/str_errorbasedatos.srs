@@ -1,0 +1,8 @@
+﻿$PBExportHeader$str_errorbasedatos.srs
+global type str_errorbasedatos from structure
+	string		titulo
+	long		numero
+	string		texto
+	string		mensajepantalla
+end type
+

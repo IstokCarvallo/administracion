@@ -1,0 +1,95 @@
+﻿$PBExportHeader$dw_mues_personal_empresas.srd
+release 12;
+datawindow(units=3 timer_interval=0 color=16777215 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 635 print.margin.right = 635 print.margin.top = 635 print.margin.bottom = 635 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=952 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=502 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=char(10) updatewhereclause=yes key=yes name=pers_codigo dbname="remupersonal.pers_codigo" )
+ column=(type=char(10) updatewhereclause=yes name=pers_rutemp dbname="remupersonal.pers_rutemp" )
+ column=(type=char(25) updatewhereclause=yes name=pers_apepat dbname="remupersonal.pers_apepat" )
+ column=(type=char(25) updatewhereclause=yes name=pers_apemat dbname="remupersonal.pers_apemat" )
+ column=(type=char(25) updatewhereclause=yes name=pers_nombre dbname="remupersonal.pers_nombre" )
+ column=(type=char(15) updatewhereclause=yes name=pers_nrotar dbname="remupersonal.pers_nrotar" )
+ column=(type=char(1) updatewhereclause=yes name=pers_sexo dbname="remupersonal.pers_sexo" values="Masculino	M/Femenino	F/" )
+ column=(type=date updatewhereclause=yes name=pers_fecnac dbname="remupersonal.pers_fecnac" )
+ column=(type=char(1) updatewhereclause=yes name=pers_estciv dbname="remupersonal.pers_estciv" values="Soltero	S/Casado	C/Viudo	V/Divorciado	D/" )
+ column=(type=char(20) updatewhereclause=yes name=pers_nacion dbname="remupersonal.pers_nacion" )
+ column=(type=char(40) updatewhereclause=yes name=pers_direcc dbname="remupersonal.pers_direcc" )
+ column=(type=decimal(0) updatewhereclause=yes name=ciud_codigo dbname="remupersonal.ciud_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=comu_codigo dbname="remupersonal.comu_codigo" )
+ column=(type=char(30) updatewhereclause=yes name=pers_nrofon dbname="remupersonal.pers_nrofon" )
+ column=(type=decimal(0) updatewhereclause=yes name=pers_estado dbname="remupersonal.pers_estado" values="No Liquidable	0/Vigente	1/Finiquitado	2/" )
+ column=(type=decimal(0) updatewhereclause=yes name=pers_pensio dbname="remupersonal.pers_pensio" values="Si	1/No	0/" )
+ column=(type=decimal(0) updatewhereclause=yes name=afps_codigo dbname="remupersonal.afps_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=isap_codigo dbname="remupersonal.isap_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=pers_plansa dbname="remupersonal.pers_plansa" values="En Pesos	1/Porcentaje	2/En U.F.	3/" )
+ column=(type=date updatewhereclause=yes name=pers_fecpla dbname="remupersonal.pers_fecpla" )
+ column=(type=decimal(0) updatewhereclause=yes name=pers_ley2ad dbname="remupersonal.pers_ley2ad" values="Si	1/No	0/" )
+ column=(type=decimal(0) updatewhereclause=yes name=sucu_codigo dbname="remupersonal.sucu_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=cont_codigo dbname="remupersonal.cont_codigo" )
+ column=(type=date updatewhereclause=yes name=pers_fecing dbname="remupersonal.pers_fecing" )
+ column=(type=date updatewhereclause=yes name=pers_fecniv dbname="remupersonal.pers_fecniv" )
+ column=(type=date updatewhereclause=yes name=pers_fecfin dbname="remupersonal.pers_fecfin" )
+ column=(type=date updatewhereclause=yes name=pers_ingrol dbname="remupersonal.pers_ingrol" )
+ column=(type=date updatewhereclause=yes name=pers_finila dbname="remupersonal.pers_finila" )
+ column=(type=decimal(0) updatewhereclause=yes name=pers_sermed dbname="remupersonal.pers_sermed" values="Si	1/No	0/" )
+ column=(type=decimal(0) updatewhereclause=yes name=supa_codigo dbname="remupersonal.supa_codigo" )
+ column=(type=decimal(0) updatewhereclause=yes name=smce_codigo dbname="remupersonal.smce_codigo" )
+ column=(type=char(200) updatewhereclause=yes name=pers_nomcom dbname="pers_nomcom" )
+ column=(type=char(20) updatewhereclause=yes name=empr_nombre dbname="empr_nombre" )
+ column=(type=decimal(0) updatewhereclause=yes name=empr_codigo dbname="empr_codigo" )
+ retrieve="  SELECT ~"dba~".~"remupersonal~".~"pers_codigo~",   
+         ~"dba~".~"remupersonal~".~"pers_rutemp~",   
+         ~"dba~".~"remupersonal~".~"pers_apepat~",   
+         ~"dba~".~"remupersonal~".~"pers_apemat~",   
+         ~"dba~".~"remupersonal~".~"pers_nombre~",   
+         ~"dba~".~"remupersonal~".~"pers_nrotar~",   
+         ~"dba~".~"remupersonal~".~"pers_sexo~",   
+         ~"dba~".~"remupersonal~".~"pers_fecnac~",   
+         ~"dba~".~"remupersonal~".~"pers_estciv~",   
+         ~"dba~".~"remupersonal~".~"pers_nacion~",   
+         ~"dba~".~"remupersonal~".~"pers_direcc~",   
+         ~"dba~".~"remupersonal~".~"ciud_codigo~",   
+         ~"dba~".~"remupersonal~".~"comu_codigo~",   
+         ~"dba~".~"remupersonal~".~"pers_nrofon~",   
+         ~"dba~".~"remupersonal~".~"pers_estado~",   
+         ~"dba~".~"remupersonal~".~"pers_pensio~",   
+         ~"dba~".~"remupersonal~".~"afps_codigo~",   
+         ~"dba~".~"remupersonal~".~"isap_codigo~",   
+         ~"dba~".~"remupersonal~".~"pers_plansa~",   
+         ~"dba~".~"remupersonal~".~"pers_fecpla~",   
+         ~"dba~".~"remupersonal~".~"pers_ley2ad~",   
+         ~"dba~".~"remupersonal~".~"sucu_codigo~",   
+         ~"dba~".~"remupersonal~".~"cont_codigo~",   
+         ~"dba~".~"remupersonal~".~"pers_fecing~",   
+         ~"dba~".~"remupersonal~".~"pers_fecniv~",   
+         ~"dba~".~"remupersonal~".~"pers_fecfin~",   
+         ~"dba~".~"remupersonal~".~"pers_ingrol~",   
+         ~"dba~".~"remupersonal~".~"pers_finila~",   
+         ~"dba~".~"remupersonal~".~"pers_sermed~",   
+         ~"dba~".~"remupersonal~".~"supa_codigo~",   
+         ~"dba~".~"remupersonal~".~"smce_codigo~",   
+         Convert(Char(200), pers_apepat + ' ' + pers_apemat + ' ' + pers_nombre) as pers_nomcom,   
+         convert(char(20), :empresa ) as empr_nombre,   
+         Convert(Numeric, :codigo) as empr_codigo  
+    FROM ~"dba~".~"remupersonal~"  
+   WHERE ~"dba~".~"remupersonal~".~"pers_estado~" in (1)
+" update="dbo.remupersonal" updatewhere=0 updatekeyinplace=no arguments=(("empresa", string),("codigo", number)) )
+column(band=detail id=34 alignment="0" tabsequence=32766 border="0" color="0" x="79" y="26" height="370" width="396" format="[general]" html.valueishtml="0"  name=empr_codigo visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=32 alignment="0" tabsequence=32766 border="0" color="0" x="555" y="26" height="370" width="2222" format="[general]" html.valueishtml="0"  name=pers_nomcom visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=33 alignment="0" tabsequence=32766 border="0" color="0" x="2883" y="26" height="370" width="5529" format="[general]" html.valueishtml="0"  name=empr_nombre visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="
+Empresa" border="6" color="16777215" x="79" y="79" height="820" width="2698" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8388608" background.transparency="0" background.gradient.color="16711680" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="5" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=header alignment="2" text="
+Personal" border="6" color="16777215" x="2883" y="79" height="820" width="5529" html.valueishtml="0"  name=pers_rutemp_t visible="1"  font.face="Arial" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8388608" background.transparency="0" background.gradient.color="16711680" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="5" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="0" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()

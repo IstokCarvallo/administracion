@@ -1,0 +1,83 @@
+﻿$PBExportHeader$dw_mues_controlingreso_casino.srd
+release 19;
+datawindow(units=0 timer_interval=0 color=16777215 brushmode=0 transparency=0 gradient.angle=0 gradient.color=8421504 gradient.focus=0 gradient.repetition.count=0 gradient.repetition.length=100 gradient.repetition.mode=0 gradient.scale=100 gradient.spread=100 gradient.transparency=0 picture.blur=0 picture.clip.bottom=0 picture.clip.left=0 picture.clip.right=0 picture.clip.top=0 picture.mode=0 picture.scale.x=100 picture.scale.y=100 picture.transparency=0 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.background=no print.preview.background=no print.preview.outline=yes hidegrayline=no showbackcoloronxp=no picture.file="" )
+header(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+summary(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+footer(height=0 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+detail(height=396 color="536870912" transparency="0" gradient.color="8421504" gradient.transparency="0" gradient.angle="0" brushmode="0" gradient.repetition.mode="0" gradient.repetition.count="0" gradient.repetition.length="100" gradient.focus="0" gradient.scale="100" gradient.spread="100" )
+table(column=(type=time update=yes updatewhereclause=yes name=camv_horaco dbname="Casino_MovtoColaciones.camv_horaco" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=cape_codigo dbname="Casino_MovtoColaciones.cape_codigo" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=camv_rutinv dbname="Casino_MovtoColaciones.camv_rutinv" )
+ column=(type=date update=yes updatewhereclause=yes key=yes name=camv_fechac dbname="Casino_MovtoColaciones.camv_fechac" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=zona_codigo dbname="Casino_MovtoColaciones.zona_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=caar_codigo dbname="Casino_MovtoColaciones.caar_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=camv_secuen dbname="Casino_MovtoColaciones.camv_secuen" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=tico_codigo dbname="Casino_MovtoColaciones.tico_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=caco_codigo dbname="Casino_MovtoColaciones.caco_codigo" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=camv_tipope dbname="Casino_MovtoColaciones.camv_tipope" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=camv_tdieta dbname="Casino_MovtoColaciones.camv_tdieta" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=camv_appain dbname="Casino_MovtoColaciones.camv_appain" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=camv_apmain dbname="Casino_MovtoColaciones.camv_apmain" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=camv_nominv dbname="Casino_MovtoColaciones.camv_nominv" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=camv_estado dbname="Casino_MovtoColaciones.camv_estado" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=camv_invcur dbname="Casino_MovtoColaciones.camv_invcur" )
+ column=(type=char(25) updatewhereclause=yes name=cape_apepat dbname="Casino_PersonaColacion.cape_apepat" )
+ column=(type=char(25) updatewhereclause=yes name=cape_apemat dbname="Casino_PersonaColacion.cape_apemat" )
+ column=(type=char(30) updatewhereclause=yes name=cape_nombre dbname="Casino_PersonaColacion.cape_nombre" )
+ column=(type=char(40) updatewhereclause=yes name=caco_nombre dbname="Casino_Colaciones.caco_nombre" )
+ column=(type=char(30) updatewhereclause=yes name=tico_nombre dbname="Casino_TipoColacion.tico_nombre" )
+ column=(type=char(27) updatewhereclause=yes name=lectura dbname="LECTURA" )
+ column=(type=time update=yes updatewhereclause=yes name=camv_hormvt dbname="Casino_MovtoColaciones.camv_hormvt" )
+ retrieve="  SELECT dbo.casino_movtocolaciones.camv_horaco,   
+         dbo.casino_movtocolaciones.cape_codigo,   
+         dbo.casino_movtocolaciones.camv_rutinv,   
+         dbo.casino_movtocolaciones.camv_fechac,   
+         dbo.casino_movtocolaciones.zona_codigo,   
+         dbo.casino_movtocolaciones.caar_codigo,   
+         dbo.casino_movtocolaciones.camv_secuen,   
+         dbo.casino_movtocolaciones.tico_codigo,   
+         dbo.casino_movtocolaciones.caco_codigo,   
+         dbo.casino_movtocolaciones.camv_tipope,   
+         dbo.casino_movtocolaciones.camv_tdieta,   
+         dbo.casino_movtocolaciones.camv_appain,   
+         dbo.casino_movtocolaciones.camv_apmain,   
+         dbo.casino_movtocolaciones.camv_nominv,   
+         dbo.casino_movtocolaciones.camv_estado,   
+         dbo.casino_movtocolaciones.camv_invcur,   
+         dbo.casino_personacolacion.cape_apepat,   
+         dbo.casino_personacolacion.cape_apemat,   
+         dbo.casino_personacolacion.cape_nombre,   
+         dbo.casino_colaciones.caco_nombre,   
+         dbo.casino_tipocolacion.tico_nombre,   
+         CONVERT(CHAR(27), '') AS LECTURA,   
+         dbo.casino_movtocolaciones.camv_hormvt  
+    FROM dbo.casino_movtocolaciones,   
+         dbo.casino_personacolacion,   
+         dbo.casino_colaciones,   
+         dbo.casino_tipocolacion  
+   WHERE ( dbo.casino_movtocolaciones.caar_codigo = dbo.casino_personacolacion.caar_codigo ) and  
+         ( dbo.casino_movtocolaciones.cape_codigo = dbo.casino_personacolacion.cape_codigo ) and  
+         ( dbo.casino_movtocolaciones.zona_codigo = dbo.casino_personacolacion.zona_codigo ) and  
+         ( dbo.casino_colaciones.zona_codigo = dbo.casino_movtocolaciones.zona_codigo ) and  
+         ( dbo.casino_colaciones.tico_codigo = dbo.casino_movtocolaciones.tico_codigo ) and  
+         ( dbo.casino_colaciones.caco_codigo = dbo.casino_movtocolaciones.caco_codigo ) and  
+         ( dbo.casino_movtocolaciones.zona_codigo = dbo.casino_tipocolacion.zona_codigo ) and  
+         ( dbo.casino_movtocolaciones.tico_codigo = dbo.casino_tipocolacion.tico_codigo ) and  
+         ( dbo.casino_movtocolaciones.tico_codigo = :colacion ) AND  
+         ( dbo.casino_movtocolaciones.camv_fechac = :fecha ) AND  
+         ( :rut in (dbo.casino_movtocolaciones.cape_codigo, dbo.casino_movtocolaciones.camv_rutinv) )    
+" update="dbo.casino_movtocolaciones" updatewhere=1 updatekeyinplace=yes arguments=(("rut", string),("fecha", date),("colacion", number)) )
+text(band=header alignment="0" text="test" border="0" color="33554432" x="41" y="36" height="428" width="2903" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-70" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+text(band=detail alignment="0" text="" border="6" color="33554432" x="5" y="0" height="380" width="3250" html.valueishtml="0"  name=t_2 visible="1"  font.face="Arial" font.height="-12" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="16711680" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+column(band=detail id=22 alignment="0" tabsequence=30 border="5" color="65535" x="41" y="36" height="304" width="3173" format="[general]" html.valueishtml="0"  name=lectura visible="1" edit.limit=27 edit.case=upper edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-36" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="8388608" background.transparency="0" background.gradient.color="8421504" background.gradient.transparency="0" background.gradient.angle="0" background.brushmode="0" background.gradient.repetition.mode="0" background.gradient.repetition.count="0" background.gradient.repetition.length="100" background.gradient.focus="0" background.gradient.scale="100" background.gradient.spread="100" tooltip.backcolor="134217752" tooltip.delay.initial="0" tooltip.delay.visible="32000" tooltip.enabled="0" tooltip.hasclosebutton="0" tooltip.icon="0" tooltip.isbubble="0" tooltip.maxwidth="0" tooltip.textcolor="134217751" tooltip.transparency="0" transparency="0" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" nativepdf.customsize=0 nativepdf.customorientation=0 nativepdf.pdfstandard=0 nativepdf.useprintspec=no )
+export.xhtml()
+ 

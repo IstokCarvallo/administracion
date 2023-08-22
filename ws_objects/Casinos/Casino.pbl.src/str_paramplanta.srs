@@ -1,0 +1,20 @@
+﻿$PBExportHeader$str_paramplanta.srs
+global type str_paramplanta from structure
+	integer		codigoplanta
+	string		administrador
+	integer		destare
+	integer		controlenvase
+	integer		guiaenvase
+	integer		codigoespecie
+	integer		codigovariedad
+	integer		codigoservicio
+	integer		plantaadminist
+	integer		diasretraso
+	integer		productorempresa
+	integer		etiquetaembalaje
+	integer		pesajebins
+	decimal { 2 }		porcentajeiva
+	integer		poolventa
+	integer		poolretiro
+end type
+

@@ -1,0 +1,13 @@
+﻿$PBExportHeader$str_mant.srs
+global type str_mant from structure
+	string		argumento[]
+	datawindow		dw
+	datawindow		dw2
+	boolean		agrega
+	boolean		borra
+	boolean		solo_consulta
+	integer		respuesta
+	string		tipo
+	boolean		usuariosoloconsulta
+end type
+

@@ -1,0 +1,1650 @@
+﻿$PBExportHeader$m_principal.srm
+$PBExportComments$Menú de Sistema
+forward
+global type m_principal from m_sys_frame
+end type
+type m_conectividad from menu within m_aplicacion
+end type
+type m_proveedoresyservicios from menu within m_aplicacion
+end type
+type m_proveedores from menu within m_proveedoresyservicios
+end type
+type m_proveedoresserviciocasino from menu within m_proveedoresyservicios
+end type
+type m_proveedoresyservicios from menu within m_aplicacion
+m_proveedores m_proveedores
+m_proveedoresserviciocasino m_proveedoresserviciocasino
+end type
+type m_personalparacolación from menu within m_aplicacion
+end type
+type m_contactoporarea from menu within m_aplicacion
+end type
+type m_colaciones from menu within m_aplicacion
+end type
+type m_valorcolación from menu within m_aplicacion
+end type
+type m_horariosdecolaciones from menu within m_aplicacion
+end type
+type m_parametroscasino from menu within m_aplicacion
+end type
+type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_conectividad m_conectividad
+m_proveedoresyservicios m_proveedoresyservicios
+m_personalparacolación m_personalparacolación
+m_contactoporarea m_contactoporarea
+m_colaciones m_colaciones
+m_valorcolación m_valorcolación
+m_horariosdecolaciones m_horariosdecolaciones
+m_parametroscasino m_parametroscasino
+end type
+type m_0 from menu within m_movimientos
+end type
+type m_pedidos from menu within m_movimientos
+end type
+type m_movimientos from m_sys_frame`m_movimientos within m_principal
+m_0 m_0
+m_pedidos m_pedidos
+end type
+type m_controlcolaciones from menu within m_procesos
+end type
+type m_aprobaciondepedidos from menu within m_procesos
+end type
+type m_valescontratista from menu within m_procesos
+end type
+type m_genera from menu within m_valescontratista
+end type
+type m_entrega from menu within m_valescontratista
+end type
+type m_recepciona from menu within m_valescontratista
+end type
+type m_valescontratista from menu within m_procesos
+m_genera m_genera
+m_entrega m_entrega
+m_recepciona m_recepciona
+end type
+type m_procesos from m_sys_frame`m_procesos within m_principal
+m_controlcolaciones m_controlcolaciones
+m_aprobaciondepedidos m_aprobaciondepedidos
+m_valescontratista m_valescontratista
+end type
+type m_consumosdiarios from menu within m_informes
+end type
+type m_colacionesporarea from menu within m_informes
+end type
+type m_proformafacturaservicios from menu within m_informes
+end type
+type m_informes from m_sys_frame`m_informes within m_principal
+m_consumosdiarios m_consumosdiarios
+m_colacionesporarea m_colacionesporarea
+m_proformafacturaservicios m_proformafacturaservicios
+end type
+type m_1 from menu within m_principal
+end type
+global type m_principal from m_sys_frame
+m_1 m_1
+end type
+end forward
+
+global type m_principal from m_sys_frame
+m_1 m_1
+end type
+global m_principal m_principal
+
+on m_principal.create
+m_principal=this
+call super::create
+this.m_1=create m_1
+this.Item[UpperBound(this.Item)+1]=this.m_1
+end on
+
+on m_principal.destroy
+call super::destroy
+destroy(this.m_1)
+end on
+
+type m_file from m_sys_frame`m_file within m_principal
+end type
+
+on m_file.create
+call super::create
+end on
+
+on m_file.destroy
+call super::destroy
+end on
+
+type m_controldeaccesos from m_sys_frame`m_controldeaccesos within m_file
+end type
+
+on m_controldeaccesos.create
+call super::create
+end on
+
+on m_controldeaccesos.destroy
+call super::destroy
+end on
+
+type m_visordeaccesos from m_sys_frame`m_visordeaccesos within m_controldeaccesos
+end type
+
+on m_visordeaccesos.create
+call super::create
+end on
+
+on m_visordeaccesos.destroy
+call super::destroy
+end on
+
+type m_depuracióndeaccesos from m_sys_frame`m_depuracióndeaccesos within m_controldeaccesos
+end type
+
+on m_depuracióndeaccesos.create
+call super::create
+end on
+
+on m_depuracióndeaccesos.destroy
+call super::destroy
+end on
+
+type m_rayita2000 from m_sys_frame`m_rayita2000 within m_controldeaccesos
+end type
+
+on m_rayita2000.create
+call super::create
+end on
+
+on m_rayita2000.destroy
+call super::destroy
+end on
+
+type m_mantencióndeaccesos from m_sys_frame`m_mantencióndeaccesos within m_controldeaccesos
+end type
+
+on m_mantencióndeaccesos.create
+call super::create
+end on
+
+on m_mantencióndeaccesos.destroy
+call super::destroy
+end on
+
+type m_sucursalesyuadministrativas from m_sys_frame`m_sucursalesyuadministrativas within m_mantencióndeaccesos
+end type
+
+on m_sucursalesyuadministrativas.create
+call super::create
+end on
+
+on m_sucursalesyuadministrativas.destroy
+call super::destroy
+end on
+
+type m_accesodegruposalsistema from m_sys_frame`m_accesodegruposalsistema within m_mantencióndeaccesos
+end type
+
+on m_accesodegruposalsistema.create
+call super::create
+end on
+
+on m_accesodegruposalsistema.destroy
+call super::destroy
+end on
+
+type m_gruposyusuarios from m_sys_frame`m_gruposyusuarios within m_mantencióndeaccesos
+end type
+
+on m_gruposyusuarios.create
+call super::create
+end on
+
+on m_gruposyusuarios.destroy
+call super::destroy
+end on
+
+type m_rayita2003 from m_sys_frame`m_rayita2003 within m_mantencióndeaccesos
+end type
+
+on m_rayita2003.create
+call super::create
+end on
+
+on m_rayita2003.destroy
+call super::destroy
+end on
+
+type m_accesosdeusuarios from m_sys_frame`m_accesosdeusuarios within m_mantencióndeaccesos
+end type
+
+on m_accesosdeusuarios.create
+call super::create
+end on
+
+on m_accesosdeusuarios.destroy
+call super::destroy
+end on
+
+type m_tipodeadministraciónsistema from m_sys_frame`m_tipodeadministraciónsistema within m_mantencióndeaccesos
+end type
+
+on m_tipodeadministraciónsistema.create
+call super::create
+end on
+
+on m_tipodeadministraciónsistema.destroy
+call super::destroy
+end on
+
+type m_rayita2002 from m_sys_frame`m_rayita2002 within m_controldeaccesos
+end type
+
+on m_rayita2002.create
+call super::create
+end on
+
+on m_rayita2002.destroy
+call super::destroy
+end on
+
+type m_informesdeaccesos from m_sys_frame`m_informesdeaccesos within m_controldeaccesos
+end type
+
+on m_informesdeaccesos.create
+call super::create
+end on
+
+on m_informesdeaccesos.destroy
+call super::destroy
+end on
+
+type m_informedesucursalesyuadministrativas from m_sys_frame`m_informedesucursalesyuadministrativas within m_informesdeaccesos
+end type
+
+on m_informedesucursalesyuadministrativas.create
+call super::create
+end on
+
+on m_informedesucursalesyuadministrativas.destroy
+call super::destroy
+end on
+
+type m_informedegruposyusuarios from m_sys_frame`m_informedegruposyusuarios within m_informesdeaccesos
+end type
+
+on m_informedegruposyusuarios.create
+call super::create
+end on
+
+on m_informedegruposyusuarios.destroy
+call super::destroy
+end on
+
+type m_informedesistemasygrupos from m_sys_frame`m_informedesistemasygrupos within m_informesdeaccesos
+end type
+
+on m_informedesistemasygrupos.create
+call super::create
+end on
+
+on m_informedesistemasygrupos.destroy
+call super::destroy
+end on
+
+type m_informedeaccesoalsistema from m_sys_frame`m_informedeaccesoalsistema within m_informesdeaccesos
+end type
+
+on m_informedeaccesoalsistema.create
+call super::create
+end on
+
+on m_informedeaccesoalsistema.destroy
+call super::destroy
+end on
+
+type m_informeaccesodeusuariosaaplicaciones from m_sys_frame`m_informeaccesodeusuariosaaplicaciones within m_informesdeaccesos
+end type
+
+on m_informeaccesodeusuariosaaplicaciones.create
+call super::create
+end on
+
+on m_informeaccesodeusuariosaaplicaciones.destroy
+call super::destroy
+end on
+
+type m_rayita2001 from m_sys_frame`m_rayita2001 within m_controldeaccesos
+end type
+
+on m_rayita2001.create
+call super::create
+end on
+
+on m_rayita2001.destroy
+call super::destroy
+end on
+
+type m_cambiodepassword from m_sys_frame`m_cambiodepassword within m_controldeaccesos
+end type
+
+on m_cambiodepassword.create
+call super::create
+end on
+
+on m_cambiodepassword.destroy
+call super::destroy
+end on
+
+type m_calculadora from m_sys_frame`m_calculadora within m_file
+end type
+
+on m_calculadora.create
+call super::create
+end on
+
+on m_calculadora.destroy
+call super::destroy
+end on
+
+type m_-0 from m_sys_frame`m_-0 within m_file
+end type
+
+on m_-0.create
+call super::create
+end on
+
+on m_-0.destroy
+call super::destroy
+end on
+
+type m_configurarimpresora from m_sys_frame`m_configurarimpresora within m_file
+end type
+
+on m_configurarimpresora.create
+call super::create
+end on
+
+on m_configurarimpresora.destroy
+call super::destroy
+end on
+
+type m_-1 from m_sys_frame`m_-1 within m_file
+end type
+
+on m_-1.create
+call super::create
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_cerrarventanaactiva from m_sys_frame`m_cerrarventanaactiva within m_file
+end type
+
+on m_cerrarventanaactiva.create
+call super::create
+end on
+
+on m_cerrarventanaactiva.destroy
+call super::destroy
+end on
+
+type m_-2 from m_sys_frame`m_-2 within m_file
+end type
+
+on m_-2.create
+call super::create
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_salirdelaaplicacin from m_sys_frame`m_salirdelaaplicacin within m_file
+end type
+
+on m_salirdelaaplicacin.create
+call super::create
+end on
+
+on m_salirdelaaplicacin.destroy
+call super::destroy
+end on
+
+type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_conectividad m_conectividad
+m_proveedoresyservicios m_proveedoresyservicios
+m_personalparacolación m_personalparacolación
+m_contactoporarea m_contactoporarea
+m_colaciones m_colaciones
+m_valorcolación m_valorcolación
+m_horariosdecolaciones m_horariosdecolaciones
+m_parametroscasino m_parametroscasino
+end type
+
+on m_aplicacion.create
+call super::create
+this.m_conectividad=create m_conectividad
+this.m_proveedoresyservicios=create m_proveedoresyservicios
+this.m_personalparacolación=create m_personalparacolación
+this.m_contactoporarea=create m_contactoporarea
+this.m_colaciones=create m_colaciones
+this.m_valorcolación=create m_valorcolación
+this.m_horariosdecolaciones=create m_horariosdecolaciones
+this.m_parametroscasino=create m_parametroscasino
+this.Item[UpperBound(this.Item)+1]=this.m_conectividad
+this.Item[UpperBound(this.Item)+1]=this.m_proveedoresyservicios
+this.Item[UpperBound(this.Item)+1]=this.m_personalparacolación
+this.Item[UpperBound(this.Item)+1]=this.m_contactoporarea
+this.Item[UpperBound(this.Item)+1]=this.m_colaciones
+this.Item[UpperBound(this.Item)+1]=this.m_valorcolación
+this.Item[UpperBound(this.Item)+1]=this.m_horariosdecolaciones
+this.Item[UpperBound(this.Item)+1]=this.m_parametroscasino
+end on
+
+on m_aplicacion.destroy
+call super::destroy
+destroy(this.m_conectividad)
+destroy(this.m_proveedoresyservicios)
+destroy(this.m_personalparacolación)
+destroy(this.m_contactoporarea)
+destroy(this.m_colaciones)
+destroy(this.m_valorcolación)
+destroy(this.m_horariosdecolaciones)
+destroy(this.m_parametroscasino)
+end on
+
+type m_movimientos from m_sys_frame`m_movimientos within m_principal
+m_0 m_0
+m_pedidos m_pedidos
+end type
+
+on m_movimientos.create
+call super::create
+this.m_0=create m_0
+this.m_pedidos=create m_pedidos
+this.Item[UpperBound(this.Item)+1]=this.m_0
+this.Item[UpperBound(this.Item)+1]=this.m_pedidos
+end on
+
+on m_movimientos.destroy
+call super::destroy
+destroy(this.m_0)
+destroy(this.m_pedidos)
+end on
+
+type m_procesos from m_sys_frame`m_procesos within m_principal
+m_controlcolaciones m_controlcolaciones
+m_aprobaciondepedidos m_aprobaciondepedidos
+m_valescontratista m_valescontratista
+end type
+
+on m_procesos.create
+call super::create
+this.m_controlcolaciones=create m_controlcolaciones
+this.m_aprobaciondepedidos=create m_aprobaciondepedidos
+this.m_valescontratista=create m_valescontratista
+this.Item[UpperBound(this.Item)+1]=this.m_controlcolaciones
+this.Item[UpperBound(this.Item)+1]=this.m_aprobaciondepedidos
+this.Item[UpperBound(this.Item)+1]=this.m_valescontratista
+end on
+
+on m_procesos.destroy
+call super::destroy
+destroy(this.m_controlcolaciones)
+destroy(this.m_aprobaciondepedidos)
+destroy(this.m_valescontratista)
+end on
+
+type m_informes from m_sys_frame`m_informes within m_principal
+m_consumosdiarios m_consumosdiarios
+m_colacionesporarea m_colacionesporarea
+m_proformafacturaservicios m_proformafacturaservicios
+end type
+
+on m_informes.create
+call super::create
+this.m_consumosdiarios=create m_consumosdiarios
+this.m_colacionesporarea=create m_colacionesporarea
+this.m_proformafacturaservicios=create m_proformafacturaservicios
+this.Item[UpperBound(this.Item)+1]=this.m_consumosdiarios
+this.Item[UpperBound(this.Item)+1]=this.m_colacionesporarea
+this.Item[UpperBound(this.Item)+1]=this.m_proformafacturaservicios
+end on
+
+on m_informes.destroy
+call super::destroy
+destroy(this.m_consumosdiarios)
+destroy(this.m_colacionesporarea)
+destroy(this.m_proformafacturaservicios)
+end on
+
+type m_consultas from m_sys_frame`m_consultas within m_principal
+end type
+
+on m_consultas.create
+call super::create
+this.visible = false
+this.enabled = false
+end on
+
+on m_consultas.destroy
+call super::destroy
+end on
+
+type m_topicactions from m_sys_frame`m_topicactions within m_principal
+end type
+
+on m_topicactions.create
+call super::create
+end on
+
+on m_topicactions.destroy
+call super::destroy
+end on
+
+type m_primerregistro from m_sys_frame`m_primerregistro within m_topicactions
+end type
+
+on m_primerregistro.create
+call super::create
+end on
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from m_sys_frame`m_registroanterior within m_topicactions
+end type
+
+on m_registroanterior.create
+call super::create
+end on
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from m_sys_frame`m_siguienteregistro within m_topicactions
+end type
+
+on m_siguienteregistro.create
+call super::create
+end on
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from m_sys_frame`m_ultimoregistro within m_topicactions
+end type
+
+on m_ultimoregistro.create
+call super::create
+end on
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-45 from m_sys_frame`m_-45 within m_topicactions
+end type
+
+on m_-45.create
+call super::create
+end on
+
+on m_-45.destroy
+call super::destroy
+end on
+
+type m_buscarregistro from m_sys_frame`m_buscarregistro within m_topicactions
+end type
+
+on m_buscarregistro.create
+call super::create
+end on
+
+on m_buscarregistro.destroy
+call super::destroy
+end on
+
+type m_ordenar from m_sys_frame`m_ordenar within m_topicactions
+end type
+
+on m_ordenar.create
+call super::create
+end on
+
+on m_ordenar.destroy
+call super::destroy
+end on
+
+type m_-0001 from m_sys_frame`m_-0001 within m_topicactions
+end type
+
+on m_-0001.create
+call super::create
+end on
+
+on m_-0001.destroy
+call super::destroy
+end on
+
+type m_nuevoregistro from m_sys_frame`m_nuevoregistro within m_topicactions
+end type
+
+on m_nuevoregistro.create
+call super::create
+end on
+
+on m_nuevoregistro.destroy
+call super::destroy
+end on
+
+type m_búsquedadeinformación from m_sys_frame`m_búsquedadeinformación within m_topicactions
+end type
+
+on m_búsquedadeinformación.create
+call super::create
+end on
+
+on m_búsquedadeinformación.destroy
+call super::destroy
+end on
+
+type m_lectura from m_sys_frame`m_lectura within m_topicactions
+end type
+
+on m_lectura.create
+call super::create
+end on
+
+on m_lectura.destroy
+call super::destroy
+end on
+
+type m_grabainformación from m_sys_frame`m_grabainformación within m_topicactions
+end type
+
+on m_grabainformación.create
+call super::create
+end on
+
+on m_grabainformación.destroy
+call super::destroy
+end on
+
+type m_eliminainformación from m_sys_frame`m_eliminainformación within m_topicactions
+end type
+
+on m_eliminainformación.create
+call super::create
+end on
+
+on m_eliminainformación.destroy
+call super::destroy
+end on
+
+type m_imprimedocumento from m_sys_frame`m_imprimedocumento within m_topicactions
+end type
+
+on m_imprimedocumento.create
+call super::create
+end on
+
+on m_imprimedocumento.destroy
+call super::destroy
+end on
+
+type m_-0002 from m_sys_frame`m_-0002 within m_topicactions
+end type
+
+on m_-0002.create
+call super::create
+end on
+
+on m_-0002.destroy
+call super::destroy
+end on
+
+type m_agregadetalle from m_sys_frame`m_agregadetalle within m_topicactions
+end type
+
+on m_agregadetalle.create
+call super::create
+end on
+
+on m_agregadetalle.destroy
+call super::destroy
+end on
+
+type m_eliminadetalle from m_sys_frame`m_eliminadetalle within m_topicactions
+end type
+
+on m_eliminadetalle.create
+call super::create
+end on
+
+on m_eliminadetalle.destroy
+call super::destroy
+end on
+
+type m_respaldos from m_sys_frame`m_respaldos within m_principal
+end type
+
+on m_respaldos.create
+call super::create
+end on
+
+on m_respaldos.destroy
+call super::destroy
+end on
+
+type m_respaldobasededatosylog from m_sys_frame`m_respaldobasededatosylog within m_respaldos
+end type
+
+on m_respaldobasededatosylog.create
+call super::create
+end on
+
+on m_respaldobasededatosylog.destroy
+call super::destroy
+end on
+
+type m_-respaldos from m_sys_frame`m_-respaldos within m_respaldos
+end type
+
+on m_-respaldos.create
+call super::create
+end on
+
+on m_-respaldos.destroy
+call super::destroy
+end on
+
+type m_actualizacióndedatos from m_sys_frame`m_actualizacióndedatos within m_respaldos
+end type
+
+on m_actualizacióndedatos.create
+call super::create
+end on
+
+on m_actualizacióndedatos.destroy
+call super::destroy
+end on
+
+type m_window from m_sys_frame`m_window within m_principal
+end type
+
+on m_window.create
+call super::create
+end on
+
+on m_window.destroy
+call super::destroy
+end on
+
+type m_tile from m_sys_frame`m_tile within m_window
+end type
+
+on m_tile.create
+call super::create
+end on
+
+on m_tile.destroy
+call super::destroy
+end on
+
+type m_tilehorizontal from m_sys_frame`m_tilehorizontal within m_window
+end type
+
+on m_tilehorizontal.create
+call super::create
+end on
+
+on m_tilehorizontal.destroy
+call super::destroy
+end on
+
+type m_layer from m_sys_frame`m_layer within m_window
+end type
+
+on m_layer.create
+call super::create
+end on
+
+on m_layer.destroy
+call super::destroy
+end on
+
+type m_cascade from m_sys_frame`m_cascade within m_window
+end type
+
+on m_cascade.create
+call super::create
+end on
+
+on m_cascade.destroy
+call super::destroy
+end on
+
+type m_help from m_sys_frame`m_help within m_principal
+end type
+
+on m_help.create
+call super::create
+end on
+
+on m_help.destroy
+call super::destroy
+end on
+
+type m_helpgeneralidades from m_sys_frame`m_helpgeneralidades within m_help
+end type
+
+on m_helpgeneralidades.create
+call super::create
+end on
+
+on m_helpgeneralidades.destroy
+call super::destroy
+end on
+
+type m_helpadministracióndeusuarios from m_sys_frame`m_helpadministracióndeusuarios within m_help
+end type
+
+on m_helpadministracióndeusuarios.create
+call super::create
+end on
+
+on m_helpadministracióndeusuarios.destroy
+call super::destroy
+end on
+
+type m_liberacióndesistemas from m_sys_frame`m_liberacióndesistemas within m_help
+end type
+
+on m_liberacióndesistemas.create
+call super::create
+end on
+
+on m_liberacióndesistemas.destroy
+call super::destroy
+end on
+
+type m_actualizacionesdesistema from m_sys_frame`m_actualizacionesdesistema within m_help
+end type
+
+on m_actualizacionesdesistema.create
+call super::create
+end on
+
+on m_actualizacionesdesistema.destroy
+call super::destroy
+end on
+
+type m_helpindex from m_sys_frame`m_helpindex within m_help
+end type
+
+on m_helpindex.create
+call super::create
+end on
+
+on m_helpindex.destroy
+call super::destroy
+end on
+
+type m_-3 from m_sys_frame`m_-3 within m_help
+end type
+
+on m_-3.create
+call super::create
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_about from m_sys_frame`m_about within m_help
+end type
+
+on m_about.create
+call super::create
+end on
+
+on m_about.destroy
+call super::destroy
+end on
+
+type m_conectividad from menu within m_aplicacion
+end type
+
+on m_conectividad.create
+call super::create
+this.text = "Conecti&vidad"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_conectividad.destroy
+call super::destroy
+end on
+
+event clicked;SetPointer(HourGlass!)
+
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_contempresascons, w_main, ii_Columna, Original!)
+end event
+
+type m_proveedoresyservicios from menu within m_aplicacion
+m_proveedores m_proveedores
+m_proveedoresserviciocasino m_proveedoresserviciocasino
+end type
+
+on m_proveedoresyservicios.create
+call super::create
+this.text = "Proveedores y Servicios"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_proveedores=create m_proveedores
+this.m_proveedoresserviciocasino=create m_proveedoresserviciocasino
+this.Item[UpperBound(this.Item)+1]=this.m_proveedores
+this.Item[UpperBound(this.Item)+1]=this.m_proveedoresserviciocasino
+end on
+
+on m_proveedoresyservicios.destroy
+call super::destroy
+destroy(this.m_proveedores)
+destroy(this.m_proveedoresserviciocasino)
+end on
+
+type m_proveedores from menu within m_proveedoresyservicios
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_clienprove_Servicios, w_main, ii_Columna, Original!)
+end event
+
+on m_proveedores.create
+call super::create
+this.text = "Proveedores/&Contratistas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_proveedores.destroy
+call super::destroy
+end on
+
+type m_proveedoresserviciocasino from menu within m_proveedoresyservicios
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_casino_proveedorserv, w_main, ii_Columna, Original!)
+end event
+
+on m_proveedoresserviciocasino.create
+call super::create
+this.text = "&Proveedores Servicio Casino"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_proveedoresserviciocasino.destroy
+call super::destroy
+end on
+
+type m_personalparacolación from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_rgtopersonalcolacion, w_main, ii_Columna, Original!)
+end event
+
+on m_personalparacolación.create
+call super::create
+this.text = "&Personal para Colación"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_personalparacolación.destroy
+call super::destroy
+end on
+
+type m_contactoporarea from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_casino_areacontacto, w_main, ii_Columna, Original!)
+end event
+
+on m_contactoporarea.create
+call super::create
+this.text = "Contacto por &Area"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_contactoporarea.destroy
+call super::destroy
+end on
+
+type m_colaciones from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_casino_tipocolacion, w_main, ii_Columna, Original!)
+end event
+
+on m_colaciones.create
+call super::create
+this.text = "&Colaciones"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_colaciones.destroy
+call super::destroy
+end on
+
+type m_valorcolación from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_valorcolacion, w_main, ii_Columna, Original!)
+end event
+
+on m_valorcolación.create
+call super::create
+this.text = "&Valor Colación"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_valorcolación.destroy
+call super::destroy
+end on
+
+type m_horariosdecolaciones from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_horariocolaciones, w_main, ii_Columna, Original!)
+end event
+
+on m_horariosdecolaciones.create
+call super::create
+this.text = "&Horarios de Colaciones"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_horariosdecolaciones.destroy
+call super::destroy
+end on
+
+type m_parametroscasino from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_casino_parametros, w_main, ii_Columna, Original!)
+end event
+
+on m_parametroscasino.create
+call super::create
+this.text = "Pa&rametros Casino"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_parametroscasino.destroy
+call super::destroy
+end on
+
+type m_0 from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_movimiento_colaciones, w_main, ii_Columna, Original!)
+end event
+
+on m_0.create
+call super::create
+this.text = "&Colaciones"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_0.destroy
+call super::destroy
+end on
+
+type m_pedidos from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_casino_pedidos, w_main, ii_Columna, Original!)
+end event
+
+on m_pedidos.create
+call super::create
+this.text = "Pedidos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pedidos.destroy
+call super::destroy
+end on
+
+type m_controlcolaciones from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_control_entrada_colacion, w_main, ii_Columna, Original!)
+end event
+
+on m_controlcolaciones.create
+call super::create
+this.visible = false
+this.text = "Control &Colaciones"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_controlcolaciones.destroy
+call super::destroy
+end on
+
+type m_aprobaciondepedidos from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_pedidos_cambiaestado, w_main, ii_Columna, Original!)
+end event
+
+on m_aprobaciondepedidos.create
+call super::create
+this.text = "Aprobacion de &Pedidos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_aprobaciondepedidos.destroy
+call super::destroy
+end on
+
+type m_valescontratista from menu within m_procesos
+m_genera m_genera
+m_entrega m_entrega
+m_recepciona m_recepciona
+end type
+
+on m_valescontratista.create
+call super::create
+this.text = "&Vales Contratista"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_genera=create m_genera
+this.m_entrega=create m_entrega
+this.m_recepciona=create m_recepciona
+this.Item[UpperBound(this.Item)+1]=this.m_genera
+this.Item[UpperBound(this.Item)+1]=this.m_entrega
+this.Item[UpperBound(this.Item)+1]=this.m_recepciona
+end on
+
+on m_valescontratista.destroy
+call super::destroy
+destroy(this.m_genera)
+destroy(this.m_entrega)
+destroy(this.m_recepciona)
+end on
+
+type m_genera from menu within m_valescontratista
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_genera_valescontratista, w_main, ii_Columna, Original!)
+end event
+
+on m_genera.create
+call super::create
+this.text = "&Genera"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_genera.destroy
+call super::destroy
+end on
+
+type m_entrega from menu within m_valescontratista
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_entregavales, w_main, ii_Columna, Original!)
+end event
+
+on m_entrega.create
+call super::create
+this.text = "&Entrega"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_entrega.destroy
+call super::destroy
+end on
+
+type m_recepciona from menu within m_valescontratista
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_devolucionvales, w_main, ii_Columna, Original!)
+end event
+
+on m_recepciona.create
+call super::create
+this.visible = false
+this.text = "&Recepciona"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_recepciona.destroy
+call super::destroy
+end on
+
+type m_consumosdiarios from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_consumosdiarios, w_main, ii_Columna, Original!)
+end event
+
+on m_consumosdiarios.create
+call super::create
+this.text = "Consumos &Diarios"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_consumosdiarios.destroy
+call super::destroy
+end on
+
+type m_colacionesporarea from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_colacionesporarea, w_main, ii_Columna, Original!)
+end event
+
+on m_colacionesporarea.create
+call super::create
+this.text = "Colaciones por &Area"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_colacionesporarea.destroy
+call super::destroy
+end on
+
+type m_proformafacturaservicios from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_proforma_fact_serv, w_main, ii_Columna, Original!)
+end event
+
+on m_proformafacturaservicios.create
+call super::create
+this.text = "Proforma Factura Servicios"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_proformafacturaservicios.destroy
+call super::destroy
+end on
+
+type m_1 from menu within m_principal
+end type
+
+on m_1.create
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+

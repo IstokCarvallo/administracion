@@ -1,0 +1,47 @@
+﻿$PBExportHeader$str_parametros.srs
+global type str_parametros from structure
+	integer		lar_cuenta
+	string		mas_cuenta
+	integer		correlativ
+	integer		corr_mensual
+	string		password
+	integer		mes_inicio
+	date		mes_proceso
+	integer		periodo
+	integer		tipoap
+	integer		consol
+	integer		codemp
+	integer		anulac
+	date		mes_compra
+	integer		comp_auto
+	integer		actualiza
+	integer		modifica
+	string		usuario1
+	string		usuario2
+	date		mes_venta
+	integer		tipomoneda
+	string		nombresegmoneda
+	string		abrevisegmoneda
+	integer		tipoci
+	long		funinicial
+	long		funfinal
+	integer		doblemoneda
+	string		utilidad
+	string		perdida
+	integer		tipocalce
+	long		var_pesos
+	decimal { 2 }		var_otram
+	decimal { 2 }		var_cambio
+	decimal { 2 }		dis_cambio
+	integer		formato
+	date		fecha_inicio
+	string		impuesto
+	integer		cuotas
+	integer		cantidad
+	integer		codsucursal
+	integer		valida
+	integer		conexion
+	integer		analisis_cex
+	string		smtp
+end type
+

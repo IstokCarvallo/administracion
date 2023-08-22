@@ -1,0 +1,172 @@
+﻿$PBExportHeader$m_casino_opcion.srm
+forward
+global type m_casino_opcion from menu
+end type
+type m_pop from menu within m_casino_opcion
+end type
+type m_open from menu within m_pop
+end type
+type m_terminate from menu within m_pop
+end type
+type m_pop from menu within m_casino_opcion
+m_open m_open
+m_terminate m_terminate
+end type
+global type m_casino_opcion from menu
+m_pop m_pop
+end type
+end forward
+
+global type m_casino_opcion from menu
+m_pop m_pop
+end type
+global m_casino_opcion m_casino_opcion
+
+on m_casino_opcion.create
+m_casino_opcion=this
+call super::create
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_pop=create m_pop
+this.Item[UpperBound(this.Item)+1]=this.m_pop
+end on
+
+on m_casino_opcion.destroy
+call super::destroy
+destroy(this.m_pop)
+end on
+
+type m_pop from menu within m_casino_opcion
+m_open m_open
+m_terminate m_terminate
+end type
+
+on m_pop.create
+call super::create
+this.text = "Pop"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_open=create m_open
+this.m_terminate=create m_terminate
+this.Item[UpperBound(this.Item)+1]=this.m_open
+this.Item[UpperBound(this.Item)+1]=this.m_terminate
+end on
+
+on m_pop.destroy
+call super::destroy
+destroy(this.m_open)
+destroy(this.m_terminate)
+end on
+
+type m_open from menu within m_pop
+end type
+
+event clicked;//istr_mant.Argumento[1]	=	"Control Trafico Telefónico"
+//istr_mant.Argumento[2]	=	istr_config.Password
+
+//OpenWithParm(w_passwordCentral, istr_mant)
+//
+//istr_mant	=	Message.PowerObjectParm
+//
+//IF istr_mant.Respuesta = 0 THEN 
+//	MessageBox("Atención","Clave Errónea",Exclamation!)
+//ELSEIF istr_mant.Respuesta = 1 THEN
+	Show(ParentWindow)
+//END IF
+
+end event
+
+on m_open.create
+call super::create
+this.text = "&Abrir"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_open.destroy
+call super::destroy
+end on
+
+type m_terminate from menu within m_pop
+end type
+
+event clicked;//istr_mant.Argumento[1]	=	"Control Trafico Telefónico"
+//istr_mant.Argumento[2]	=	istr_config.Password
+//
+//OpenWithParm(w_passwordCentral, istr_mant)
+//
+//istr_mant	=	Message.PowerObjectParm
+//
+//IF istr_mant.Respuesta = 0 THEN 
+//	MessageBox("Atención","Clave Errónea",Exclamation!)
+//ELSEIF istr_mant.Respuesta = 1 THEN
+sqlca.AutoCommit	=	True
+DISCONNECT Using SQLCA;
+Close(ParentWindow)
+//END IF
+
+end event
+
+on m_terminate.create
+call super::create
+this.text = "&Terminar"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_terminate.destroy
+call super::destroy
+end on
+

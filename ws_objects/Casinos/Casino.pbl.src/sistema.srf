@@ -1,0 +1,11 @@
+﻿$PBExportHeader$sistema.srf
+global type sistema from function_object
+end type
+
+forward prototypes
+global function boolean sistema ()
+end prototypes
+
+global function boolean sistema ();RETURN True
+end function
+

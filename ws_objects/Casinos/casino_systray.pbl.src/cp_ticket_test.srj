@@ -1,0 +1,34 @@
+﻿$PBExportHeader$cp_ticket_test.srj
+EXE:TicketCasino.exe,..\..\imagenes\administracion.pbr,0,1,1,1,
+CMP:0,0,0,2,0,0,1
+COM:RIOblanco Spa
+DES:
+CPY:2021
+PRD:Ticket
+PVS:5.21.30092021
+PVN:5,21,3009,2021
+FVS:5.21.30092021
+FVN:5,21,3009,2021
+MAN:0,asInvoker,0
+POWERCLIENT:{"cp_ticket_test":{"Format":"1.0","AppType":1,"AppName":"TicketCasino","OutputDir":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache\\temp\\TicketCasino","ResourceName":"C:\\Desarrollo 21\\imagenes\\administracion.pbr","Arguments":"","DeployVersion":"5.21.30092021","MinimumValidVersion":"5.21.30092021","OnlineTime":"2021-05-20 18:32:38","OfflineTime":"2031-05-20 18:32:38","PromptOverwrite":false,"WindowsClassicStyle":false,"FullBuild":true,"EnableDebugSymbol":true,"EncryptPbdFiles":true,"Is32Bit":true,"CheckLauncherValid":true,"LocalServer":false,"ServerProfile":"","GeneratePackage":true,"PackageOutputExe":false,"PackageLauncher":false,"DefaultLauncher":true,"LauncherPath":"C:\\Users\\istok.carvallo\\AppData\\Roaming\\CloudAppLauncher_Installer","RuntimePlatform":3,"LauncherName":"Default_Both_WithServiceSingle","PackageOutputPath":"C:\\Users\\ISTOK~1.CAR\\AppData\\Local\\Temp\\pbappscache\\export","FullDownload":false,"DeployWebPage":0,"CreateDesktopShortcut":true,"CreateStartMenuShortcut":true,"CreateAppUninstallShortcut":true,"AppShortcutName":"TicketCasino","AppShortcutImage":"","ShowStartAnimatedWindow":true,"CheckPbdValidaty":false,"StartMode":2,"IsVerOffCheck":false,"PBCParams":"","RuntimeVersion":"21.0.0.1288","PreloadEventCommands":"","RunCommandAsAdmin":false,"AlwaysRunCommand":false,"ProductName":"Ticket","CompanyName":"RIOblanco Spa","Description":"","Copyright":"2021","ProductVersion":"5.21.30092021","FileVersion":"5.21.30092021","ProductVersionMajor":5,"ProductVersionMinor":21,"ProductVersionBuild":3009,"ProductVersionRevision":2021,"FileVersionMajor":5,"FileVersionMinor":21,"FileVersionBuild":3009,"FileVersionRevision":2021,"GenerateOption":2,"ExecutionLevel":2,"AllowAccessSystemUI":false,"RunWithHttps":false,"RunWithShellApp":true,"RunArguments":"","RunHost":"DistribucionAPP","RunPort":"","AppStartupMethod":0,"Libraries":[{"PbdName":"casino_systray.pbd","PbdLocalPath":"casino_systray.pbd"}],"PredownloadPackages":{},"PredownloadFiles":["Casino_SysTray.ini"],"InstantDownloadFiles":[],"RuntimeModules":["Core Runtime Files","SNC SQL Native Client (SNC)"],"RegisterFiles":[],"Signing":{"SignOption":0,"CustomScript":"","SignTool":"","PfxFile":"","PfxPassword":"","Algorithm":"SHA256","TimeStamp":"http://timestamp.digicert.com"},"powerserver":{"webapiurl":"","webapihost":"","webapiport":0,"iswebapihttps":false,"srvsrcoutdir":"","srvsrcoutdiradditiondir":"","modelname":"","generateopts":0,"licensefile":"","licenseversion":"","licensecontent":"","TemplateTypeName":"","bBuildSolution":false,"EnvironmentType":""},"IniConfigFiles":[{"FileName":"Casino_SysTray.ini","UpdateType":3}]}}
+PBD:casino_systray.pbl,,1
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,f_fechahora,f
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,w_systray,w
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,uo_movtocasino,u
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,casino_systray,a
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_mues_controlingreso_casino,d
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_mues_controlingreso_casino_sharedata,d
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,m_casino_opcion,m
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_info_controlingreso_casino_sharedata,d
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,bitor,f
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,str_usuario,s
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,w_errorbasedatos,w
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,w_movto_casinos_systray,w
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,str_aplicacion,s
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_mues_colacionesdia_porhora,d
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_tarjeta_anfitrion,d
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,w_mant_tarjeta_anfitrion,w
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,str_errorbasedatos,s
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,nvo_sizeof,u
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,str_mant,s
+OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,f_errorbasedatos,f

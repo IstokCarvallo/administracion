@@ -1,0 +1,5 @@
+﻿$PBExportHeader$str_busqueda.srs
+global type str_busqueda from structure
+	string		argum[]
+end type
+

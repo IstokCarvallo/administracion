@@ -1,0 +1,12 @@
+﻿$PBExportHeader$str_usuario.srs
+$PBExportComments$Estructura de definición de usuarios con privilegios para el acceso a los distintos módulos del Sistema.
+global type str_usuario from structure
+	string		nombre
+	string		nombreusuario
+	integer		codigogrupo
+	string		nombregrupo
+	integer		administrador
+	string		opcionactiva
+	string		computador
+end type
+

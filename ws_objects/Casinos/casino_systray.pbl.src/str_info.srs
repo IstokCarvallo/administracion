@@ -1,0 +1,9 @@
+﻿$PBExportHeader$str_info.srs
+global type str_info from structure
+	datawindow		dw
+	string		titulo
+	integer		copias
+	integer		orden
+	boolean		multiple
+end type
+

@@ -1,0 +1,26 @@
+﻿$PBExportHeader$f_fechahora.srf
+$PBExportComments$Entrega Fecha y Hora de Servidor
+global type f_fechahora from function_object
+end type
+
+forward prototypes
+global function datetime f_fechahora ()
+end prototypes
+
+global function datetime f_fechahora ();Datetime ldt_FechaHora
+Time		lt_Hora
+Integer	li_Contador
+
+IF sqlca.Dbms = "ODBC" THEN
+	SELECT	Count(*), Now()
+		INTO	:li_Contador, :ldt_FechaHora
+		FROM	dba.admasistemas;	
+ELSE
+	SELECT	Count(*), GetDate()
+		INTO	:li_Contador, :ldt_FechaHora
+		FROM	dbo.admasistemas;
+END IF
+
+RETURN ldt_FechaHora
+end function
+

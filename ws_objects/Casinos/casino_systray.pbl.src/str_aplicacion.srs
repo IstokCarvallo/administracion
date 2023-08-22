@@ -1,0 +1,31 @@
+﻿$PBExportHeader$str_aplicacion.srs
+$PBExportComments$Estructura de la aplicación para contener la Gerencia que utiliza el Sistema, el título de la Aplicación  y el archivo de inicialización para la conección con el Motor de Datos.
+global type str_aplicacion from structure
+	string		titulo
+	string		ini
+	string		bmp
+	string		razon_social
+	string		nom_empresa
+	string		rut_empresa
+	string		dir_empresa
+	string		com_empresa
+	string		ciu_empresa
+	string		tel_empresa
+	string		fax_empresa
+	string		act_economica
+	string		gir_empresa
+	string		rep_legal
+	string		rut_replegal
+	string		referencia
+	string		instalacion
+	string		liberacion
+	string		version
+	string		icono
+	string		oficina
+	integer		codigosistema
+	string		nombresistema
+	string		clavesistema
+	string		dirrespaldo
+	date		fechalibera
+end type
+

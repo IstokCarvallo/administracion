@@ -1,0 +1,37 @@
+﻿$PBExportHeader$parempresa.srf
+$PBExportComments$Lectura de Parámetros de Emporesa
+global type parempresa from function_object
+end type
+
+forward prototypes
+global subroutine parempresa ()
+end prototypes
+
+global subroutine parempresa ();SELECT	empr_rutemp, empr_razsoc, empr_nombre,
+			empr_direcc, empr_comuna, empr_ciudad,
+			empr_nrotel, empr_nrofax, empr_giroem,	
+			empr_repleg, empr_rutrle, empr_codexp,
+			empr_codplt, empr_oficin, empr_pfxpal, empr_packing,
+			IsNull(empr_emiele,0), IsNull(empr_ubicac, ''), IsNull(empr_coemel, 0),
+			IsNull(empr_ubipdf, ''), IsNull(empr_smtp, ''), IsNull(empr_usucor, ''), IsNull(empr_pascor, ''),
+			IsNull(empr_concom,0),IsNull(empr_ubicom, ''), IsNull(empr_pdfcom, '')
+	INTO	:gstr_parempresa.empr_rutemp, :gstr_parempresa.empr_razsoc, :gstr_parempresa.empr_nombre,
+			:gstr_parempresa.empr_direcc, :gstr_parempresa.empr_comuna, :gstr_parempresa.empr_ciudad,
+			:gstr_parempresa.empr_nrotel, :gstr_parempresa.empr_nrofax, :gstr_parempresa.empr_giroem,
+			:gstr_parempresa.empr_repleg, :gstr_parempresa.empr_rutrle, :gi_CodExport,
+			:gstr_parempresa.empr_codplt, :gstr_parempresa.empr_oficin, :gs_pfijopallet, :gi_Packing,
+			:gi_Emisor_Electronico, :gs_Ubicacion_DTE, :gi_Conecion_GuiaElectronica, :gs_Ubicacion_PDFDTE,
+			:gstr_parempresa.SMTP, :gstr_parempresa.Correo, :gstr_parempresa.Password,
+			:gstr_parempresa.Conecion_GuiaElectronica_Comer , :gstr_parempresa.Ubicacion_DTE_Comercial , 
+			:gstr_parempresa.Ubicacion_PDFDTE_Comercial			
+	FROM	dbo.parempresa
+	Using SQLCA;
+
+If SQLCA.SQLCode = -1 Then
+	F_ErrorBaseDatos(SQLCA,"Lectura de Parametros Empresa")
+Else
+	gi_CodPlanta	= gstr_parempresa.empr_codplt
+End If
+
+end subroutine
+

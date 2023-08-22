@@ -1,0 +1,49 @@
+﻿$PBExportHeader$paramplanta.srf
+global type paramplanta from function_object
+end type
+
+forward prototypes
+global subroutine paramplanta ()
+end prototypes
+
+global subroutine paramplanta ();Integer  li_Planta
+
+SELECT	plde_codigo
+INTO		:li_planta
+FROM     dbo.spro_usuarplanta
+WHERE    usua_codigo =: gstr_us.nombre
+AND		usua_activa = 1;
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Usuarios por Planta: spro_usuarplanta")
+	RETURN
+ELSEIF sqlca.SQLCode	= 100 THEN
+	MessageBox("Advertencia","Debe dejar activa una Planta para el Usuario")
+	RETURN
+END IF
+
+SELECT	plde_codigo, prpa_nomadm, prpa_destar, prpa_recenv, prpa_guienv, espe_codigo, vari_codigo, 
+			sepl_codigo,prpa_diaret, prod_codigo, prpa_poriva, prpa_etiemb, prpa_pesbin,prpa_ticopv,prpa_ticopr
+	INTO	:gstr_paramplanta.codigoplanta, :gstr_paramplanta.administrador, :gstr_paramplanta.destare,
+			:gstr_paramplanta.controlenvase, :gstr_paramplanta.guiaenvase,	:gstr_paramplanta.codigoespecie, 
+			:gstr_paramplanta.codigovariedad, :gstr_paramplanta.codigoservicio, :gstr_paramplanta.diasretraso,
+			:gstr_paramplanta.productorempresa, :gstr_paramplanta.porcentajeiva, :gstr_paramplanta.etiquetaembalaje,
+			:gstr_paramplanta.pesajebins,:gstr_paramplanta.PoolVenta,:gstr_paramplanta.PoolRetiro
+	FROM	dbo.spro_paramplanta
+  WHERE	plde_codigo =: li_planta;
+
+IF sqlca.SQLCode	= -1 THEN
+	F_ErrorBaseDatos(sqlca, "Lectura de Parametros Planta: spro_param_planta")
+ELSEIF sqlca.SQLCode	= 100 THEN
+	MessageBox("Error","Lectura de Parametros Planta: spro_paramplanta")
+END IF
+
+SELECT	plde_nombre, plde_admini
+	INTO	:gstr_apl.referencia, :gstr_ParamPlanta.plantaadminist
+	FROM	dbo.plantadesp
+	WHERE	plde_codigo	=	:gstr_ParamPlanta.CodigoPlanta ;
+	
+gstr_apl.referencia	=	"Planta : " + gstr_apl.referencia
+
+end subroutine
+

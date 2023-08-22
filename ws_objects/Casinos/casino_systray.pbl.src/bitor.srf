@@ -1,0 +1,33 @@
+﻿$PBExportHeader$bitor.srf
+$PBExportComments$Simple bitwise OR..
+global type bitor from function_object
+end type
+
+forward prototypes
+global function long bitor (long values[])
+end prototypes
+
+global function long bitor (long values[]);Integer li_Bit, li_Size, li_Number = 2
+Long ll_RetValue, ll_ValueA, ll_ValueB
+
+ll_RetValue = 0 
+ll_ValueA = Values[1]
+
+DO 
+	ll_ValueB = Values[li_Number]
+
+	FOR li_Bit = 0 TO 31
+		IF Mod(Long(ll_ValueA /  2^li_Bit), 2) > 0 OR Mod(Long(ll_ValueB /  2^li_Bit), 2) > 0 Then
+			IF NOT Mod(Long(ll_RetValue /  2^li_Bit), 2) > 0 THEN
+				ll_RetValue += 2^li_Bit
+			END IF
+		END IF
+	NEXT
+
+	ll_ValueA = ll_RetValue
+	li_Number++
+LOOP UNTIL li_Number > li_Size
+
+Return(ll_RetValue)
+end function
+

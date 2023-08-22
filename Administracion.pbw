@@ -1,0 +1,9 @@
+Save Format v3.0(19990112)
+@begin Targets
+ 0 "Infraestructura\\infraestructutati.pbt";
+ 1 "Casinos\\control_casinos.pbt";
+ 2 "Casinos\\casino_systray.pbt";
+@end;
+DefaultTarget "Infraestructura\\infraestructutati.pbt";
+DefaultExportEncode "UTF-8";
+DefaultRemoteTarget "Infraestructura\\infraestructutati.pbt";

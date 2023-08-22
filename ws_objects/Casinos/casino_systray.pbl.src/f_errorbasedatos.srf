@@ -1,0 +1,46 @@
+﻿$PBExportHeader$f_errorbasedatos.srf
+global type f_errorbasedatos from function_object
+end type
+
+forward prototypes
+global function integer f_errorbasedatos (transaction at_trans, string as_mensaje)
+end prototypes
+
+global function integer f_errorbasedatos (transaction at_trans, string as_mensaje);/*	Función		:	F_ErroBaseDatos
+						Despliegue de Ventana con todos los datos del Error Producido
+	Argumentos	:	at_trans		=>	Objeto de Transacción donde se produjo el Error
+						as_Mensaje	=>	Título para la ventana de Error (Mensaje)
+*/
+
+Str_ErrorBaseDatos	lstr_ErrBD
+
+IF at_trans.sqlcode = 0 THEN RETURN 0
+
+lstr_ErrBD.Titulo	=	"Se ha Producido un Error en :~r~n" + as_Mensaje
+lstr_ErrBD.Numero	=	at_trans.SqldbCode
+lstr_ErrBD.Texto	=	at_trans.SqlErrText
+
+as_Mensaje	=	"Se ha Producido un Error en :~r~n" + as_Mensaje + "~r~n~r~n"
+as_Mensaje	+=	"Transaction Error Code~t: " + String (at_trans.SqlCode) + "~r~n"
+as_Mensaje	+=	"Database Error Code~t: " + String (at_trans.SqldbCode) + "~r~n"
+as_Mensaje	+=	"Database Error Text~t~t: " + at_trans.SqlErrText + "~r~n~r~n"
+as_Mensaje	+=	"DBMS~t~t~t: " + at_trans.DBMS + "~r~n"
+as_Mensaje	+=	"Database~t~t~t: " + at_trans.DataBase + "~r~n"
+as_Mensaje	+=	"User ID~t~t~t: " + at_trans.UserId + "~r~n"
+as_Mensaje	+=	"DBParm~t~t~t: " + at_trans.dbParm + "~r~n"
+as_Mensaje	+=	"Login ID~t~t~t: " + at_trans.LogId + "~r~n"
+as_Mensaje	+=	"ServerName~t~t: " + at_trans.ServerName + "~r~n"
+
+IF at_trans.AutoCommit THEN
+	as_Mensaje	+=	"AutoCommit~t~t: True~r~n"
+ELSE
+	as_Mensaje	+=	"AutoCommit~t~t: False~r~n"
+END IF
+
+lstr_ErrBD.MensajePantalla	=	as_Mensaje
+
+OpenWithParm(w_ErrorBaseDatos, lstr_ErrBD)
+
+RETURN 1
+end function
+

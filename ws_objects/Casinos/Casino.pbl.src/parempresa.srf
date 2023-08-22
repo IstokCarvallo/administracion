@@ -1,0 +1,27 @@
+﻿$PBExportHeader$parempresa.srf
+$PBExportComments$Lectura de Parámetros de Emporesa
+global type parempresa from function_object
+end type
+
+forward prototypes
+global subroutine parempresa ()
+end prototypes
+
+global subroutine parempresa ();SELECT	empr_rutemp, empr_razsoc, empr_nombre,
+			empr_direcc, empr_comuna, empr_ciudad,
+			empr_nrotel, empr_nrofax, empr_giroem,	
+			empr_repleg, empr_rutrle, empr_oficin,
+			empr_dirres
+	INTO	:gstr_parempresa.empr_rutemp, :gstr_parempresa.empr_razsoc, :gstr_parempresa.empr_nombre,
+			:gstr_parempresa.empr_direcc, :gstr_parempresa.empr_comuna, :gstr_parempresa.empr_ciudad,
+			:gstr_parempresa.empr_nrotel, :gstr_parempresa.empr_nrofax, :gstr_parempresa.empr_giroem,
+			:gstr_parempresa.empr_repleg, :gstr_parempresa.empr_rutrle, :gstr_parempresa.empr_oficin,
+			:gstr_parempresa.empr_dirres
+	FROM	dbo.parempresa;
+	
+IF SQLCA.SQLCode = -1 THEN
+	F_ErrorBaseDatos(SQLCA,"Lectura de Parametros Temporada Vigente")
+END IF
+
+end subroutine
+

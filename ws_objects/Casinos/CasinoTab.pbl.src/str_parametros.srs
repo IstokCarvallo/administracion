@@ -1,0 +1,33 @@
+﻿$PBExportHeader$str_parametros.srs
+global type str_parametros from structure
+	integer		lar_cuenta
+	string		mas_cuenta
+	integer		periodo
+	integer		liq_semana
+	string		password
+	date		mes_inicio
+	date		mes_proceso
+	string		usuario1
+	string		usuario2
+	integer		mutualseguridad
+	integer		cajacompensacion
+	decimal { 2 }		riesgoadicional
+	decimal { 2 }		aportepatronal
+	long		acteconomica
+	integer		analisis_emp
+	integer		analisis_suc
+	integer		analisis_cex
+	decimal { 2 }		tasa_regant
+	decimal { 2 }		tasa_fonafp
+	decimal { 2 }		tasa_isaafp
+	decimal { 2 }		tasa_regisa
+	integer		nro_semana
+	integer		diasvacaciones
+	integer		serviciomedico
+	string		referencia
+	integer		formatofiniquito
+	integer		controlavacpdtes
+	date		iniciosegurocesantia
+	integer		codigoafp
+end type
+

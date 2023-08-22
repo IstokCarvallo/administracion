@@ -1,0 +1,27 @@
+﻿$PBExportHeader$parempresa.srf
+$PBExportComments$Lectura de Parámetros de Emporesa
+global type parempresa from function_object
+end type
+
+forward prototypes
+global subroutine parempresa ()
+end prototypes
+
+global subroutine parempresa ();SELECT	empr_rutemp, empr_razsoc, empr_nombre,empr_direcc, empr_comuna, 
+			empr_ciudad,empr_nrotel, empr_nrofax, empr_giroem,	empr_repleg, 
+			empr_rutrle, 
+			IsNull(empr_emiele,0), IsNull(empr_ubicac, ''), IsNull(empr_coemel, 0),IsNull(empr_ubipdf, '')
+	INTO	:gstr_parempresa.empr_rutemp, :gstr_parempresa.empr_razsoc, :gstr_parempresa.empr_nombre,
+			:gstr_parempresa.empr_direcc, :gstr_parempresa.empr_comuna, :gstr_parempresa.empr_ciudad,
+			:gstr_parempresa.empr_nrotel, :gstr_parempresa.empr_nrofax, :gstr_parempresa.empr_giroem,
+			:gstr_parempresa.empr_repleg, :gstr_parempresa.empr_rutrle, 
+			:gi_Emisor_Electronico, :gstr_ParEmpresa.Ubicacion_DTE, : gstr_ParEmpresa.Conecion_GuiaElectronica, :gstr_ParEmpresa.Ubicacion_PDFDTE
+	FROM	dbo.parempresa
+	Using SQLCA;
+
+If SQLCA.SQLCode = -1 Then
+	F_ErrorBaseDatos(SQLCA,"Lectura de Parametros Empresa")
+End If
+
+end subroutine
+

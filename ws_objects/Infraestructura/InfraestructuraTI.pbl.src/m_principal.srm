@@ -1,0 +1,2625 @@
+﻿$PBExportHeader$m_principal.srm
+forward
+global type m_principal from m_sys_frame
+end type
+type m_geográficas from menu within m_aplicacion
+end type
+type m_pais from menu within m_geográficas
+end type
+type m_region from menu within m_geográficas
+end type
+type m_comuna from menu within m_geográficas
+end type
+type m_geográficas from menu within m_aplicacion
+m_pais m_pais
+m_region m_region
+m_comuna m_comuna
+end type
+type m_generales from menu within m_aplicacion
+end type
+type m_item from menu within m_generales
+end type
+type m_marcas from menu within m_generales
+end type
+type m_monedas from menu within m_generales
+end type
+type m_servicios from menu within m_generales
+end type
+type m_tipodeequipos from menu within m_generales
+end type
+type m_modelos from menu within m_generales
+end type
+type m_unidadmedidas from menu within m_generales
+end type
+type m_generales from menu within m_aplicacion
+m_item m_item
+m_marcas m_marcas
+m_monedas m_monedas
+m_servicios m_servicios
+m_tipodeequipos m_tipodeequipos
+m_modelos m_modelos
+m_unidadmedidas m_unidadmedidas
+end type
+type m_2 from menu within m_aplicacion
+end type
+type m_empresas from menu within m_aplicacion
+end type
+type m_conexiones from menu within m_aplicacion
+end type
+type m_5 from menu within m_aplicacion
+end type
+type m_personal from menu within m_aplicacion
+end type
+type m_proveedor from menu within m_aplicacion
+end type
+type m_seccion from menu within m_aplicacion
+end type
+type m_sucursal from menu within m_aplicacion
+end type
+type m_ubicacion from menu within m_aplicacion
+end type
+type m_7 from menu within m_aplicacion
+end type
+type m_tipomovimientoequipos from menu within m_aplicacion
+end type
+type m_1 from menu within m_aplicacion
+end type
+type m_0 from menu within m_aplicacion
+end type
+type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_geográficas m_geográficas
+m_generales m_generales
+m_2 m_2
+m_empresas m_empresas
+m_conexiones m_conexiones
+m_5 m_5
+m_personal m_personal
+m_proveedor m_proveedor
+m_seccion m_seccion
+m_sucursal m_sucursal
+m_ubicacion m_ubicacion
+m_7 m_7
+m_tipomovimientoequipos m_tipomovimientoequipos
+m_1 m_1
+m_0 m_0
+end type
+type m_asignaciónequipos from menu within m_movimientos
+end type
+type m_ordentrabajo from menu within m_movimientos
+end type
+type m_asignacionlicencias from menu within m_movimientos
+end type
+type m_8 from menu within m_movimientos
+end type
+type m_9 from menu within m_movimientos
+end type
+type m_movimientos from m_sys_frame`m_movimientos within m_principal
+m_asignaciónequipos m_asignaciónequipos
+m_ordentrabajo m_ordentrabajo
+m_asignacionlicencias m_asignacionlicencias
+m_8 m_8
+m_9 m_9
+end type
+type m_ordenesdetrabajoproc from menu within m_procesos
+end type
+type m_cierreordenestrabajo from menu within m_ordenesdetrabajoproc
+end type
+type m_anulaordenesdetrabajo from menu within m_ordenesdetrabajoproc
+end type
+type m_ordenesdetrabajoproc from menu within m_procesos
+m_cierreordenestrabajo m_cierreordenestrabajo
+m_anulaordenesdetrabajo m_anulaordenesdetrabajo
+end type
+type m_estadoequipos from menu within m_procesos
+end type
+type m_devolucionequipos from menu within m_procesos
+end type
+type m_impresion from menu within m_procesos
+end type
+type m_procesos from m_sys_frame`m_procesos within m_principal
+m_ordenesdetrabajoproc m_ordenesdetrabajoproc
+m_estadoequipos m_estadoequipos
+m_devolucionequipos m_devolucionequipos
+m_impresion m_impresion
+end type
+type m_detalleequipos from menu within m_informes
+end type
+type m_6 from menu within m_informes
+end type
+type m_personalequipos from menu within m_informes
+end type
+type m_10 from menu within m_informes
+end type
+type m_valorcuotaequipos from menu within m_informes
+end type
+type m_valorcuotaequipos0 from menu within m_informes
+end type
+type m_3 from menu within m_informes
+end type
+type m_ordenesdetrabajo from menu within m_informes
+end type
+type m_4 from menu within m_informes
+end type
+type m_informes from m_sys_frame`m_informes within m_principal
+m_detalleequipos m_detalleequipos
+m_6 m_6
+m_personalequipos m_personalequipos
+m_10 m_10
+m_valorcuotaequipos m_valorcuotaequipos
+m_valorcuotaequipos0 m_valorcuotaequipos0
+m_3 m_3
+m_ordenesdetrabajo m_ordenesdetrabajo
+m_4 m_4
+end type
+type m_consultaequipos from menu within m_consultas
+end type
+type m_consultamovimientos from menu within m_consultas
+end type
+type m_consultas from m_sys_frame`m_consultas within m_principal
+m_consultaequipos m_consultaequipos
+m_consultamovimientos m_consultamovimientos
+end type
+end forward
+
+global type m_principal from m_sys_frame
+end type
+global m_principal m_principal
+
+type variables
+Integer	columna = 8
+end variables
+
+on m_principal.create
+m_principal=this
+call super::create
+end on
+
+on m_principal.destroy
+call super::destroy
+end on
+
+type m_file from m_sys_frame`m_file within m_principal
+end type
+
+on m_file.create
+call super::create
+end on
+
+on m_file.destroy
+call super::destroy
+end on
+
+type m_controldeaccesos from m_sys_frame`m_controldeaccesos within m_file
+end type
+
+on m_controldeaccesos.create
+call super::create
+end on
+
+on m_controldeaccesos.destroy
+call super::destroy
+end on
+
+type m_visordeaccesos from m_sys_frame`m_visordeaccesos within m_controldeaccesos
+end type
+
+on m_visordeaccesos.create
+call super::create
+end on
+
+on m_visordeaccesos.destroy
+call super::destroy
+end on
+
+type m_depuracióndeaccesos from m_sys_frame`m_depuracióndeaccesos within m_controldeaccesos
+end type
+
+on m_depuracióndeaccesos.create
+call super::create
+end on
+
+on m_depuracióndeaccesos.destroy
+call super::destroy
+end on
+
+type m_rayita2000 from m_sys_frame`m_rayita2000 within m_controldeaccesos
+end type
+
+on m_rayita2000.create
+call super::create
+end on
+
+on m_rayita2000.destroy
+call super::destroy
+end on
+
+type m_mantencióndeaccesos from m_sys_frame`m_mantencióndeaccesos within m_controldeaccesos
+end type
+
+on m_mantencióndeaccesos.create
+call super::create
+end on
+
+on m_mantencióndeaccesos.destroy
+call super::destroy
+end on
+
+type m_sucursalesyuadministrativas from m_sys_frame`m_sucursalesyuadministrativas within m_mantencióndeaccesos
+end type
+
+on m_sucursalesyuadministrativas.create
+call super::create
+end on
+
+on m_sucursalesyuadministrativas.destroy
+call super::destroy
+end on
+
+type m_accesodegruposalsistema from m_sys_frame`m_accesodegruposalsistema within m_mantencióndeaccesos
+end type
+
+on m_accesodegruposalsistema.create
+call super::create
+end on
+
+on m_accesodegruposalsistema.destroy
+call super::destroy
+end on
+
+type m_gruposyusuarios from m_sys_frame`m_gruposyusuarios within m_mantencióndeaccesos
+end type
+
+on m_gruposyusuarios.create
+call super::create
+end on
+
+on m_gruposyusuarios.destroy
+call super::destroy
+end on
+
+type m_rayita2003 from m_sys_frame`m_rayita2003 within m_mantencióndeaccesos
+end type
+
+on m_rayita2003.create
+call super::create
+end on
+
+on m_rayita2003.destroy
+call super::destroy
+end on
+
+type m_accesosdeusuarios from m_sys_frame`m_accesosdeusuarios within m_mantencióndeaccesos
+end type
+
+on m_accesosdeusuarios.create
+call super::create
+end on
+
+on m_accesosdeusuarios.destroy
+call super::destroy
+end on
+
+type m_tipodeadministraciónsistema from m_sys_frame`m_tipodeadministraciónsistema within m_mantencióndeaccesos
+end type
+
+on m_tipodeadministraciónsistema.create
+call super::create
+end on
+
+on m_tipodeadministraciónsistema.destroy
+call super::destroy
+end on
+
+type m_rayita2002 from m_sys_frame`m_rayita2002 within m_controldeaccesos
+end type
+
+on m_rayita2002.create
+call super::create
+end on
+
+on m_rayita2002.destroy
+call super::destroy
+end on
+
+type m_informesdeaccesos from m_sys_frame`m_informesdeaccesos within m_controldeaccesos
+end type
+
+on m_informesdeaccesos.create
+call super::create
+end on
+
+on m_informesdeaccesos.destroy
+call super::destroy
+end on
+
+type m_informedesucursalesyuadministrativas from m_sys_frame`m_informedesucursalesyuadministrativas within m_informesdeaccesos
+end type
+
+on m_informedesucursalesyuadministrativas.create
+call super::create
+end on
+
+on m_informedesucursalesyuadministrativas.destroy
+call super::destroy
+end on
+
+type m_informedegruposyusuarios from m_sys_frame`m_informedegruposyusuarios within m_informesdeaccesos
+end type
+
+on m_informedegruposyusuarios.create
+call super::create
+end on
+
+on m_informedegruposyusuarios.destroy
+call super::destroy
+end on
+
+type m_informedesistemasygrupos from m_sys_frame`m_informedesistemasygrupos within m_informesdeaccesos
+end type
+
+on m_informedesistemasygrupos.create
+call super::create
+end on
+
+on m_informedesistemasygrupos.destroy
+call super::destroy
+end on
+
+type m_informedeaccesoalsistema from m_sys_frame`m_informedeaccesoalsistema within m_informesdeaccesos
+end type
+
+on m_informedeaccesoalsistema.create
+call super::create
+end on
+
+on m_informedeaccesoalsistema.destroy
+call super::destroy
+end on
+
+type m_informeaccesodeusuariosaaplicaciones from m_sys_frame`m_informeaccesodeusuariosaaplicaciones within m_informesdeaccesos
+end type
+
+on m_informeaccesodeusuariosaaplicaciones.create
+call super::create
+end on
+
+on m_informeaccesodeusuariosaaplicaciones.destroy
+call super::destroy
+end on
+
+type m_rayita2001 from m_sys_frame`m_rayita2001 within m_controldeaccesos
+end type
+
+on m_rayita2001.create
+call super::create
+end on
+
+on m_rayita2001.destroy
+call super::destroy
+end on
+
+type m_cambiodepassword from m_sys_frame`m_cambiodepassword within m_controldeaccesos
+end type
+
+on m_cambiodepassword.create
+call super::create
+end on
+
+on m_cambiodepassword.destroy
+call super::destroy
+end on
+
+type m_calculadora from m_sys_frame`m_calculadora within m_file
+end type
+
+on m_calculadora.create
+call super::create
+end on
+
+on m_calculadora.destroy
+call super::destroy
+end on
+
+type m_-0 from m_sys_frame`m_-0 within m_file
+end type
+
+on m_-0.create
+call super::create
+end on
+
+on m_-0.destroy
+call super::destroy
+end on
+
+type m_configurarimpresora from m_sys_frame`m_configurarimpresora within m_file
+end type
+
+on m_configurarimpresora.create
+call super::create
+end on
+
+on m_configurarimpresora.destroy
+call super::destroy
+end on
+
+type m_-1 from m_sys_frame`m_-1 within m_file
+end type
+
+on m_-1.create
+call super::create
+end on
+
+on m_-1.destroy
+call super::destroy
+end on
+
+type m_cerrarventanaactiva from m_sys_frame`m_cerrarventanaactiva within m_file
+end type
+
+on m_cerrarventanaactiva.create
+call super::create
+end on
+
+on m_cerrarventanaactiva.destroy
+call super::destroy
+end on
+
+type m_-2 from m_sys_frame`m_-2 within m_file
+end type
+
+on m_-2.create
+call super::create
+end on
+
+on m_-2.destroy
+call super::destroy
+end on
+
+type m_salirdelaaplicacin from m_sys_frame`m_salirdelaaplicacin within m_file
+end type
+
+on m_salirdelaaplicacin.create
+call super::create
+end on
+
+on m_salirdelaaplicacin.destroy
+call super::destroy
+end on
+
+type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_geográficas m_geográficas
+m_generales m_generales
+m_2 m_2
+m_empresas m_empresas
+m_conexiones m_conexiones
+m_5 m_5
+m_personal m_personal
+m_proveedor m_proveedor
+m_seccion m_seccion
+m_sucursal m_sucursal
+m_ubicacion m_ubicacion
+m_7 m_7
+m_tipomovimientoequipos m_tipomovimientoequipos
+m_1 m_1
+m_0 m_0
+end type
+
+on m_aplicacion.create
+call super::create
+this.m_geográficas=create m_geográficas
+this.m_generales=create m_generales
+this.m_2=create m_2
+this.m_empresas=create m_empresas
+this.m_conexiones=create m_conexiones
+this.m_5=create m_5
+this.m_personal=create m_personal
+this.m_proveedor=create m_proveedor
+this.m_seccion=create m_seccion
+this.m_sucursal=create m_sucursal
+this.m_ubicacion=create m_ubicacion
+this.m_7=create m_7
+this.m_tipomovimientoequipos=create m_tipomovimientoequipos
+this.m_1=create m_1
+this.m_0=create m_0
+this.Item[UpperBound(this.Item)+1]=this.m_geográficas
+this.Item[UpperBound(this.Item)+1]=this.m_generales
+this.Item[UpperBound(this.Item)+1]=this.m_2
+this.Item[UpperBound(this.Item)+1]=this.m_empresas
+this.Item[UpperBound(this.Item)+1]=this.m_conexiones
+this.Item[UpperBound(this.Item)+1]=this.m_5
+this.Item[UpperBound(this.Item)+1]=this.m_personal
+this.Item[UpperBound(this.Item)+1]=this.m_proveedor
+this.Item[UpperBound(this.Item)+1]=this.m_seccion
+this.Item[UpperBound(this.Item)+1]=this.m_sucursal
+this.Item[UpperBound(this.Item)+1]=this.m_ubicacion
+this.Item[UpperBound(this.Item)+1]=this.m_7
+this.Item[UpperBound(this.Item)+1]=this.m_tipomovimientoequipos
+this.Item[UpperBound(this.Item)+1]=this.m_1
+this.Item[UpperBound(this.Item)+1]=this.m_0
+end on
+
+on m_aplicacion.destroy
+call super::destroy
+destroy(this.m_geográficas)
+destroy(this.m_generales)
+destroy(this.m_2)
+destroy(this.m_empresas)
+destroy(this.m_conexiones)
+destroy(this.m_5)
+destroy(this.m_personal)
+destroy(this.m_proveedor)
+destroy(this.m_seccion)
+destroy(this.m_sucursal)
+destroy(this.m_ubicacion)
+destroy(this.m_7)
+destroy(this.m_tipomovimientoequipos)
+destroy(this.m_1)
+destroy(this.m_0)
+end on
+
+type m_movimientos from m_sys_frame`m_movimientos within m_principal
+m_asignaciónequipos m_asignaciónequipos
+m_ordentrabajo m_ordentrabajo
+m_asignacionlicencias m_asignacionlicencias
+m_8 m_8
+m_9 m_9
+end type
+
+on m_movimientos.create
+call super::create
+this.m_asignaciónequipos=create m_asignaciónequipos
+this.m_ordentrabajo=create m_ordentrabajo
+this.m_asignacionlicencias=create m_asignacionlicencias
+this.m_8=create m_8
+this.m_9=create m_9
+this.Item[UpperBound(this.Item)+1]=this.m_asignaciónequipos
+this.Item[UpperBound(this.Item)+1]=this.m_ordentrabajo
+this.Item[UpperBound(this.Item)+1]=this.m_asignacionlicencias
+this.Item[UpperBound(this.Item)+1]=this.m_8
+this.Item[UpperBound(this.Item)+1]=this.m_9
+end on
+
+on m_movimientos.destroy
+call super::destroy
+destroy(this.m_asignaciónequipos)
+destroy(this.m_ordentrabajo)
+destroy(this.m_asignacionlicencias)
+destroy(this.m_8)
+destroy(this.m_9)
+end on
+
+type m_procesos from m_sys_frame`m_procesos within m_principal
+m_ordenesdetrabajoproc m_ordenesdetrabajoproc
+m_estadoequipos m_estadoequipos
+m_devolucionequipos m_devolucionequipos
+m_impresion m_impresion
+end type
+
+on m_procesos.create
+call super::create
+this.m_ordenesdetrabajoproc=create m_ordenesdetrabajoproc
+this.m_estadoequipos=create m_estadoequipos
+this.m_devolucionequipos=create m_devolucionequipos
+this.m_impresion=create m_impresion
+this.Item[UpperBound(this.Item)+1]=this.m_ordenesdetrabajoproc
+this.Item[UpperBound(this.Item)+1]=this.m_estadoequipos
+this.Item[UpperBound(this.Item)+1]=this.m_devolucionequipos
+this.Item[UpperBound(this.Item)+1]=this.m_impresion
+end on
+
+on m_procesos.destroy
+call super::destroy
+destroy(this.m_ordenesdetrabajoproc)
+destroy(this.m_estadoequipos)
+destroy(this.m_devolucionequipos)
+destroy(this.m_impresion)
+end on
+
+type m_informes from m_sys_frame`m_informes within m_principal
+m_detalleequipos m_detalleequipos
+m_6 m_6
+m_personalequipos m_personalequipos
+m_10 m_10
+m_valorcuotaequipos m_valorcuotaequipos
+m_valorcuotaequipos0 m_valorcuotaequipos0
+m_3 m_3
+m_ordenesdetrabajo m_ordenesdetrabajo
+m_4 m_4
+end type
+
+on m_informes.create
+call super::create
+this.m_detalleequipos=create m_detalleequipos
+this.m_6=create m_6
+this.m_personalequipos=create m_personalequipos
+this.m_10=create m_10
+this.m_valorcuotaequipos=create m_valorcuotaequipos
+this.m_valorcuotaequipos0=create m_valorcuotaequipos0
+this.m_3=create m_3
+this.m_ordenesdetrabajo=create m_ordenesdetrabajo
+this.m_4=create m_4
+this.Item[UpperBound(this.Item)+1]=this.m_detalleequipos
+this.Item[UpperBound(this.Item)+1]=this.m_6
+this.Item[UpperBound(this.Item)+1]=this.m_personalequipos
+this.Item[UpperBound(this.Item)+1]=this.m_10
+this.Item[UpperBound(this.Item)+1]=this.m_valorcuotaequipos
+this.Item[UpperBound(this.Item)+1]=this.m_valorcuotaequipos0
+this.Item[UpperBound(this.Item)+1]=this.m_3
+this.Item[UpperBound(this.Item)+1]=this.m_ordenesdetrabajo
+this.Item[UpperBound(this.Item)+1]=this.m_4
+end on
+
+on m_informes.destroy
+call super::destroy
+destroy(this.m_detalleequipos)
+destroy(this.m_6)
+destroy(this.m_personalequipos)
+destroy(this.m_10)
+destroy(this.m_valorcuotaequipos)
+destroy(this.m_valorcuotaequipos0)
+destroy(this.m_3)
+destroy(this.m_ordenesdetrabajo)
+destroy(this.m_4)
+end on
+
+type m_consultas from m_sys_frame`m_consultas within m_principal
+m_consultaequipos m_consultaequipos
+m_consultamovimientos m_consultamovimientos
+end type
+
+on m_consultas.create
+call super::create
+this.m_consultaequipos=create m_consultaequipos
+this.m_consultamovimientos=create m_consultamovimientos
+this.Item[UpperBound(this.Item)+1]=this.m_consultaequipos
+this.Item[UpperBound(this.Item)+1]=this.m_consultamovimientos
+end on
+
+on m_consultas.destroy
+call super::destroy
+destroy(this.m_consultaequipos)
+destroy(this.m_consultamovimientos)
+end on
+
+type m_topicactions from m_sys_frame`m_topicactions within m_principal
+end type
+
+on m_topicactions.create
+call super::create
+end on
+
+on m_topicactions.destroy
+call super::destroy
+end on
+
+type m_primerregistro from m_sys_frame`m_primerregistro within m_topicactions
+end type
+
+on m_primerregistro.create
+call super::create
+end on
+
+on m_primerregistro.destroy
+call super::destroy
+end on
+
+type m_registroanterior from m_sys_frame`m_registroanterior within m_topicactions
+end type
+
+on m_registroanterior.create
+call super::create
+end on
+
+on m_registroanterior.destroy
+call super::destroy
+end on
+
+type m_siguienteregistro from m_sys_frame`m_siguienteregistro within m_topicactions
+end type
+
+on m_siguienteregistro.create
+call super::create
+end on
+
+on m_siguienteregistro.destroy
+call super::destroy
+end on
+
+type m_ultimoregistro from m_sys_frame`m_ultimoregistro within m_topicactions
+end type
+
+on m_ultimoregistro.create
+call super::create
+end on
+
+on m_ultimoregistro.destroy
+call super::destroy
+end on
+
+type m_-45 from m_sys_frame`m_-45 within m_topicactions
+end type
+
+on m_-45.create
+call super::create
+end on
+
+on m_-45.destroy
+call super::destroy
+end on
+
+type m_buscarregistro from m_sys_frame`m_buscarregistro within m_topicactions
+end type
+
+on m_buscarregistro.create
+call super::create
+end on
+
+on m_buscarregistro.destroy
+call super::destroy
+end on
+
+type m_ordenar from m_sys_frame`m_ordenar within m_topicactions
+end type
+
+on m_ordenar.create
+call super::create
+end on
+
+on m_ordenar.destroy
+call super::destroy
+end on
+
+type m_-0001 from m_sys_frame`m_-0001 within m_topicactions
+end type
+
+on m_-0001.create
+call super::create
+end on
+
+on m_-0001.destroy
+call super::destroy
+end on
+
+type m_nuevoregistro from m_sys_frame`m_nuevoregistro within m_topicactions
+end type
+
+on m_nuevoregistro.create
+call super::create
+end on
+
+on m_nuevoregistro.destroy
+call super::destroy
+end on
+
+type m_búsquedadeinformación from m_sys_frame`m_búsquedadeinformación within m_topicactions
+end type
+
+on m_búsquedadeinformación.create
+call super::create
+end on
+
+on m_búsquedadeinformación.destroy
+call super::destroy
+end on
+
+type m_lectura from m_sys_frame`m_lectura within m_topicactions
+end type
+
+on m_lectura.create
+call super::create
+end on
+
+on m_lectura.destroy
+call super::destroy
+end on
+
+type m_grabainformación from m_sys_frame`m_grabainformación within m_topicactions
+end type
+
+on m_grabainformación.create
+call super::create
+end on
+
+on m_grabainformación.destroy
+call super::destroy
+end on
+
+type m_eliminainformación from m_sys_frame`m_eliminainformación within m_topicactions
+end type
+
+on m_eliminainformación.create
+call super::create
+end on
+
+on m_eliminainformación.destroy
+call super::destroy
+end on
+
+type m_imprimedocumento from m_sys_frame`m_imprimedocumento within m_topicactions
+end type
+
+on m_imprimedocumento.create
+call super::create
+end on
+
+on m_imprimedocumento.destroy
+call super::destroy
+end on
+
+type m_-0002 from m_sys_frame`m_-0002 within m_topicactions
+end type
+
+on m_-0002.create
+call super::create
+end on
+
+on m_-0002.destroy
+call super::destroy
+end on
+
+type m_agregadetalle from m_sys_frame`m_agregadetalle within m_topicactions
+end type
+
+on m_agregadetalle.create
+call super::create
+end on
+
+on m_agregadetalle.destroy
+call super::destroy
+end on
+
+type m_eliminadetalle from m_sys_frame`m_eliminadetalle within m_topicactions
+end type
+
+on m_eliminadetalle.create
+call super::create
+end on
+
+on m_eliminadetalle.destroy
+call super::destroy
+end on
+
+type m_respaldos from m_sys_frame`m_respaldos within m_principal
+end type
+
+on m_respaldos.create
+call super::create
+end on
+
+on m_respaldos.destroy
+call super::destroy
+end on
+
+type m_respaldobasededatosylog from m_sys_frame`m_respaldobasededatosylog within m_respaldos
+end type
+
+on m_respaldobasededatosylog.create
+call super::create
+end on
+
+on m_respaldobasededatosylog.destroy
+call super::destroy
+end on
+
+type m_-respaldos from m_sys_frame`m_-respaldos within m_respaldos
+end type
+
+on m_-respaldos.create
+call super::create
+end on
+
+on m_-respaldos.destroy
+call super::destroy
+end on
+
+type m_actualizacióndedatos from m_sys_frame`m_actualizacióndedatos within m_respaldos
+end type
+
+on m_actualizacióndedatos.create
+call super::create
+end on
+
+on m_actualizacióndedatos.destroy
+call super::destroy
+end on
+
+type m_window from m_sys_frame`m_window within m_principal
+end type
+
+on m_window.create
+call super::create
+end on
+
+on m_window.destroy
+call super::destroy
+end on
+
+type m_tile from m_sys_frame`m_tile within m_window
+end type
+
+on m_tile.create
+call super::create
+end on
+
+on m_tile.destroy
+call super::destroy
+end on
+
+type m_tilehorizontal from m_sys_frame`m_tilehorizontal within m_window
+end type
+
+on m_tilehorizontal.create
+call super::create
+end on
+
+on m_tilehorizontal.destroy
+call super::destroy
+end on
+
+type m_layer from m_sys_frame`m_layer within m_window
+end type
+
+on m_layer.create
+call super::create
+end on
+
+on m_layer.destroy
+call super::destroy
+end on
+
+type m_cascade from m_sys_frame`m_cascade within m_window
+end type
+
+on m_cascade.create
+call super::create
+end on
+
+on m_cascade.destroy
+call super::destroy
+end on
+
+type m_help from m_sys_frame`m_help within m_principal
+end type
+
+on m_help.create
+call super::create
+end on
+
+on m_help.destroy
+call super::destroy
+end on
+
+type m_helpgeneralidades from m_sys_frame`m_helpgeneralidades within m_help
+end type
+
+on m_helpgeneralidades.create
+call super::create
+end on
+
+on m_helpgeneralidades.destroy
+call super::destroy
+end on
+
+type m_helpadministracióndeusuarios from m_sys_frame`m_helpadministracióndeusuarios within m_help
+end type
+
+on m_helpadministracióndeusuarios.create
+call super::create
+end on
+
+on m_helpadministracióndeusuarios.destroy
+call super::destroy
+end on
+
+type m_liberacióndesistemas from m_sys_frame`m_liberacióndesistemas within m_help
+end type
+
+on m_liberacióndesistemas.create
+call super::create
+end on
+
+on m_liberacióndesistemas.destroy
+call super::destroy
+end on
+
+type m_actualizacionesdesistema from m_sys_frame`m_actualizacionesdesistema within m_help
+end type
+
+on m_actualizacionesdesistema.create
+call super::create
+end on
+
+on m_actualizacionesdesistema.destroy
+call super::destroy
+end on
+
+type m_helpindex from m_sys_frame`m_helpindex within m_help
+end type
+
+on m_helpindex.create
+call super::create
+this.visible = true
+this.enabled = true
+end on
+
+on m_helpindex.destroy
+call super::destroy
+end on
+
+event m_helpindex::clicked;call super::clicked;ShowHelp("Activo Fijo.hlp", index!)
+end event
+
+type m_-3 from m_sys_frame`m_-3 within m_help
+end type
+
+on m_-3.create
+call super::create
+this.visible = true
+end on
+
+on m_-3.destroy
+call super::destroy
+end on
+
+type m_about from m_sys_frame`m_about within m_help
+end type
+
+on m_about.create
+call super::create
+end on
+
+on m_about.destroy
+call super::destroy
+end on
+
+type m_geográficas from menu within m_aplicacion
+m_pais m_pais
+m_region m_region
+m_comuna m_comuna
+end type
+
+on m_geográficas.create
+call super::create
+this.text = "Geográficas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_pais=create m_pais
+this.m_region=create m_region
+this.m_comuna=create m_comuna
+this.Item[UpperBound(this.Item)+1]=this.m_pais
+this.Item[UpperBound(this.Item)+1]=this.m_region
+this.Item[UpperBound(this.Item)+1]=this.m_comuna
+end on
+
+on m_geográficas.destroy
+call super::destroy
+destroy(this.m_pais)
+destroy(this.m_region)
+destroy(this.m_comuna)
+end on
+
+type m_pais from menu within m_geográficas
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_paises, w_main, ii_Columna, Original!)
+end event
+
+on m_pais.create
+call super::create
+this.text = "&Pais"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_pais.destroy
+call super::destroy
+end on
+
+type m_region from menu within m_geográficas
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_region, w_main, ii_Columna, Original!)
+end event
+
+on m_region.create
+call super::create
+this.text = "&Region"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_region.destroy
+call super::destroy
+end on
+
+type m_comuna from menu within m_geográficas
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_comuna, w_main, ii_Columna, Original!)
+end event
+
+on m_comuna.create
+call super::create
+this.text = "&Comuna"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_comuna.destroy
+call super::destroy
+end on
+
+type m_generales from menu within m_aplicacion
+m_item m_item
+m_marcas m_marcas
+m_monedas m_monedas
+m_servicios m_servicios
+m_tipodeequipos m_tipodeequipos
+m_modelos m_modelos
+m_unidadmedidas m_unidadmedidas
+end type
+
+on m_generales.create
+call super::create
+this.text = "Generales"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_item=create m_item
+this.m_marcas=create m_marcas
+this.m_monedas=create m_monedas
+this.m_servicios=create m_servicios
+this.m_tipodeequipos=create m_tipodeequipos
+this.m_modelos=create m_modelos
+this.m_unidadmedidas=create m_unidadmedidas
+this.Item[UpperBound(this.Item)+1]=this.m_item
+this.Item[UpperBound(this.Item)+1]=this.m_marcas
+this.Item[UpperBound(this.Item)+1]=this.m_monedas
+this.Item[UpperBound(this.Item)+1]=this.m_servicios
+this.Item[UpperBound(this.Item)+1]=this.m_tipodeequipos
+this.Item[UpperBound(this.Item)+1]=this.m_modelos
+this.Item[UpperBound(this.Item)+1]=this.m_unidadmedidas
+end on
+
+on m_generales.destroy
+call super::destroy
+destroy(this.m_item)
+destroy(this.m_marcas)
+destroy(this.m_monedas)
+destroy(this.m_servicios)
+destroy(this.m_tipodeequipos)
+destroy(this.m_modelos)
+destroy(this.m_unidadmedidas)
+end on
+
+type m_item from menu within m_generales
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_item, w_main, ii_Columna, Original!)
+end event
+
+on m_item.create
+call super::create
+this.text = "&Item"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_item.destroy
+call super::destroy
+end on
+
+type m_marcas from menu within m_generales
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_marca, w_main, ii_Columna, Original!)
+end event
+
+on m_marcas.create
+call super::create
+this.text = "M&arcas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_marcas.destroy
+call super::destroy
+end on
+
+type m_monedas from menu within m_generales
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_moneda, w_main, ii_Columna, Original!)
+end event
+
+on m_monedas.create
+call super::create
+this.text = "&Monedas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_monedas.destroy
+call super::destroy
+end on
+
+type m_servicios from menu within m_generales
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_servicios, w_main, ii_Columna, Original!)
+end event
+
+on m_servicios.create
+call super::create
+this.text = "&Servicios"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_servicios.destroy
+call super::destroy
+end on
+
+type m_tipodeequipos from menu within m_generales
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_tipoequipo, w_main, ii_Columna, Original!)
+end event
+
+on m_tipodeequipos.create
+call super::create
+this.text = "&Tipo de Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_tipodeequipos.destroy
+call super::destroy
+end on
+
+type m_modelos from menu within m_generales
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_modelo, w_main, ii_Columna, Original!)
+end event
+
+on m_modelos.create
+call super::create
+this.text = "Modelos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_modelos.destroy
+call super::destroy
+end on
+
+type m_unidadmedidas from menu within m_generales
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_unidadmedida, w_main, ii_Columna, Original!)
+end event
+
+on m_unidadmedidas.create
+call super::create
+this.text = "&Unidad Medidas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_unidadmedidas.destroy
+call super::destroy
+end on
+
+type m_2 from menu within m_aplicacion
+end type
+
+on m_2.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_2.destroy
+call super::destroy
+end on
+
+type m_empresas from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_empresa, w_main, ii_Columna, Original!)
+end event
+
+on m_empresas.create
+call super::create
+this.text = "&Empresas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_empresas.destroy
+call super::destroy
+end on
+
+type m_conexiones from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_empresasconexion, w_main, ii_Columna, Original!)
+end event
+
+on m_conexiones.create
+call super::create
+this.text = "Conexiones"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_conexiones.destroy
+call super::destroy
+end on
+
+type m_5 from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_cargo, w_main, ii_Columna, Original!)
+end event
+
+on m_5.create
+call super::create
+this.text = "&Cargos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_5.destroy
+call super::destroy
+end on
+
+type m_personal from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_personal, w_main, ii_Columna, Original!)
+end event
+
+on m_personal.create
+call super::create
+this.text = "&Colaborador"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_personal.destroy
+call super::destroy
+end on
+
+type m_proveedor from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_proveedor, w_main, ii_Columna, Original!)
+end event
+
+on m_proveedor.create
+call super::create
+this.text = "P&roveedor"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_proveedor.destroy
+call super::destroy
+end on
+
+type m_seccion from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_seccion, w_main, ii_Columna, Original!)
+end event
+
+on m_seccion.create
+call super::create
+this.text = "&Seccion"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_seccion.destroy
+call super::destroy
+end on
+
+type m_sucursal from menu within m_aplicacion
+end type
+
+on m_sucursal.create
+call super::create
+this.text = "S&ucursal"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_sucursal.destroy
+call super::destroy
+end on
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_sucursal, w_main, ii_Columna, Original!)
+end event
+
+type m_ubicacion from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_ubicacion, w_main, ii_Columna, Original!)
+end event
+
+on m_ubicacion.create
+call super::create
+this.text = "Ubicacio&n"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_ubicacion.destroy
+call super::destroy
+end on
+
+type m_7 from menu within m_aplicacion
+end type
+
+on m_7.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_7.destroy
+call super::destroy
+end on
+
+type m_tipomovimientoequipos from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_tipomovto, w_main, ii_Columna, Original!)
+end event
+
+on m_tipomovimientoequipos.create
+call super::create
+this.text = "Tipo Movimiento Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_tipomovimientoequipos.destroy
+call super::destroy
+end on
+
+type m_1 from menu within m_aplicacion
+end type
+
+on m_1.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_0 from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_parempresa, w_main, ii_Columna, Original!)
+end event
+
+on m_0.create
+call super::create
+this.text = "&Parámetros Empresa"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_0.destroy
+call super::destroy
+end on
+
+type m_asignaciónequipos from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_asignacionequipos, w_main, ii_Columna, Original!)
+end event
+
+on m_asignaciónequipos.create
+call super::create
+this.text = "Asignación &Equipos~tCtrl+E"
+this.shortcut = 325
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_asignaciónequipos.destroy
+call super::destroy
+end on
+
+type m_ordentrabajo from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_ordentrabajo, w_main, ii_Columna, Original!)
+end event
+
+on m_ordentrabajo.create
+call super::create
+this.text = "&Orden Trabajo~tCtrl+O"
+this.shortcut = 335
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_ordentrabajo.destroy
+call super::destroy
+end on
+
+type m_asignacionlicencias from menu within m_movimientos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_asignacionlicencias, w_main, ii_Columna, Original!)
+end event
+
+on m_asignacionlicencias.create
+call super::create
+this.text = "Asignacion &Licencias~tCtrl+L"
+this.shortcut = 332
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_asignacionlicencias.destroy
+call super::destroy
+end on
+
+type m_8 from menu within m_movimientos
+end type
+
+on m_8.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_8.destroy
+call super::destroy
+end on
+
+type m_9 from menu within m_movimientos
+end type
+
+on m_9.create
+call super::create
+this.text = "&Movimiento Equipos~tCtrl+M"
+this.shortcut = 333
+this.microhelp = "Movimiento de Equipamiento Computaciional"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_9.destroy
+call super::destroy
+end on
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_maed_despachos, w_main, ii_Columna, Original!)
+end event
+
+type m_ordenesdetrabajoproc from menu within m_procesos
+m_cierreordenestrabajo m_cierreordenestrabajo
+m_anulaordenesdetrabajo m_anulaordenesdetrabajo
+end type
+
+on m_ordenesdetrabajoproc.create
+call super::create
+this.text = "&Ordenes de Trabajo"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+this.m_cierreordenestrabajo=create m_cierreordenestrabajo
+this.m_anulaordenesdetrabajo=create m_anulaordenesdetrabajo
+this.Item[UpperBound(this.Item)+1]=this.m_cierreordenestrabajo
+this.Item[UpperBound(this.Item)+1]=this.m_anulaordenesdetrabajo
+end on
+
+on m_ordenesdetrabajoproc.destroy
+call super::destroy
+destroy(this.m_cierreordenestrabajo)
+destroy(this.m_anulaordenesdetrabajo)
+end on
+
+type m_cierreordenestrabajo from menu within m_ordenesdetrabajoproc
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheetWithParm(w_proc_ordenestrabajo, 'C', w_main,  ii_Columna, Original!)
+end event
+
+on m_cierreordenestrabajo.create
+call super::create
+this.text = "&Cierre Ordenes de Trabajo"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cierreordenestrabajo.destroy
+call super::destroy
+end on
+
+type m_anulaordenesdetrabajo from menu within m_ordenesdetrabajoproc
+end type
+
+on m_anulaordenesdetrabajo.create
+call super::create
+this.text = "&Anula Ordenes de Trabajo"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_anulaordenesdetrabajo.destroy
+call super::destroy
+end on
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheetWithParm(w_proc_ordenestrabajo, 'A', w_main,  ii_Columna, Original!)
+end event
+
+type m_estadoequipos from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_proc_equipos, w_main,  ii_Columna, Original!)
+end event
+
+on m_estadoequipos.create
+call super::create
+this.text = "&Estado Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_estadoequipos.destroy
+call super::destroy
+end on
+
+type m_devolucionequipos from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_proc_devolucion_equipos, w_main,  ii_Columna, Original!)
+end event
+
+on m_devolucionequipos.create
+call super::create
+this.text = "&Devolucion Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_devolucionequipos.destroy
+call super::destroy
+end on
+
+type m_impresion from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_proc_impresion_codebar, w_main,  ii_Columna, Original!)
+end event
+
+on m_impresion.create
+call super::create
+this.text = "&Impresion Codigo Barras~tCtrl+P"
+this.shortcut = 336
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_impresion.destroy
+call super::destroy
+end on
+
+type m_detalleequipos from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_detalleequipos, w_main, ii_Columna, Original!)
+end event
+
+on m_detalleequipos.create
+call super::create
+this.text = "&Detalle Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_detalleequipos.destroy
+call super::destroy
+end on
+
+type m_6 from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_detalleequipos_id, w_main, ii_Columna, Original!)
+end event
+
+on m_6.create
+call super::create
+this.text = "Detalle ID. Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_6.destroy
+call super::destroy
+end on
+
+type m_personalequipos from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_personalequipos, w_main, ii_Columna, Original!)
+end event
+
+on m_personalequipos.create
+call super::create
+this.text = "Personal / Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_personalequipos.destroy
+call super::destroy
+end on
+
+type m_10 from menu within m_informes
+end type
+
+on m_10.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_10.destroy
+call super::destroy
+end on
+
+type m_valorcuotaequipos from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_valorcuota, w_main, ii_Columna, Original!)
+end event
+
+on m_valorcuotaequipos.create
+call super::create
+this.text = "Valor Cuota Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_valorcuotaequipos.destroy
+call super::destroy
+end on
+
+type m_valorcuotaequipos0 from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_valorcuota_det, w_main, ii_Columna, Original!)
+end event
+
+on m_valorcuotaequipos0.create
+call super::create
+this.text = "Valor Cuota Equipos Detalle"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_valorcuotaequipos0.destroy
+call super::destroy
+end on
+
+type m_3 from menu within m_informes
+end type
+
+on m_3.create
+call super::create
+this.text = "-"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_3.destroy
+call super::destroy
+end on
+
+type m_ordenesdetrabajo from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_ordenestrabajo, w_main, ii_Columna, Original!)
+end event
+
+on m_ordenesdetrabajo.create
+call super::create
+this.text = "&Ordenes de Trabajo"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_ordenesdetrabajo.destroy
+call super::destroy
+end on
+
+type m_4 from menu within m_informes
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_info_equiposasignados, w_main, ii_Columna, Original!)
+end event
+
+on m_4.create
+call super::create
+this.text = "&Fichas de Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_4.destroy
+call super::destroy
+end on
+
+type m_consultaequipos from menu within m_consultas
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_cons_equipo, w_main, ii_Columna, Original!)
+end event
+
+on m_consultaequipos.create
+call super::create
+this.text = "Consulta Equipos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_consultaequipos.destroy
+call super::destroy
+end on
+
+type m_consultamovimientos from menu within m_consultas
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_cons_movto, w_main, ii_Columna, Original!)
+end event
+
+on m_consultamovimientos.create
+call super::create
+this.text = "Consulta Movimientos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_consultamovimientos.destroy
+call super::destroy
+end on
+

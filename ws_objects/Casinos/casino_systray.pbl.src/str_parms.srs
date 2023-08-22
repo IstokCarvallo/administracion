@@ -1,0 +1,6 @@
+﻿$PBExportHeader$str_parms.srs
+global type str_parms from structure
+    string string_arg[]
+    datawindow dw_arg
+end type
+
