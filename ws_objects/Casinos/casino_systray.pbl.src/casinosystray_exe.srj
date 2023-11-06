@@ -12,23 +12,23 @@ FVS:5.21.30092021
 FVN:5,21,3009,2021
 MAN:0,asInvoker,0
 PBD:casino_systray.pbl,,1
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,f_fechahora,f
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,w_systray,w
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,uo_movtocasino,u
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,casino_systray,a
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_mues_controlingreso_casino,d
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_mues_controlingreso_casino_sharedata,d
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,m_casino_opcion,m
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_info_controlingreso_casino_sharedata,d
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,bitor,f
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,str_usuario,s
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,w_errorbasedatos,w
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,w_movto_casinos_systray,w
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,str_aplicacion,s
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_mues_colacionesdia_porhora,d
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,dw_tarjeta_anfitrion,d
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,w_mant_tarjeta_anfitrion,w
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,str_errorbasedatos,s
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,nvo_sizeof,u
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,str_mant,s
-OBJ:C:\Desarrollo 21\Administracion\Casinos\casino_systray.pbl,f_errorbasedatos,f
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,f_errorbasedatos,f
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,str_mant,s
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,uo_movtocasino,u
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,dw_mues_controlingreso_casino,d
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,casino_systray,a
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,str_errorbasedatos,s
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,str_usuario,s
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,nvo_sizeof,u
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,m_casino_opcion,m
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,bitor,f
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,w_mant_tarjeta_anfitrion,w
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,dw_mues_controlingreso_casino_sharedata,d
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,dw_info_controlingreso_casino_sharedata,d
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,w_errorbasedatos,w
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,dw_mues_colacionesdia_porhora,d
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,str_aplicacion,s
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,dw_tarjeta_anfitrion,d
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,w_systray,w
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,f_fechahora,f
+OBJ:C:\Desarrollo 22\Administracion\Casinos\casino_systray.pbl,w_movto_casinos_systray,w
