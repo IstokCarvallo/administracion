@@ -207,6 +207,10 @@ Else
 	ll_Propiedad = 1
 End If
 
+If cbx_estado.Checked Then
+	ii_Estado = -1
+End If
+
 OpenWithParm(vinf, istr_info)
 vinf.dw_1.DataObject = "dw_info_equipodetalle"
 vinf.dw_1.SetTransObject(sqlca)

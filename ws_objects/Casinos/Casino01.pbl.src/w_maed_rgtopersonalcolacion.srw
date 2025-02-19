@@ -61,12 +61,12 @@ end variables
 forward prototypes
 public function boolean cargatabs ()
 public subroutine personalvigente (integer ai_fila)
-public function boolean conectaempresa (integer ai_fila)
-public function boolean reprocesaempresa ()
 protected function boolean wf_actualiza_db ()
 public subroutine rescatanombre (string as_nombre)
 public function boolean usuariobd (string as_username, boolean crear)
 public subroutine bloqueaventana (boolean ab_estado)
+public function boolean wf_conectaempresa (integer ai_fila)
+public function boolean wf_reprocesaempresa ()
 end prototypes
 
 public function boolean cargatabs ();Boolean 	lb_retorno = True
@@ -145,153 +145,6 @@ dw_6.Sort()
 
 Destroy lds_dw_1;
 end subroutine
-
-public function boolean conectaempresa (integer ai_fila);String		ls_Usuario, ls_Password, ls_DBMS, ls_Nombre, ls_DBParm, ls_Base, ls_Server, ls_Provider
-Boolean	lb_conectado
-
-SetPointer(HourGlass!)
-
-DISCONNECT USING it_trans;													
-
-ls_DBMS		=	dw_2.Object.empr_nodbms[ai_fila]
-ls_nombre	=	dw_2.Object.empr_idodbc[ai_fila]
-ls_usuario  	=  dw_2.Object.empr_nomusu[ai_fila]
-ls_Password	=  dw_2.Object.empr_passwo[ai_fila]
-ls_Server	=	dw_2.Object.empr_nomser[ai_fila]
-ls_Base		=	dw_2.Object.empr_nombas[ai_fila]
-ls_Provider	=	dw_2.Object.empr_driver[ai_fila]
-
-it_trans.Dbms			=	ls_DBMS
-it_trans.ServerName	=	ls_Server
-it_trans.DataBase		=	ls_Base
-
-If ls_DBMS = "ODBC" Then
-		it_trans.DbParm		=	"Connectstring='DSN=" + ls_Nombre + ";" + &
-													"UID=" + ls_Usuario  + ";" + &
-													"PWD=" + ls_Password + "'// ;" + &
-													"ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT'" + &
-													"PBUseProcOwner = "  + '"Yes"'
-	ElseIf ls_Dbms = 'OLEDB' Then
-		it_trans.LogId   		= ls_usuario
-		it_trans.LogPass 		= ls_Password
-		it_trans.Autocommit	= True
-		
-		If Len(Trim(ls_DBParm)) > 0 Then ls_DbParm = ","+ls_DbParm
-
-		ls_DBParm = "PROVIDER='" + ls_Provider + "',PROVIDERSTRING='database="+ls_Base + "'," + &
-					 "DATASOURCE='"+ls_Server +"'"+ls_DbParm
-				
-		it_trans.DbParm = ls_DbParm
-	ElseIf Mid(ls_Dbms,1,3) = 'SNC' or Mid(ls_Dbms,1,9) = 'TRACE SNC' Then
-		it_trans.LogId  	 		= ls_usuario
-		it_trans.LogPass  		= ls_Password
-		it_trans.Autocommit	= True
-			
-		If Len(Trim(ls_DBParm)) > 0 Then ls_DbParm = ","+ls_DbParm
-		
-		ls_Dbparm = "Provider='" + ls_Provider + "',Database='"+ls_Base+"'"+ls_DbParm+",TrimSpaces=1,"
-			
-		it_trans.DBParm = ls_Dbparm
-	ElseIf	ls_Dbms = "ADO.Net" Then
-		it_trans.DBMS 			= "ADO.Net"
-		it_trans.LogId			=	ls_usuario
-		it_trans.LogPass		=	ls_Password
-		it_trans.Autocommit	=	True
-		it_trans.DBParm 		= "DataSource='" + ls_Server + "',Database='" + ls_Base + "',Namespace='System.Data.OleDb',Provider='SQLNCLI10'"
-	Else
-		it_trans.LogId			=	ls_usuario
-		it_trans.LogPass		=	ls_Password
-		it_trans.Autocommit	=	True
-	End If
-	
-CONNECT USING it_trans;
-
-IF it_trans.SQLCode = 0 THEN
-	lb_conectado	=	True
-ELSE
-	lb_conectado	=	False
-	F_ErrorBaseDatos(it_trans, This.Title)
-END IF
-
-RETURN lb_conectado
-end function
-
-public function boolean reprocesaempresa ();SetPointer(HourGlass!)
-
-Long			ll_empresas, ll_fila
-Boolean		lb_AutoCommit
-Integer		respuesta, li_codigo, li_find, li_Numero, li_Retorno
-String			ls_empresa
-String			ls_Errores[] = {"Falló Apertura de Traspaso", 					&
-									"Demasiadas Columnas", 						&
-									"Tabla ya Existe", 									&
-									"Tabla no Existe", 									&
-									"Perdió Conexión", 								&
-									"Argumentos Erróneos", 							&
-									"Columna(s) de distinto Tipo", 					&
-									"Error Fatal en SQL de Fuente", 				&
-									"Error Fatal en SQL de Destino", 				&
-									"Exedió máximo de Errores", 					&
-									"",														&
-									"Error de Sintáxis en Tabla", 					&
-									"Tabla requiere de LLave pero no tiene",		&
-									"", 													&
-									"Traspaso ya estaba en Progreso",			&
-									"Error en Base de Datos Fuente",				&
-									"Error en Base de Datos Destino",				&
-									"Base de Datos Destino es de Sólo Lectura"}
-
-
-Pipeline				lpl_Traspaso
-lpl_Traspaso	=	Create PipeLine
-
-lpl_Traspaso.Cancel()
-
-//Carga personal por empresa
-FOR ll_empresas = 1 TO dw_2.RowCount()
-	If dw_2.IsSelected(ll_empresas) Then
-		
-		If NOT ConectaEmpresa(ll_empresas) Then
-			Return False
-		End If
-		
-		li_codigo						=	dw_2.Object.empr_codigo[ll_empresas]
-		dw_errores.Visible 		= 	True
-		lpl_Traspaso.DataObject	=	"dpl_remupersonal"
-		li_Retorno					=	lpl_Traspaso.Start(it_trans, sqlca, dw_errores, li_codigo)
-		
-		If li_Retorno < 0 Then
-			MessageBox("Error", "Se ha producido el siguiente Error en el Traspaso de " 	+	&
-							lpl_Traspaso.DataObject + "~r~r"	+	&
-							String(li_Retorno) + " : "	+	ls_Errores[Abs(li_Retorno)] 			+	&
-							"~r~rAvise a Administrador de Sistema.")
-			Return False
-		End If
-		
-		If li_Retorno < 1 Then  Return False
-		
-		dw_errores.Visible 		= 	True
-		lpl_Traspaso.DataObject	=	"dpl_centrocosto"
-		li_Retorno					=	lpl_Traspaso.Start(it_trans, sqlca, dw_errores)
-		
-		If li_Retorno < 0 Then
-			MessageBox("Error", "Se ha producido el siguiente Error en el Traspaso de " 	+	&
-							"dpl_centrocosto. ~r~r" 	+	&
-							String(li_Retorno) + " : "	+	ls_Errores[Abs(li_Retorno)] 			+	&
-							"~r~rAvise a Administrador de Sistema.")
-			Return False
-		End If
-		
-		If li_Retorno < 1 Then Return False
-	End If
-NEXT
-
-dw_errores.Visible = False
-
-Destroy lpl_Traspaso
-
-Return True
-end function
 
 protected function boolean wf_actualiza_db ();Integer	li_filas
 Boolean	lb_AutoCommit, lb_Retorno
@@ -407,6 +260,153 @@ end function
 
 public subroutine bloqueaventana (boolean ab_estado);
 end subroutine
+
+public function boolean wf_conectaempresa (integer ai_fila);String		ls_Usuario, ls_Password, ls_DBMS, ls_Nombre, ls_DBParm, ls_Base, ls_Server, ls_Provider
+Boolean	lb_conectado
+
+SetPointer(HourGlass!)
+
+DISCONNECT USING it_trans;													
+
+ls_DBMS		=	dw_2.Object.empr_nodbms[ai_fila]
+ls_nombre	=	dw_2.Object.empr_idodbc[ai_fila]
+ls_usuario  	=  dw_2.Object.empr_nomusu[ai_fila]
+ls_Password	=  dw_2.Object.empr_passwo[ai_fila]
+ls_Server	=	dw_2.Object.empr_nomser[ai_fila]
+ls_Base		=	dw_2.Object.empr_nombas[ai_fila]
+ls_Provider	=	"SQLNCLI11"//dw_2.Object.empr_driver[ai_fila]
+
+it_trans.Dbms			=	ls_DBMS
+it_trans.ServerName	=	ls_Server
+it_trans.DataBase		=	ls_Base
+
+If ls_DBMS = "ODBC" Then
+		it_trans.DbParm		=	"Connectstring='DSN=" + ls_Nombre + ";" + &
+													"UID=" + ls_Usuario  + ";" + &
+													"PWD=" + ls_Password + "'// ;" + &
+													"ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT'" + &
+													"PBUseProcOwner = "  + '"Yes"'
+	ElseIf ls_Dbms = 'OLEDB' Then
+		it_trans.LogId   		= ls_usuario
+		it_trans.LogPass 		= ls_Password
+		it_trans.Autocommit	= True
+		
+		If Len(Trim(ls_DBParm)) > 0 Then ls_DbParm = ","+ls_DbParm
+
+		ls_DBParm = "PROVIDER='" + ls_Provider + "',PROVIDERSTRING='database="+ls_Base + "'," + &
+					 "DATASOURCE='"+ls_Server +"'"+ls_DbParm
+				
+		it_trans.DbParm = ls_DbParm
+	ElseIf Mid(ls_Dbms,1,3) = 'SNC' or Mid(ls_Dbms,1,9) = 'TRACE SNC' Then
+		it_trans.LogId  	 		= ls_usuario
+		it_trans.LogPass  		= ls_Password
+		it_trans.Autocommit	= True
+			
+		If Len(Trim(ls_DBParm)) > 0 Then ls_DbParm = ","+ls_DbParm
+		
+		ls_Dbparm = "Provider='" + ls_Provider + "',Database='"+ls_Base+"'"+ls_DbParm+",TrimSpaces=1,"
+			
+		it_trans.DBParm = ls_Dbparm
+	ElseIf	ls_Dbms = "ADO.Net" Then
+		it_trans.DBMS 			= "ADO.Net"
+		it_trans.LogId			=	ls_usuario
+		it_trans.LogPass		=	ls_Password
+		it_trans.Autocommit	=	True
+		it_trans.DBParm 		= "DataSource='" + ls_Server + "',Database='" + ls_Base + "',Namespace='System.Data.OleDb',Provider='SQLNCLI10'"
+	Else
+		it_trans.LogId			=	ls_usuario
+		it_trans.LogPass		=	ls_Password
+		it_trans.Autocommit	=	True
+	End If
+	
+CONNECT USING it_trans;
+
+IF it_trans.SQLCode = 0 THEN
+	lb_conectado	=	True
+ELSE
+	lb_conectado	=	False
+	F_ErrorBaseDatos(it_trans, This.Title)
+END IF
+
+RETURN lb_conectado
+end function
+
+public function boolean wf_reprocesaempresa ();SetPointer(HourGlass!)
+
+Long			ll_empresas, ll_fila
+Boolean		lb_AutoCommit
+Integer		respuesta, li_codigo, li_find, li_Numero, li_Retorno
+String			ls_empresa
+String			ls_Errores[] = {"Falló Apertura de Traspaso", 					&
+									"Demasiadas Columnas", 						&
+									"Tabla ya Existe", 									&
+									"Tabla no Existe", 									&
+									"Perdió Conexión", 								&
+									"Argumentos Erróneos", 							&
+									"Columna(s) de distinto Tipo", 					&
+									"Error Fatal en SQL de Fuente", 				&
+									"Error Fatal en SQL de Destino", 				&
+									"Exedió máximo de Errores", 					&
+									"",														&
+									"Error de Sintáxis en Tabla", 					&
+									"Tabla requiere de LLave pero no tiene",		&
+									"", 													&
+									"Traspaso ya estaba en Progreso",			&
+									"Error en Base de Datos Fuente",				&
+									"Error en Base de Datos Destino",				&
+									"Base de Datos Destino es de Sólo Lectura"}
+
+
+Pipeline				lpl_Traspaso
+lpl_Traspaso	=	Create PipeLine
+
+lpl_Traspaso.Cancel()
+
+//Carga personal por empresa
+FOR ll_empresas = 1 TO dw_2.RowCount()
+	If dw_2.IsSelected(ll_empresas) Then
+		
+		If NOT wf_ConectaEmpresa(ll_empresas) Then
+			Return False
+		End If
+		
+		li_codigo						=	dw_2.Object.empr_codigo[ll_empresas]
+		dw_errores.Visible 		= 	True
+		lpl_Traspaso.DataObject	=	"dpl_remupersonal"
+		li_Retorno					=	lpl_Traspaso.Start(it_trans, sqlca, dw_errores, li_codigo)
+		
+		If li_Retorno < 0 Then
+			MessageBox("Error", "Se ha producido el siguiente Error en el Traspaso de " 	+	&
+							lpl_Traspaso.DataObject + "~r~r"	+	&
+							String(li_Retorno) + " : "	+	ls_Errores[Abs(li_Retorno)] 			+	&
+							"~r~rAvise a Administrador de Sistema.")
+			Return False
+		End If
+		
+		If li_Retorno < 1 Then  Return False
+		
+		dw_errores.Visible 		= 	True
+		lpl_Traspaso.DataObject	=	"dpl_centrocosto"
+		li_Retorno					=	lpl_Traspaso.Start(it_trans, sqlca, dw_errores)
+		
+		If li_Retorno < 0 Then
+			MessageBox("Error", "Se ha producido el siguiente Error en el Traspaso de " 	+	&
+							"dpl_centrocosto. ~r~r" 	+	&
+							String(li_Retorno) + " : "	+	ls_Errores[Abs(li_Retorno)] 			+	&
+							"~r~rAvise a Administrador de Sistema.")
+			Return False
+		End If
+		
+		If li_Retorno < 1 Then Return False
+	End If
+NEXT
+
+dw_errores.Visible = False
+
+Destroy lpl_Traspaso
+
+Return True
+end function
 
 event resize;call super::resize;Integer		li_posic_x, li_posic_y, &
 				li_Ancho = 300, li_Alto = 245, li_Siguiente = 255
@@ -830,7 +830,7 @@ alignment htextalign = left!
 string powertiptext = "Consolidacion de Datos"
 end type
 
-event clicked;ReprocesaEmpresa()
+event clicked;wf_ReprocesaEmpresa()
 end event
 
 type dw_5 from uo_dw within w_maed_rgtopersonalcolacion

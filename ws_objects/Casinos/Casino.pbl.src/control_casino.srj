@@ -1,5 +1,5 @@
 ﻿$PBExportHeader$control_casino.srj
-EXE:Control_Casinos.exe,..\..\imagenes\administracion.pbr,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 19.2.0.2670
+EXE:Control_Casinos.exe,..\..\imagenes\administracion.pbr,0,1,1,0,C:\Program Files (x86)\Appeon\Common\PowerBuilder\Runtime 22.2.0.3391
 CMP:1,0,0,2,0,0,1
 COM:RIOblanco Spa
 DES:Control Casino

@@ -19,7 +19,19 @@ end on
 event ue_validainstalacion;//
 end event
 
-event ue_usuario;call super::ue_usuario;gs_base	=	is_base
+event ue_usuario;call super::ue_usuario;RegistryGet("HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ComputerName\ComputerName", "ComputerName", RegString!, is_Computador)
+				
+gstr_us.Nombre		=	sle_nombre.text
+gstr_us.Computador	=	is_Computador
+
+sqlca.LogId		=	sle_nombre.text
+sqlca.UserId		=	sle_nombre.text
+sqlca.LogPass	=	sle_clave.text
+sqlca.DbPass	=	sle_clave.text
+
+This.TriggerEvent("ue_conectar")
+
+gs_base	=	is_base
 end event
 
 event ue_datosempresa;call super::ue_datosempresa;gstr_apl.referencia	=	gstr_apl.nom_empresa

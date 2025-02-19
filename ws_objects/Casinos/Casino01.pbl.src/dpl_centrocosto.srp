@@ -1,5 +1,5 @@
 ﻿$PBExportHeader$dpl_centrocosto.srp
-PIPELINE(source_connect=AdmExportadoraRB,destination_connect=CASINO,type=update,commit=100,errors=100,keyname="centrocosto")
+PIPELINE(source_connect=AdmInversionesRB,destination_connect=CASINO,type=update,commit=100,errors=100,keyname="centrocosto")
 SOURCE(name="centrocosto",COLUMN(type=decimal,name="ccos_codigo",dbtype="numeric(4,0)",key=yes,nulls_allowed=no)
  COLUMN(type=varchar,name="ccos_rutcco",dbtype="varchar(10)",nulls_allowed=yes)
  COLUMN(type=varchar,name="ccos_nombre",dbtype="varchar(40)",nulls_allowed=yes)
