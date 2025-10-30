@@ -33,67 +33,67 @@ public function boolean existetarjeta (string as_rut, string as_nrotarjeta, date
 public function integer secuenciamax (date ad_fecha, integer ai_zona, integer ai_area, transaction at_transaccion)
 end prototypes
 
-public function boolean existeenfecha (string as_rut, integer ai_colacion, date ad_fecha, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_retorno = True
-String		ls_etiqueta, ls_rut, ls_Zona, ls_Tarjeta
-Integer	li_secuencia
+public function boolean existeenfecha (string as_rut, integer ai_colacion, date ad_fecha, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
+String		ls_Etiqueta, ls_rut, ls_Zona, ls_Tarjeta
+Integer	li_Secuencia
 Long		ll_Tarjeta
 
 ls_etiqueta	= 	Mid(as_rut, 1, 3)
 ls_rut			=	Mid(as_rut, 7, 10)
 
-If Len(ls_rut) < 7 Then ls_etiqueta = 'INV'
+//If Len(ls_rut) < 7 Then ls_etiqueta = 'INV'
 
-If ls_etiqueta = 'CTT' Then
-	ls_Zona		=	Mid(as_rut, 4, 3)
-	ls_rut			=	Mid(as_rut, 7, 10)
-	ls_Tarjeta	=	Mid(as_rut, 17, 8)
-	//CTT009096968120K00000005
-	lb_retorno = ExisteTarjeta(ls_rut, ls_Tarjeta, ad_fecha, ai_colacion, ab_mensaje, at_transaccion)
-	
-	ll_Tarjeta = Long(ls_Tarjeta)
-	
-	SELECT IsNull(Max(camv_estado), 0)
-	  INTO :camv_estado
-	  FROM dbo.casino_movtocolaciones
-	 WHERE ( (:ls_rut = cape_codigo AND camv_invcur = 0) 
-	 		OR (:ls_rut = camv_rutinv AND camv_invcur = 1) )
-		AND camv_fechac	=:ad_fecha
-		AND tico_codigo 	=:ai_colacion
-		And camv_nroval	= :ll_Tarjeta
-	 USING at_transaccion;
-	 
-	 If at_Transaccion.SQLCode = -1 Then
-		F_ErrorBaseDatos(at_Transaccion, "Lectura de Tabla Movimientos de Colación")
-		lb_Retorno	=	False
-	Else
-		If camv_estado <> 1 Then
-			If camv_estado = 9 Then
-				w_movto_casinos_systray.st_Mensaje.Text = "La persona cuyo rut esta ingresando, ya efectuo el movto. correspondiente a este horario."
-				lb_retorno	=	False
-			End If
-		End If
-	End If	 
-	 
-	If lb_retorno Then
-		ii_secuencia	=	secuenciaMax(ad_fecha, at_transaccion)
-		
-		  INSERT INTO dbo.casino_movtocolaciones( zona_codigo,  caar_codigo,  camv_fechac,  camv_secuen, camv_horaco,  cape_codigo,  
-		  										tico_codigo,  caco_codigo,camv_tipope,  camv_tdieta,  camv_appain, camv_apmain,
-												camv_nominv,  camv_estado,  camv_rutinv,  camv_invcur, clpr_rut, camv_nroval) 
-			VALUES (:zona_codigot,:caar_codigot,:ad_fecha, :ii_secuencia,   :cahc_horinit, :clpr_rutt,
-					:tico_codigot, 1, 1, Null,Null,Null,
-					Null, 9, Null,0, :clpr_rutt,:ls_Tarjeta) 
-			using at_transaccion ;
-			 
-			 If at_Transaccion.SQLCode <> 0 Then
-				F_ErrorBaseDatos(at_Transaccion, "Grabación en Tabla Movimientos de Colación")
-				Rollback;
-				lb_Retorno	=	False
-			Else
-				Commit;
-			End If
-	End If
-Else
+//If ls_etiqueta = 'CTT' Then
+//	ls_Zona		=	Mid(as_rut, 4, 3)
+//	ls_rut			=	Mid(as_rut, 7, 10)
+//	ls_Tarjeta	=	Mid(as_rut, 17, 8)
+//	//CTT009096968120K00000005
+//	lb_retorno = ExisteTarjeta(ls_rut, ls_Tarjeta, ad_fecha, ai_colacion, ab_mensaje, at_transaccion)
+//	
+//	ll_Tarjeta = Long(ls_Tarjeta)
+//	
+//	SELECT IsNull(Max(camv_estado), 0)
+//	  INTO :camv_estado
+//	  FROM dbo.casino_movtocolaciones
+//	 WHERE ( (:ls_rut = cape_codigo AND camv_invcur = 0) 
+//	 		OR (:ls_rut = camv_rutinv AND camv_invcur = 1) )
+//		AND camv_fechac	=:ad_fecha
+//		AND tico_codigo 	=:ai_colacion
+//		And camv_nroval	= :ll_Tarjeta
+//	 USING at_transaccion;
+//	 
+//	 If at_Transaccion.SQLCode = -1 Then
+//		F_ErrorBaseDatos(at_Transaccion, "Lectura de Tabla Movimientos de Colación")
+//		lb_Retorno	=	False
+//	Else
+//		If camv_estado <> 1 Then
+//			If camv_estado = 9 Then
+//				w_movto_casinos_systray.st_Mensaje.Text = "La persona cuyo rut esta ingresando, ya efectuo el movto. correspondiente a este horario."
+//				lb_retorno	=	False
+//			End If
+//		End If
+//	End If	 
+//	 
+//	If lb_retorno Then
+//		ii_secuencia	=	secuenciaMax(ad_fecha, at_transaccion)
+//		
+//		  INSERT INTO dbo.casino_movtocolaciones( zona_codigo,  caar_codigo,  camv_fechac,  camv_secuen, camv_horaco,  cape_codigo,  
+//		  										tico_codigo,  caco_codigo,camv_tipope,  camv_tdieta,  camv_appain, camv_apmain,
+//												camv_nominv,  camv_estado,  camv_rutinv,  camv_invcur, clpr_rut, camv_nroval) 
+//			VALUES (:zona_codigot,:caar_codigot,:ad_fecha, :ii_secuencia,   :cahc_horinit, :clpr_rutt,
+//					:tico_codigot, 1, 1, Null,Null,Null,
+//					Null, 9, Null,0, :clpr_rutt,:ls_Tarjeta) 
+//			using at_transaccion ;
+//			 
+//			 If at_Transaccion.SQLCode <> 0 Then
+//				F_ErrorBaseDatos(at_Transaccion, "Grabación en Tabla Movimientos de Colación")
+//				Rollback;
+//				lb_Retorno	=	False
+//			Else
+//				Commit;
+//			End If
+//	End If
+//Else
 	ls_rut			=	Mid(as_rut, 4)
 
 	SELECT zona_codigo, caar_codigo, camv_fechac, camv_secuen, 
@@ -133,9 +133,9 @@ Else
 			lb_retorno	=	False
 		End If
 	End If
-End If
+//End If
 
-RETURN lb_Retorno
+Return lb_Retorno
 end function
 
 public function integer secuenciamax (date ad_fecha, transaction at_transaccion);Integer	li_secuencia
@@ -244,10 +244,11 @@ END IF
 Return lb_retorno
 end function
 
-public function boolean creamovto (string as_tarjeta, integer ai_colacion, date ad_fecha);String	ls_pers_codigo, ls_pers_apepat, ls_pers_apemat, ls_pers_nombre, ls_tarjinv
-Long		ll_pers_nrotar
+public function boolean creamovto (string as_tarjeta, integer ai_colacion, date ad_fecha);String	ls_pers_codigo, ls_pers_apepat, ls_pers_apemat, ls_pers_nombre, ls_tarjinv, ls_Empresa
+Long		ll_pers_nrotar, ll_Costo
 Integer	li_tico_codigo, li_zona, li_area, li_zonatrans, li_areatrans
-Time		lt_cahc_horini
+Time		lt_cahc_horini, lt_Now
+
 str_mant	lstr_mant
 
 ll_pers_nrotar	=	1
@@ -260,39 +261,39 @@ SELECT DISTINCT tico_codigo,  cahc_horini
 	AND Getdate() between cahc_fecini and cahc_fecter
     AND datepart(dw, GetDate()) = cahc_nrodia;
 	
-If sqlca.SQLCode = -1 Then
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla RemuPersonal")
-ElseIf sqlca.SQLCode = 100 OR IsNull(li_tico_codigo) Then
+If SQLCA.SQLCode = -1 Then
+	F_ErrorBaseDatos(SQLCA, "Lectura de Tabla RemuPersonal")
+ElseIf SQLCA.SQLCode = 100 OR IsNull(li_tico_codigo) Then
 	w_movto_casinos_systray.st_Mensaje.Text = "No existe colación alguna asignada a este horario"
 	Return False
 Else
-	SELECT zona_codigo,  caar_codigo
-	  INTO :li_zonatrans,:li_areatrans
+	SELECT zona_codigo,  caar_codigo, empr_codigo
+	  INTO :li_zonatrans,:li_areatrans, :ls_Empresa
 	  FROM dbo.Casino_PersonaColacion
 	 WHERE cape_codigo =:as_tarjeta
-	 USING sqlca;
+	 USING SQLCA;
 	
-	IF sqlca.SQLCode = -1 Then
-		F_ErrorBaseDatos(sqlca, "Lectura de Tabla Casino_PersonaColacion")
+	If SQLCA.SQLCode = -1 Then
+		F_ErrorBaseDatos(SQLCA, "Lectura de Tabla Casino_PersonaColacion")
 		Return False
-	ELSEIF sqlca.SQLCode = 100 Then
-//		F_ErrorBaseDatos(sqlca, "Lectura de Tabla Casino_PersonaColacion, Persona no ha sido asignada.")
+	ElseIf SQLCA.SQLCode = 100 Then
+//		F_ErrorBaseDatos(SQLCA, "Lectura de Tabla Casino_PersonaColacion, Persona no ha sido asignada.")
 //		Return False
-	ELSEIF sqlca.SQLCode <> 100 Then
+	ElseIf SQLCA.SQLCode <> 100 Then
 		zona_codigot	=	li_zonatrans
 		caar_codigot	=	li_areatrans
-	END IF
+	End If
 	
-	SELECT  pers_codigo, 	 pers_apepat, 		pers_apemat,  pers_nombre, 	 pers_nrotar
-	  INTO :ls_pers_codigo, :ls_pers_apepat, :ls_pers_apemat, :ls_pers_nombre, :ll_pers_nrotar
+	SELECT  pers_codigo, pers_apepat, pers_apemat,  pers_nombre, pers_nrotar, ccos_codigo
+	  INTO :ls_pers_codigo, :ls_pers_apepat, :ls_pers_apemat, :ls_pers_nombre, :ll_pers_nrotar, :ll_Costo
 	  FROM dbo.remupersonal
 	 WHERE :as_tarjeta IN (pers_codigo)
-	 USING sqlca;
+	 USING SQLCA;
 	
-	If sqlca.SQLCode = -1 Then
-		F_ErrorBaseDatos(sqlca, "Lectura de Tabla RemuPersonal")
+	If SQLCA.SQLCode = -1 Then
+		F_ErrorBaseDatos(SQLCA, "Lectura de Tabla RemuPersonal")
 		Return False
-	ElseIf sqlca.SQLCode = 100 Then
+	ElseIf SQLCA.SQLCode = 100 Then
 		lstr_mant.Argumento[1]	=	String(li_tico_codigo)
 		lstr_mant.Argumento[2]	=	String(lt_cahc_horini)
 		lstr_mant.Argumento[3]	=	""
@@ -302,10 +303,12 @@ Else
 		lstr_mant	=	Message.PowerObjectParm
 		
 		If UpperBound(lstr_mant.Argumento) > 3 AND IsNumber(lstr_mant.Argumento[10]) Then
-			ii_secuencia		=	SecuenciaMax(ad_fecha, Integer(lstr_mant.Argumento[11]), Integer(lstr_mant.Argumento[12]), sqlca)
+			ii_secuencia		=	SecuenciaMax(ad_fecha, Integer(lstr_mant.Argumento[11]), Integer(lstr_mant.Argumento[12]), SQLCA)
 			ls_pers_codigo	=	lstr_mant.Argumento[4]
 			li_zona			=	Integer(lstr_mant.Argumento[11])
 			li_area			=	Integer(lstr_mant.Argumento[12])
+			ll_Costo			=	Integer(lstr_mant.Argumento[13])
+			ls_Empresa		=	lstr_mant.Argumento[14]
 			
 			If Not IsNumber(Left(as_tarjeta, 1)) Then
 				ls_tarjinv		=	Right(as_tarjeta, Len(as_tarjeta) - 3)
@@ -313,16 +316,18 @@ Else
 				ls_tarjinv		=	as_tarjeta
 			End If
 			
-			INSERT INTO dbo.casino_movtocolaciones( zona_codigo,  caar_codigo,  camv_fechac,  camv_secuen,camv_horaco,  cape_codigo,  
-											tico_codigo,  caco_codigo,camv_tipope,  camv_tdieta,  camv_appain,  camv_apmain,
-											camv_nominv,  camv_estado,  camv_rutinv,  camv_invcur,clpr_rut,camv_nroval) 
-				VALUES  (:li_zona,     :li_area,    :ad_fecha,    :ii_secuencia,   :lt_cahc_horini,:ls_pers_codigo,
-							:li_tico_codigo, 1,  1, Null, 'Invitado Generico','',
-							'', 9, :ls_tarjinv, 1, :ls_pers_codigo, Null) 
-				Using sqlca;
+			lt_Now = Now()
+			
+			INSERT INTO dbo.casino_movtocolaciones( zona_codigo,  caar_codigo,  camv_fechac,  camv_secuen, camv_horaco,  cape_codigo,  
+											tico_codigo,  caco_codigo, camv_tipope, camv_tdieta, camv_appain, camv_apmain, camv_hormvt, 
+											camv_nominv,  camv_estado,  camv_rutinv,  camv_invcur,clpr_rut,camv_nroval, ccos_codigo) 
+				VALUES  (:li_zona, :li_area, :ad_fecha, :ii_secuencia, :lt_cahc_horini, :ls_pers_codigo,
+							:li_tico_codigo, 1, 1, Null, 'Invitado Generico','', :lt_Now,
+							'', 9, :ls_tarjinv, 1, :ls_Empresa, Null, :ll_Costo) 
+				Using SQLCA;
 
-			If sqlca.SQLCode <> 0 Then
-				F_ErrorBaseDatos(sqlca, "Grabación en Tabla Movimientos de Colación")
+			If SQLCA.SQLCode <> 0 Then
+				F_ErrorBaseDatos(SQLCA, "Grabación en Tabla Movimientos de Colación")
 				Rollback;
 				Return False
 			Else
@@ -334,18 +339,19 @@ Else
 			
 		End If
 	Else
-		ii_secuencia	=	SecuenciaMax(ad_fecha, sqlca)
+		ii_secuencia	=	SecuenciaMax(ad_fecha, SQLCA)
+		lt_Now = Now()
 
-		INSERT INTO dbo.casino_movtocolaciones ( zona_codigo,  caar_codigo,  camv_fechac,  camv_secuen, camv_horaco,  cape_codigo,  
-											tico_codigo,  caco_codigo, camv_tipope,  camv_tdieta,  camv_appain,  camv_apmain,
-											camv_nominv,  camv_estado,  camv_rutinv,  camv_invcur,clpr_rut, camv_nroval) 
-			VALUES  (:zona_codigot,:caar_codigot, :ad_fecha,    :ii_secuencia, :lt_cahc_horini,:ls_pers_codigo, 
-						:li_tico_codigo, 1, 1, Null, Null, Null,
-						Null, 9, Null, 0, :ls_pers_codigo, Null)
-			Using sqlca ;
+		INSERT INTO dbo.casino_movtocolaciones ( zona_codigo,  caar_codigo, camv_fechac, camv_secuen, camv_horaco, cape_codigo,  
+											tico_codigo, caco_codigo, camv_tipope, camv_tdieta, camv_appain, camv_apmain, camv_hormvt,
+											camv_nominv, camv_estado, camv_rutinv, camv_invcur, clpr_rut, camv_nroval, ccos_codigo) 
+			VALUES  (:zona_codigot,:caar_codigot, :ad_fecha, :ii_secuencia, :lt_cahc_horini,:ls_pers_codigo, 
+						:li_tico_codigo, 1, 1, Null, Null, Null, :lt_Now,
+						Null, 9, Null, 0, :ls_empresa, Null, :ll_Costo)
+			Using SQLCA ;
 
-		 If sqlca.SQLCode <> 0 Then
-			F_ErrorBaseDatos(sqlca, "Grabación en Tabla Movimientos de Colación")
+		 If SQLCA.SQLCode <> 0 Then
+			F_ErrorBaseDatos(SQLCA, "Grabación en Tabla Movimientos de Colación")
 			Rollback;
 			Return False
 		Else

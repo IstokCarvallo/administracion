@@ -491,65 +491,65 @@ integer height = 816
 string dataobject = "dw_mant_pedido"
 end type
 
-event dw_2::itemchanged;call super::itemchanged;String	ls_Columna, ls_Nula
-
-SetNull(ls_Nula)
-
-ls_Columna	=	dwo.Name
-
-CHOOSE CASE ls_Columna
-	CASE 'zona_codigo'
-		IF Not iuo_Zonas.Existe(Integer(Data),  True, sqlca) THEN
-			F_RestauraValor(Row, ls_Columna, dw_2)
-			RETURN 1
-		ELSE
-			IF idwc_TipoColac.Retrieve(iuo_Zonas.Codigo) < 1 THEN
-				idwc_TipoColac.InsertRow(0)
-			END IF
-		END IF
-		
-	CASE "tico_codigo"
-		IF iuo_TipoColacion.Existe(This.Object.zona_codigo[row], Integer(Data), True, sqlca) THEN
-			dw_1.GetChild('caco_codigo', idwc_colacion)
-			idwc_Colacion.SetTransObject(Sqlca)
-			
-			IF idwc_Colacion.Retrieve(iuo_Zonas.Codigo, iuo_TipoColacion.Codigo) < 1 THEN
-				idwc_Colacion.InsertRow(0)
-			END IF
-			
-			IF iuo_Pedidos.Existe(Long(Data), This.Object.pcen_numero[1], False, Sqlca) THEN
-				This.AcceptText()
-				Parent.TriggerEvent('ue_recuperadatos')
-			END IF
-		ELSE
-			F_RestauraValor(Row, ls_Columna, dw_2)
-			RETURN 1
-		END IF
-
-	CASE 'pcen_numero'
-		IF iuo_Pedidos.Existe(iuo_Zonas.Codigo, Long(Data), False, Sqlca) THEN
-			This.AcceptText()
-			Parent.TriggerEvent('ue_recuperadatos')
-		END IF
-
-	CASE 'cape_codigo'
-		is_rut = F_verrut(data, True)
-		
-		IF Not iuo_encargado.Existe(is_rut, True, Sqlca) THEN
-			F_RestauraValor(Row, ls_Columna, dw_2)
-			RETURN 1
-		ELSE
-			IF iuo_encargado.PedidoCasino = 0 THEN
-				MessageBox('Alerta', 'Esta persona no puede solicitar colaciones.', Information!, OK!)
-				F_RestauraValor(Row, ls_Columna, dw_2)
-				RETURN 1
-			Else
-				This.Object.nombre[Row]	=	iuo_encargado.Nombres + ' ' + iuo_encargado.ApellidoPat
-			END IF
-		END IF
-END CHOOSE
-
-HabilitaIngreso(ls_Columna)
+event dw_2::itemchanged;call super::itemchanged;////String	ls_Columna, ls_Nula
+//
+//SetNull(ls_Nula)
+//
+//ls_Columna	=	dwo.Name
+//
+//CHOOSE CASE ls_Columna
+//	CASE 'zona_codigo'
+//		IF Not iuo_Zonas.Existe(Integer(Data),  True, sqlca) THEN
+//			F_RestauraValor(Row, ls_Columna, dw_2)
+//			RETURN 1
+//		ELSE
+//			IF idwc_TipoColac.Retrieve(iuo_Zonas.Codigo) < 1 THEN
+//				idwc_TipoColac.InsertRow(0)
+//			END IF
+//		END IF
+//		
+//	CASE "tico_codigo"
+//		IF iuo_TipoColacion.Existe(This.Object.zona_codigo[row], Integer(Data), True, sqlca) THEN
+//			dw_1.GetChild('caco_codigo', idwc_colacion)
+//			idwc_Colacion.SetTransObject(Sqlca)
+//			
+//			IF idwc_Colacion.Retrieve(iuo_Zonas.Codigo, iuo_TipoColacion.Codigo) < 1 THEN
+//				idwc_Colacion.InsertRow(0)
+//			END IF
+//			
+//			IF iuo_Pedidos.Existe(Long(Data), This.Object.pcen_numero[1], False, Sqlca) THEN
+//				This.AcceptText()
+//				Parent.TriggerEvent('ue_recuperadatos')
+//			END IF
+//		ELSE
+//			F_RestauraValor(Row, ls_Columna, dw_2)
+//			RETURN 1
+//		END IF
+//
+//	CASE 'pcen_numero'
+//		IF iuo_Pedidos.Existe(iuo_Zonas.Codigo, Long(Data), False, Sqlca) THEN
+//			This.AcceptText()
+//			Parent.TriggerEvent('ue_recuperadatos')
+//		END IF
+//
+//	CASE 'cape_codigo'
+//		is_rut = F_verrut(data, True)
+//		
+//		IF Not iuo_encargado.Existe(is_rut, True, Sqlca) THEN
+//			F_RestauraValor(Row, ls_Columna, dw_2)
+//			RETURN 1
+//		ELSE
+//			IF iuo_encargado.PedidoCasino = 0 THEN
+//				MessageBox('Alerta', 'Esta persona no puede solicitar colaciones.', Information!, OK!)
+//				F_RestauraValor(Row, ls_Columna, dw_2)
+//				RETURN 1
+//			Else
+//				This.Object.nombre[Row]	=	iuo_encargado.Nombres + ' ' + iuo_encargado.ApellidoPat
+//			END IF
+//		END IF
+//END CHOOSE
+//
+//HabilitaIngreso(ls_Columna)
 end event
 
 event dw_2::itemfocuschanged;call super::itemfocuschanged;String	ls_Columna

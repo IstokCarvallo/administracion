@@ -28,38 +28,40 @@ global uo_seleccion_tipocolacion uo_seleccion_tipocolacion
 type variables
 DataWindowChild	idwc_Seleccion
 
-uo_TipoColacion	iuo_TipoColacion
+uo_TipoColacion	iuo_Codigo
 
-Long		Codigo
+Long		Codigo, Zona
 String 	Nombre
 end variables
 
 forward prototypes
 public subroutine seleccion (boolean ab_todos, boolean ab_consolida)
 public subroutine todos (boolean ab_todos)
-public subroutine bloquear (boolean ab_opcion)
 public subroutine limpiadatos ()
+public function boolean inicia (integer ai_codigo)
+public subroutine filtra (integer ai_zona)
+public subroutine habilita (boolean ab_habilita)
 end prototypes
 
 public subroutine seleccion (boolean ab_todos, boolean ab_consolida);cbx_Todos.Visible			=	ab_Todos
 cbx_Consolida.Visible	=	ab_Consolida
 
-IF Not ab_Todos AND Not ab_Consolida THEN
+If Not ab_Todos AND Not ab_Consolida Then
 	dw_Seleccion.y			=	0
 	dw_Seleccion.Enabled	=	True
 	
 	dw_Seleccion.Object.Codigo.BackGround.Color	=	RGB(255, 255, 255)
-ELSE
+Else
 	dw_Seleccion.y			=	100
 	dw_Seleccion.Enabled	=	False
 	
 	dw_Seleccion.Object.Codigo.BackGround.Color	=	RGB(192, 192, 192)
-END IF
+End If
 
-RETURN
-end subroutine
+Return
+End subroutine
 
-public subroutine todos (boolean ab_todos);IF ab_Todos THEN
+public subroutine todos (boolean ab_todos);If ab_Todos Then
 	Codigo						=	-1
 	Nombre						=	'Todos'
 	cbx_Todos.Checked			=	True
@@ -71,7 +73,7 @@ public subroutine todos (boolean ab_todos);IF ab_Todos THEN
 	dw_Seleccion.Reset()
 	
 	dw_Seleccion.InsertRow(0)
-ELSE
+Else
 	SetNull(Codigo)
 	SetNull(Nombre)
 	
@@ -82,29 +84,64 @@ ELSE
 	
 	dw_Seleccion.Object.Codigo[1]						=	Codigo
 	dw_Seleccion.Object.Codigo.BackGround.Color	=	RGB(255, 255, 255)
-END IF
+End If
 
-RETURN
-end subroutine
-
-public subroutine bloquear (boolean ab_opcion);IF ab_opcion THEN
-	dw_Seleccion.Enabled	= False
-	cbx_Todos.Visible    		= False
-	dw_Seleccion.Object.Codigo.BackGround.Color	=	RGB(255, 255, 255)
-ELSE
-	dw_Seleccion.Enabled	= True
-	cbx_Todos.Visible			= True
-	dw_Seleccion.Object.Codigo.BackGround.Color	=	RGB(192, 192, 192)
-END IF
-
-RETURN
-end subroutine
+Return
+End subroutine
 
 public subroutine limpiadatos ();String	ls_Nula
 
 SetNull(ls_Nula)
 
 dw_Seleccion.SetItem(1, "codigo", Integer(ls_Nula))
+End subroutine
+
+public function boolean inicia (integer ai_codigo);Integer	li_Nula
+Boolean	lb_Retorno = False
+
+SetNull(li_Nula)
+
+If iuo_Codigo.Of_Existe(ai_Codigo,  False, sqlca) Then
+	Codigo	=	iuo_Codigo.Codigo
+	Nombre	=	iuo_Codigo.Nombre	
+	
+	dw_Seleccion.SetItem(1, "codigo", String(ai_Codigo))
+	lb_Retorno = True
+Else
+	dw_Seleccion.SetItem(1, "codigo", li_Nula)
+End If
+
+Return lb_Retorno 
+End function
+
+public subroutine filtra (integer ai_zona);Zona	=	ai_Zona
+ 
+dw_Seleccion.GetChild("codigo", idwc_Seleccion)
+
+idwc_Seleccion.SetTransObject(sqlca)
+
+If idwc_Seleccion.Retrieve(Zona) = 0 Then
+	MessageBox("Atención", "No existen colaciones para Tipo seleccionada.")
+	
+	SetNull(Codigo)
+	SetNull(Nombre)
+End If
+
+Return
+end subroutine
+
+public subroutine habilita (boolean ab_habilita);String	Nula
+
+SetNull(Nula)
+
+If ab_Habilita Then
+	dw_Seleccion.Object.Codigo[1]		=	Nula
+	dw_Seleccion.Enabled				=	True
+	dw_Seleccion.Object.Codigo.BackGround.Mode	=	0
+Else
+	dw_Seleccion.Enabled	=	False
+	dw_Seleccion.Object.Codigo.BackGround.Mode	=	1
+End If
 end subroutine
 
 on uo_seleccion_tipocolacion.create
@@ -129,7 +166,7 @@ dw_Seleccion.Object.codigo.Dddw.DataColumn			=	'tico_codigo'
 dw_Seleccion.GetChild("codigo", idwc_Seleccion)
 
 idwc_Seleccion.SetTransObject(sqlca)
-IF	idwc_Seleccion.Retrieve() = 0 THEN
+If	idwc_Seleccion.Retrieve(-1) = 0 Then
 	MessageBox("Atención", "No existen Tipos de Colacion en Tabla Respectiva.", Information!, Ok!)
 	SetNull(Codigo)
 	SetNull(Nombre)
@@ -146,7 +183,7 @@ Else
 	Codigo		=	-1
 	Nombre		=	'Todas'
 	
-	iuo_TipoColacion	=	Create uo_TipoColacion
+	iuo_Codigo	=	Create uo_TipoColacion
 	
 	This.Seleccion(True, True)
 End If
@@ -168,16 +205,16 @@ long backcolor = 553648127
 string text = "Consolidado"
 end type
 
-event clicked;IF This.Checked THEN
+event clicked;If This.Checked Then
 	Codigo	=	-9
 	Nombre	=	'Consolidada'
-ELSE
+Else
 	Codigo	=	-1
 	Nombre	=	'Todas'
-END IF
+End If
 
 Parent.TriggerEvent("ue_cambio")
-end event
+End event
 
 type cbx_todos from checkbox within uo_seleccion_tipocolacion
 integer width = 402
@@ -198,12 +235,12 @@ end type
 event clicked;Todos(This.Checked)
 
 Parent.TriggerEvent("ue_cambio")
-end event
+End event
 
 type dw_seleccion from datawindow within uo_seleccion_tipocolacion
 integer y = 80
 integer width = 882
-integer height = 80
+integer height = 144
 integer taborder = 30
 string title = "none"
 string dataobject = "dddw_codnumero"
@@ -215,17 +252,17 @@ event itemchanged;Integer	li_Nula
 
 SetNull(li_Nula)
 
-IF iuo_TipoColacion.Existe(Integer(data),True, sqlca) THEN
-	Codigo			=	iuo_TipoColacion.Codigo
-	Nombre			=	iuo_TipoColacion.Nombre
-ELSE
+If iuo_Codigo.of_Existe(Integer(data),True, SQLCA) Then
+	Codigo			=	iuo_Codigo.Codigo
+	Nombre			=	iuo_Codigo.Nombre
+Else
 	This.SetItem(1, "Codigo", li_Nula)
-	RETURN 1
-END IF
+	Return 1
+End If
 
 Parent.TriggerEvent("ue_cambio")
-end event
+End event
 
-event itemerror;RETURN 1
-end event
+event itemerror;Return 1
+End event
 

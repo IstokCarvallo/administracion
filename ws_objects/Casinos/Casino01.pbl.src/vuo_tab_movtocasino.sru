@@ -60,12 +60,14 @@ end type
 global vuo_tab_movtocasino vuo_tab_movtocasino
 
 type variables
-Integer								ii_zona, ii_area, ii_tipoco, il_fila, il_filatrans
-Date									id_fecha
-String								is_rut
+Integer			ii_zona, ii_area, ii_tipoco, il_fila, il_filatrans
+Date				id_fecha
+String				is_rut
+
+Private	String	is_Filtro
 
 
-DataWindowChild					idwc_colaciones, idwc_horarios
+DataWindowChild		idwc_colaciones, idwc_horarios
 
 w_maed_movimiento_colaciones	iw_me
 uo_personacasino					iuo_percas
@@ -76,6 +78,7 @@ public subroutine referencias (window aw_me, string as_usuario, integer ai_caco_
 public function boolean filtra ()
 public function boolean puedeinvitar (string as_cape_codigo)
 public subroutine wf_carga_estado (integer ai_estado)
+public function string of_getfilter ()
 end prototypes
 
 event ue_nuevo();Integer	li_filas
@@ -83,7 +86,7 @@ event ue_nuevo();Integer	li_filas
 li_filas =	dw_1.GetRow()
 
 IF PuedeInvitar(dw_1.Object.cape_codigo[li_filas]) THEN
-	li_filas										=	dw_1.InsertRow(li_filas + 1)
+	li_filas									=	dw_1.InsertRow(li_filas + 1)
 	dw_1.Object.cape_codigo[li_filas]	=	dw_1.Object.cape_codigo[li_filas - 1]
 	dw_1.Object.cape_apepat[li_filas]	=	dw_1.Object.cape_apepat[li_filas - 1]
 	dw_1.Object.cape_apemat[li_filas]	=	dw_1.Object.cape_apemat[li_filas - 1]
@@ -142,7 +145,7 @@ id_fecha		=	ad_fecha
 iw_me.dw_1.Sharedata(dw_1)
 iw_me.dw_3.Sharedata(dw_2)
 
-iuo_percas.Existe(as_usuario, True, sqlca)
+iuo_percas.of_Existe(as_usuario, True, sqlca)
 end subroutine
 
 public function boolean filtra ();Integer	li_fila, li_find
@@ -150,47 +153,47 @@ Boolean	lb_retorno = True
 
 dw_1.SetFilter("tico_codigo = " + String(ii_tipoco))
 dw_1.Filter()
+
+is_Filtro = "tico_codigo = " + String(ii_tipoco)
 	
-dw_colac.Retrieve(iuo_percas.zona_codigo, ii_tipoco)
-dw_horas.Retrieve(iuo_percas.zona_codigo, id_fecha, ii_tipoco)
+dw_colac.Retrieve(iuo_percas.zona, ii_tipoco)
+dw_horas.Retrieve(iuo_percas.zona, id_fecha, ii_tipoco)
 
-IF dw_colac.RowCount() * dw_horas.RowCount() = 0 THEN
+If dw_colac.RowCount() * dw_horas.RowCount() = 0 Then
 	Return False
-END IF
+End If
 
-IF dw_1.RowCount() <> dw_2.RowCount() THEN
+If dw_1.RowCount() <> dw_2.RowCount() Then
 	FOR li_fila = 1 TO dw_2.RowCount()
 		li_find	=	dw_1.Find("cape_codigo = '" + dw_2.Object.cape_codigo[li_fila] + "'", 1, dw_1.RowCount())
-		IF li_find = 0 THEN
-			li_find									=	dw_1.InsertRow(0)
+		If li_find = 0 Then
+			li_find										=	dw_1.InsertRow(0)
 			dw_1.Object.cape_codigo[li_find]	=	dw_2.Object.cape_codigo[li_fila]
 			dw_1.Object.cape_apepat[li_find]	=	dw_2.Object.cape_apepat[li_fila]
 			dw_1.Object.cape_apemat[li_find]	=	dw_2.Object.cape_apemat[li_fila]
-			dw_1.Object.cape_nombre[li_find]	=	dw_2.Object.cape_nombre[li_fila]
+			dw_1.Object.cape_nombre[li_find]=	dw_2.Object.cape_nombre[li_fila]
 			dw_1.Object.caar_codigo[li_find]	=	dw_2.Object.caar_codigo[li_fila]
 			dw_1.Object.tico_codigo[li_find]	=	ii_tipoco
-			dw_1.Object.zona_codigo[li_find]	=	iuo_percas.zona_codigo
+			dw_1.Object.zona_codigo[li_find]	=	iuo_percas.zona
 			dw_1.Object.camv_fechac[li_find]	=	id_fecha
 			dw_1.Object.camv_estado[li_find]	=	1
 			dw_1.Object.camv_invcur[li_find]	=	0
 			dw_1.Object.caco_codigo[li_find]	=	dw_colac.Object.caco_codigo[1]
 			dw_1.Object.caco_nombre[li_find]	=	dw_colac.Object.caco_nombre[1]
 			dw_1.Object.camv_horaco[li_find]	=	dw_horas.Object.cahc_horini[1]
-			
-		END IF
-		
-	NEXT
-END IF
+		End If
+	Next
+End If
 dw_1.SetSort("tico_codigo, cape_apepat, cape_apemat, cape_nombre")
 dw_1.Sort()
 
-FOR li_fila = 1 TO dw_1.RowCount()
+For li_fila = 1 To dw_1.RowCount()
 	li_find	=	dw_colac.Find("caco_codigo = " + String(dw_1.Object.caco_codigo[li_fila]), &
 																1, dw_colac.RowCount())
-	IF li_find > 0 THEN
+	If li_find > 0 Then
 		dw_1.Object.caco_nombre[li_fila]	=	dw_colac.Object.caco_abrevi[li_find]
-	END IF
-NEXT
+	End If
+Next
 
 Return lb_retorno
 end function
@@ -234,6 +237,11 @@ FOR ll_Fila  = 1 To dw_1.RowCount()
 	END IF
 NEXT
 end subroutine
+
+public function string of_getfilter ();If IsNull(is_Filtro) Then is_Filtro = ''
+	
+Return	is_Filtro
+end function
 
 on vuo_tab_movtocasino.create
 this.cb_sincola=create cb_sincola
@@ -339,7 +347,7 @@ end type
 event clicked;Integer			li_fila
 str_busqueda	lstr_busq
 
-lstr_busq.Argum[1]	=	String(iuo_percas.zona_codigo)
+lstr_busq.Argum[1]	=	String(iuo_percas.zona)
 lstr_busq.Argum[2]	=	String(ii_tipoco)
 lstr_busq.Argum[3]	=	String(id_fecha)
 
@@ -506,8 +514,8 @@ event mousemove pbm_mousemove
 string tag = "Eliminar Detalle"
 integer x = 2885
 integer y = 284
-integer width = 300
-integer height = 245
+integer width = 302
+integer height = 244
 integer taborder = 40
 integer textsize = -10
 integer weight = 700
@@ -529,8 +537,8 @@ event mousemove pbm_mousemove
 string tag = "Ingresar Nuevo Detalle"
 integer x = 2885
 integer y = 40
-integer width = 300
-integer height = 245
+integer width = 302
+integer height = 244
 integer taborder = 30
 integer textsize = -10
 integer weight = 700
@@ -670,7 +678,7 @@ str_busqueda	lstr_busq
 
 IF row < 1 THEN Return
 
-lstr_busq.Argum[1]	=	String(iuo_percas.zona_codigo)
+lstr_busq.Argum[1]	=	String(iuo_percas.zona)
 lstr_busq.Argum[2]	=	String(ii_tipoco)
 lstr_busq.Argum[3]	=	String(id_fecha, 'dd/mm/yyyy')
 

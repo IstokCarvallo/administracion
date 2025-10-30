@@ -109,7 +109,7 @@ SetNull(li_nula)
 
 CHOOSE CASE dwo.name
 	CASE "caar_codigo"
-		IF iuo_area.Existe(ii_zona, Integer(data), False, sqlca) THEN
+		IF iuo_area.of_Existe(ii_zona, '', Integer(data), False, sqlca) THEN
 			FOR li_fila = 1 TO dw_1.FilteredCount()
 				IF dw_1.Object.caar_codigo.Filter[li_fila] = Integer(data) THEN
 					MessageBox("Advertencia", "El area ya ha sido ingresada", Exclamation!)
@@ -133,7 +133,7 @@ CHOOSE CASE dwo.name
 		END IF 
 		
 	CASE "ccos_codigo"
-		IF NOT iuo_ccosto.Existe(Integer(data), True, sqlca) THEN
+		IF NOT iuo_ccosto.of_Existe('', Integer(data), True, sqlca) THEN
 			This.Object.ccos_codigo[row]	=	li_nula
 			Return 1
 		END IF

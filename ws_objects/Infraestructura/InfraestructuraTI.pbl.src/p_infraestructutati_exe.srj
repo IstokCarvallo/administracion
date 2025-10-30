@@ -45,6 +45,7 @@ OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busqueda_admaunidadmini,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_busc_admagruposistema,w
 OBJ:C:\Desarrollo 22\Administracion\Infraestructura\InfraestructuraTI01.pbl,w_mant_deta_modelo,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,dw_mant_parempresa,d
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_codigo_verificacion,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,printer_info,s
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_errorbasedatos,s
 OBJ:C:\Desarrollo 22\Administracion\Infraestructura\InfraestructuraTITAB.pbl,uo_modelo,u
@@ -233,6 +234,7 @@ OBJ:C:\Desarrollo 22\Administracion\Infraestructura\InfraestructuraTI02.pbl,w_in
 OBJ:C:\Desarrollo 22\Administracion\Infraestructura\InfraestructuraTI01.pbl,dw_mant_asignaequipo,d
 OBJ:C:\Desarrollo 22\Administracion\Infraestructura\InfraestructuraTI01.pbl,dw_mant_ordentrabajo_ot,d
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,str_process_information,s
+OBJ:C:\Desarrollo 22\ObjePubl.pbl,uo_recuperapass,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_buscar,w
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,w_mant_deta_admaunidadadmini,w
 OBJ:C:\Desarrollo 22\Administracion\Infraestructura\InfraestructuraTI01.pbl,dw_mant_ordentrabajo_observacion,d

@@ -509,16 +509,16 @@ Choose Case ls_columna
 			
 		End If 
 		
-	Case "caar_codigo"
-		If  Not iuo_area.Existe(uo_selzona.codigo, Integer(data), True, Sqlca) Then
-			This.Object.caar_codigo[Row]	=	li_null
-			Return 1
-			
-		End If 
+//	Case "caar_codigo"
+//		If  Not iuo_area.Existe(uo_selzona.codigo, Integer(data), True, Sqlca) Then
+//			This.Object.caar_codigo[Row]	=	li_null
+//			Return 1
+//			
+//		End If 
 		
 	CASE "tico_codigo"
 		IF Not IsNull(data) THEN
-			IF NOT iuo_tipocolacion.Existe(uo_selzona.Codigo, Integer(data), True, sqlca) THEN
+			IF NOT iuo_tipocolacion.of_Existe(uo_selzona.Codigo, Integer(data), True, sqlca) THEN
 				This.Object.tico_codigo[row]	=	li_null
 				Return 1
 				

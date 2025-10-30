@@ -15,49 +15,33 @@ String	Nombre, Abreviacion
 end variables
 
 forward prototypes
-public function boolean busqueda (transaction at_transaccion)
-public function boolean existe (integer ai_zona, integer ai_area, boolean ab_mensaje, transaction at_transaccion)
+public function boolean of_existe (integer ai_zona, string as_empresa, integer ai_area, boolean ab_mensaje, transaction at_transaccion)
 end prototypes
 
-public function boolean busqueda (transaction at_transaccion);Boolean			lb_Retorno	=	False
-//Str_Busqueda	lstr_Busq
-//
-//OpenWithParm(w_busc_rgto_tiposeventosenca, lstr_Busq)
-//
-//lstr_Busq	= Message.PowerObjectParm
-//
-//IF lstr_Busq.argum[1] <> "" THEN
-//	Existe(Integer(lstr_Busq.Argum[1]), False, at_Transaccion)
-//	
-//	lb_Retorno	=	True
-//END IF
-//
-RETURN lb_Retorno
-end function
-
-public function boolean existe (integer ai_zona, integer ai_area, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
+public function boolean of_existe (integer ai_zona, string as_empresa, integer ai_area, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
 
 SELECT	zona_codigo, caar_codigo, caar_nombre, caar_abrevi
 	INTO	:Zona, :Codigo, :Nombre, :Abreviacion
 	FROM	dbo.casino_areas
 	WHERE	zona_codigo	=	:ai_zona
 	AND 	caar_codigo	=	:ai_area
+	And empr_codigo = :as_Empresa
 	USING	at_Transaccion;
 	
-IF at_Transaccion.SQLCode = -1 THEN
+If at_Transaccion.SQLCode = -1 Then
 	F_ErrorBaseDatos(at_Transaccion, "Lectura de Tabla de Areas")
 	
 	lb_Retorno	=	False
-ELSEIF at_Transaccion.SQLCode = 100 THEN
+ElseIf at_Transaccion.SQLCode = 100 Then
 	lb_Retorno	=	False
 
-	IF ab_Mensaje THEN
+	If ab_Mensaje Then
 		MessageBox("Atención", "En la Zona no Existe el Area" + String(ai_area) + &
 					", no ha sido Ingresado.~r~rIngrese o seleccione otro Código.")	
-	END IF
-END IF
+	End If
+End If
 
-RETURN lb_Retorno
+Return lb_Retorno
 end function
 
 on uo_areas.create

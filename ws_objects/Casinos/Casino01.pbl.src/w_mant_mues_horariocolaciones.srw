@@ -364,7 +364,7 @@ ls_columna	=	dwo.name
 CHOOSE CASE ls_columna
 	CASE "tico_codigo"
 		IF Not IsNull(data) THEN
-			IF NOT iuo_tipocolacion.Existe(uo_selzona.Codigo, Integer(data), True, sqlca) THEN
+			IF NOT iuo_tipocolacion.of_Existe(uo_selzona.Codigo, Integer(data), True, sqlca) THEN
 				This.Object.tico_codigo[row]	=	li_null
 				Return 1
 				

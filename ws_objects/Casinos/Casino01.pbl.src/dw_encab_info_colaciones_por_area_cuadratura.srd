@@ -12,7 +12,7 @@ table(column=(type=date updatewhereclause=yes name=camv_fechac dbname="camv_fech
  column=(type=decimal(0) updatewhereclause=yes name=caar_codigo dbname="caar_codigo" )
  column=(type=char(20) updatewhereclause=yes name=caar_nombre dbname="caar_nombre" )
  column=(type=number updatewhereclause=yes name=colaciones dbname="colaciones" )
- procedure="1 execute dbo.casino_informe_colaciones_diarias_cuadratura;0 @fecha = :fecha, @area = :area, @colacion = :colacion, @hasta=:Hasta" arguments=(("fecha", date),("area", decimal),("colacion", decimal),("hasta", date))  sort="camv_fechac A zona_codigo A caar_codigo A caar_nombre A " )
+ procedure="1 execute dbo.casino_informe_colaciones_diarias_cuadratura;0 @fecha = :fecha, @area = :area, @colacion = :colacion, @hasta=:Hasta, @Empresa=:Empresa" arguments=(("fecha", date),("area", decimal),("colacion", decimal),("hasta", date),("Empresa", String))  sort="camv_fechac A zona_codigo A caar_codigo A caar_nombre A " )
 group(level=1 header.height=0 trailer.height=0 by=("camv_fechac" ) header.color="536870912" trailer.color="536870912" )
 group(level=2 header.height=0 trailer.height=0 by=("zona_codigo" ) header.color="536870912" trailer.color="536870912" )
 group(level=3 header.height=0 trailer.height=0 by=("caar_codigo" ) header.color="536870912" trailer.color="536870912" )

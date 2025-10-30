@@ -29,12 +29,17 @@ end type
 type tab_2 from tab within w_maed_rgtopersonalcolacion
 tabpage_1 tabpage_1
 end type
+type dw_contratista from uo_dw within w_maed_rgtopersonalcolacion
+end type
+type dw_personal from uo_dw within w_maed_rgtopersonalcolacion
+end type
 end forward
 
 global type w_maed_rgtopersonalcolacion from w_mant_directo
 integer width = 3863
 integer height = 2528
 string title = "PERSONAL POR ZONAS"
+windowdockstate windowdockstate = windowdockstatetabbedwindow!
 dw_4 dw_4
 pb_reproceso pb_reproceso
 dw_5 dw_5
@@ -44,6 +49,8 @@ dw_3 dw_3
 dw_2 dw_2
 dw_errores dw_errores
 tab_2 tab_2
+dw_contratista dw_contratista
+dw_personal dw_personal
 end type
 global w_maed_rgtopersonalcolacion w_maed_rgtopersonalcolacion
 
@@ -60,13 +67,14 @@ end variables
 
 forward prototypes
 public function boolean cargatabs ()
-public subroutine personalvigente (integer ai_fila)
 protected function boolean wf_actualiza_db ()
 public subroutine rescatanombre (string as_nombre)
 public function boolean usuariobd (string as_username, boolean crear)
 public subroutine bloqueaventana (boolean ab_estado)
 public function boolean wf_conectaempresa (integer ai_fila)
 public function boolean wf_reprocesaempresa ()
+public subroutine wf_personalvigente (integer ai_fila)
+public function boolean wf_cargacontratista (integer empresa)
 end prototypes
 
 public function boolean cargatabs ();Boolean 	lb_retorno = True
@@ -106,45 +114,6 @@ NEXT
 
 Return lb_retorno
 end function
-
-public subroutine personalvigente (integer ai_fila);Integer		li_fila, li_find, li_empresa
-String			ls_perscodigo
-DataStore	lds_dw_1
-
-lds_dw_1				=	Create DataStore
-lds_dw_1.DataObject	=	"dw_mues_casino_personacolacion"
-
-dw_1.RowsCopy(1, dw_1.RowCount(), Primary!, lds_dw_1, 1, Primary!)
-dw_1.RowsCopy(1, dw_1.FilteredCount(), Filter!, lds_dw_1, 1, Filter!)
-
-lds_dw_1.SetFilter("")
-lds_dw_1.Filter()
-
-li_empresa	=	dw_2.Object.empr_codigo[ai_fila]
-
-dw_6.SetTransObject(sqlca)
-dw_6.Retrieve(li_empresa, '')
-
-FOR li_fila = dw_6.RowCount() TO 1 Step -1
-	li_find 	= 	dw_2.find("empr_codigo = " + String(dw_6.Object.empr_codigo[li_fila]),  1, dw_2.RowCount())
-								 
-	IF li_find > 0 THEN
-		dw_6.Object.empr_nombre[li_fila]	=	dw_2.Object.empr_abrevi[li_find]
-	END IF
-
-	ls_perscodigo	=	dw_6.Object.pers_codigo[li_fila]
-	li_find			=	lds_dw_1.Find("cape_codigo = '" + ls_perscodigo + "'", 1, lds_dw_1.RowCount())
-	IF li_find > 0 THEN
-		dw_6.DeleteRow(li_fila)
-	END IF
-	
-NEXT
-
-dw_6.SetSort("empr_codigo, pers_nomcom")
-dw_6.Sort()
-
-Destroy lds_dw_1;
-end subroutine
 
 protected function boolean wf_actualiza_db ();Integer	li_filas
 Boolean	lb_AutoCommit, lb_Retorno
@@ -281,11 +250,8 @@ it_trans.ServerName	=	ls_Server
 it_trans.DataBase		=	ls_Base
 
 If ls_DBMS = "ODBC" Then
-		it_trans.DbParm		=	"Connectstring='DSN=" + ls_Nombre + ";" + &
-													"UID=" + ls_Usuario  + ";" + &
-													"PWD=" + ls_Password + "'// ;" + &
-													"ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT'" + &
-													"PBUseProcOwner = "  + '"Yes"'
+		it_trans.DbParm		=	"Connectstring='DSN=" + ls_Nombre + "; UID=" + ls_Usuario  + "; PWD=" + ls_Password + "'// ;" + &
+										"ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT' PBUseProcOwner = "  + '"Yes"'
 	ElseIf ls_Dbms = 'OLEDB' Then
 		it_trans.LogId   		= ls_usuario
 		it_trans.LogPass 		= ls_Password
@@ -363,49 +329,156 @@ lpl_Traspaso	=	Create PipeLine
 lpl_Traspaso.Cancel()
 
 //Carga personal por empresa
-FOR ll_empresas = 1 TO dw_2.RowCount()
+For ll_empresas = 1 TO dw_2.RowCount()
 	If dw_2.IsSelected(ll_empresas) Then
-		
-		If NOT wf_ConectaEmpresa(ll_empresas) Then
-			Return False
+		If Not wf_ConectaEmpresa(ll_empresas) Then Return False
+			
+		If dw_2.Object.empr_sisoper[ll_empresas] = 1 Then
+			If Not wf_CargaContratista(dw_2.Object.empr_codigo[ll_empresas]) Then
+				MessageBox('Error', 'No se pudo cargar inforamcion de Contratista', StopSign!, Ok!)
+				Return False
+			End If
+		Else			
+			li_codigo						=	dw_2.Object.empr_codigo[ll_empresas]
+			dw_errores.Visible 		= 	True
+			lpl_Traspaso.DataObject	=	"dpl_remupersonal"
+			li_Retorno					=	lpl_Traspaso.Start(it_trans, sqlca, dw_errores, li_codigo)
+			
+			If li_Retorno < 0 Then
+				MessageBox("Error", "Se ha producido el siguiente Error en el Traspaso de " 	+	&
+								lpl_Traspaso.DataObject + "~r~r"	+	String(li_Retorno) + " : "	+	ls_Errores[Abs(li_Retorno)] 			+	&
+								"~r~rAvise a Administrador de Sistema.")
+				Return False
+			End If
+			
+			If li_Retorno < 1 Then  Return False
+			
+			dw_errores.Visible 		= 	True
+			lpl_Traspaso.DataObject	=	"dpl_centrocosto"
+			li_Retorno					=	lpl_Traspaso.Start(it_trans, sqlca, dw_errores)
+			
+			If li_Retorno < 0 Then
+				MessageBox("Error", "Se ha producido el siguiente Error en el Traspaso de " 	+	&
+								"dpl_centrocosto. ~r~r" 	+	String(li_Retorno) + " : "	+	ls_Errores[Abs(li_Retorno)] 			+	&
+								"~r~rAvise a Administrador de Sistema.")
+				Return False
+			End If
+			If li_Retorno < 1 Then Return False
 		End If
-		
-		li_codigo						=	dw_2.Object.empr_codigo[ll_empresas]
-		dw_errores.Visible 		= 	True
-		lpl_Traspaso.DataObject	=	"dpl_remupersonal"
-		li_Retorno					=	lpl_Traspaso.Start(it_trans, sqlca, dw_errores, li_codigo)
-		
-		If li_Retorno < 0 Then
-			MessageBox("Error", "Se ha producido el siguiente Error en el Traspaso de " 	+	&
-							lpl_Traspaso.DataObject + "~r~r"	+	&
-							String(li_Retorno) + " : "	+	ls_Errores[Abs(li_Retorno)] 			+	&
-							"~r~rAvise a Administrador de Sistema.")
-			Return False
-		End If
-		
-		If li_Retorno < 1 Then  Return False
-		
-		dw_errores.Visible 		= 	True
-		lpl_Traspaso.DataObject	=	"dpl_centrocosto"
-		li_Retorno					=	lpl_Traspaso.Start(it_trans, sqlca, dw_errores)
-		
-		If li_Retorno < 0 Then
-			MessageBox("Error", "Se ha producido el siguiente Error en el Traspaso de " 	+	&
-							"dpl_centrocosto. ~r~r" 	+	&
-							String(li_Retorno) + " : "	+	ls_Errores[Abs(li_Retorno)] 			+	&
-							"~r~rAvise a Administrador de Sistema.")
-			Return False
-		End If
-		
-		If li_Retorno < 1 Then Return False
 	End If
-NEXT
+Next
 
 dw_errores.Visible = False
 
 Destroy lpl_Traspaso
 
 Return True
+end function
+
+public subroutine wf_personalvigente (integer ai_fila);Integer		li_fila, li_find, li_empresa
+String			ls_perscodigo
+DataStore	lds_dw_1
+
+lds_dw_1				=	Create DataStore
+lds_dw_1.DataObject	=	"dw_mues_casino_personacolacion"
+
+dw_1.RowsCopy(1, dw_1.RowCount(), Primary!, lds_dw_1, 1, Primary!)
+dw_1.RowsCopy(1, dw_1.FilteredCount(), Filter!, lds_dw_1, 1, Filter!)
+
+lds_dw_1.SetFilter("")
+lds_dw_1.Filter()
+
+li_empresa	=	dw_2.Object.empr_codigo[ai_fila]
+
+dw_6.SetTransObject(sqlca)
+dw_6.Retrieve(li_empresa, '')
+
+FOR li_fila = dw_6.RowCount() TO 1 Step -1
+	li_find 	= 	dw_2.find("empr_codigo = " + String(dw_6.Object.empr_codigo[li_fila]),  1, dw_2.RowCount())
+								 
+	IF li_find > 0 THEN
+		dw_6.Object.empr_nombre[li_fila]	=	dw_2.Object.empr_abrevi[li_find]
+	END IF
+
+	ls_perscodigo	=	dw_6.Object.pers_codigo[li_fila]
+	li_find			=	lds_dw_1.Find("cape_codigo = '" + ls_perscodigo + "'", 1, lds_dw_1.RowCount())
+	IF li_find > 0 THEN
+		dw_6.DeleteRow(li_fila)
+	END IF
+	
+NEXT
+
+dw_6.SetSort("empr_codigo, pers_nomcom")
+dw_6.Sort()
+
+Destroy lds_dw_1;
+end subroutine
+
+public function boolean wf_cargacontratista (integer empresa);Boolean	lb_Retorno = True
+Long		ll_Fila, ll_Estado, ll_Find, ll_New
+String		ls_Rut, ls_Paterno, ls_Materno, ls_Nombre, ls_Find
+
+dw_Contratista.SetTransObject(it_Trans)
+dw_Personal.SetTransObject(SQLCA)
+
+SetPointer(HourGlass!)
+
+If dw_Contratista.Retrieve('', '') = -1 Then
+	lb_Retorno = False
+Else
+	dw_Personal.Retrieve(Empresa)
+	
+	For ll_Fila = 1 To dw_Contratista.RowCount()
+		
+		ls_Rut			=	Mid(dw_Contratista.Object.Rut[ll_Fila], 1, 10)
+		ls_Paterno	=	Trim(dw_Contratista.Object.Apellido_Paterno[ll_Fila])
+		ls_Materno	=	Trim(dw_Contratista.Object.Apellido_Materno[ll_Fila])
+		ls_Nombre	=	Trim(dw_Contratista.Object.Nombre[ll_Fila])
+		ll_Estado		=	dw_Contratista.Object.Estado[ll_Fila]	
+		ls_Rut	 		= Fill('0', 10 - Len(ls_Rut)) + ls_Rut
+		
+		ls_Find = "pers_codigo = '" + ls_Rut + "' and empr_codigo = " + String(Empresa)
+		ll_Find = dw_Personal.Find(ls_Find, 1, dw_Personal.RowCount(), Primary!)
+		
+		If ll_Find = 0 Then
+			ll_New = dw_Personal.InsertRow(0)
+			
+			dw_Personal.Object.pers_codigo[ll_New]	=	ls_Rut
+			dw_Personal.Object.pers_apepat[ll_New]	=	ls_Paterno
+			dw_Personal.Object.pers_apemat[ll_New]	=	ls_Materno
+			dw_Personal.Object.pers_nombre[ll_New]	=	ls_Nombre
+			dw_Personal.Object.pers_estado[ll_New]	=	ll_Estado
+			dw_Personal.Object.empr_codigo[ll_New]	=	Empresa
+		Else
+			dw_Personal.Object.pers_apepat[ll_Find]	=	ls_Paterno
+			dw_Personal.Object.pers_apemat[ll_Find]	=	ls_Materno
+			dw_Personal.Object.pers_nombre[ll_Find]	=	ls_Nombre
+			dw_Personal.Object.pers_estado[ll_Find]	=	ll_Estado
+			dw_Personal.Object.empr_codigo[ll_Find]	=	Empresa
+		End If			
+	Next
+End If
+
+If dw_Personal.Update(True, False) = 1 Then 
+	Commit;
+	
+	If sqlca.SQLCode <> 0 Then
+		F_ErrorBaseDatos(sqlca, This.Title)
+		lb_Retorno	=	False
+	Else
+		lb_Retorno	=	True
+
+		dw_Personal.ResetUpdate()
+	End If
+Else
+	RollBack;
+	If sqlca.SQLCode <> 0 Then F_ErrorBaseDatos(sqlca, This.Title)
+	lb_Retorno	=	False
+End If
+
+SetPointer(Arrow!)
+
+Return lb_Retorno
 end function
 
 event resize;call super::resize;Integer		li_posic_x, li_posic_y, &
@@ -459,6 +532,8 @@ this.dw_3=create dw_3
 this.dw_2=create dw_2
 this.dw_errores=create dw_errores
 this.tab_2=create tab_2
+this.dw_contratista=create dw_contratista
+this.dw_personal=create dw_personal
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.dw_4
 this.Control[iCurrent+2]=this.pb_reproceso
@@ -469,6 +544,8 @@ this.Control[iCurrent+6]=this.dw_3
 this.Control[iCurrent+7]=this.dw_2
 this.Control[iCurrent+8]=this.dw_errores
 this.Control[iCurrent+9]=this.tab_2
+this.Control[iCurrent+10]=this.dw_contratista
+this.Control[iCurrent+11]=this.dw_personal
 end on
 
 on w_maed_rgtopersonalcolacion.destroy
@@ -482,6 +559,8 @@ destroy(this.dw_3)
 destroy(this.dw_2)
 destroy(this.dw_errores)
 destroy(this.tab_2)
+destroy(this.dw_contratista)
+destroy(this.dw_personal)
 end on
 
 event open;Integer	li_filas
@@ -492,21 +571,20 @@ im_menu										=	m_principal
 This.ParentWindow().ToolBarVisible	=	True
 im_menu.Item[1].Item[6].Enabled		=	True
 im_menu.Item[7].Visible					=	False
-This.Icon									=	Gstr_apl.Icono
+This.Icon										=	Gstr_apl.Icono
 							
 it_trans										=	Create Transaction
 iuo_zona										=	Create uo_zona
 
 dw_1.SetTransObject(sqlca)
-dw_1.Modify("datawindow.message.title='Error '+ is_titulo")
+dw_1.ModIfy("datawindow.message.title='Error '+ is_titulo")
 dw_1.SetRowFocusIndicator(Hand!)
-dw_1.Modify("DataWindow.Footer.Height = 110")
+dw_1.ModIfy("DataWindow.Footer.Height = 110")
 
 istr_mant.UsuarioSoloConsulta			=	OpcionSoloConsulta()
 istr_mant.Solo_Consulta					=	istr_mant.UsuarioSoloConsulta
 
-GrabaAccesoAplicacion(True, id_FechaAcceso, it_HoraAcceso, &
-							This.Title, "Acceso a Aplicación", 1)
+GrabaAccesoAplicacion(True, id_FechaAcceso, it_HoraAcceso, This.Title, "Acceso a Aplicación", 1)
 
 dw_2.SetTransObject(sqlca)
 dw_4.SetTransObject(sqlca)
@@ -515,18 +593,16 @@ dw_5.SetTransObject(sqlca)
 dw_4.InsertRow(0)
 li_filas	=	dw_2.Retrieve()
 
-IF li_filas > 0 THEN
+If li_filas > 0 Then
 	pb_reproceso.Enabled	=	True
-	
-ELSE
+Else
 	pb_reproceso.Enabled	=	False
-	
-END IF
+End If
 
-Tab_1.Visible				=	False
-Tab_2.Visible				=	True
-Tab_2.Enabled				=	False
-Tab_2.tabpage_1.Enabled	=	False
+Tab_1.Visible					=	False
+Tab_2.Visible					=	True
+Tab_2.Enabled					=	False
+Tab_2.TabPage_1.Enabled	=	False
 
 buscar			= "Rut:Spers_codigo,Nombre:Spers_nomcom"
 ordenar			= "Rut:pers_codigo,Nombre:pers_nomcom"
@@ -586,7 +662,7 @@ CHOOSE CASE li_respuesta
 END CHOOSE
 FOR ll_recorre = 1 TO dw_2.RowCount()
 	IF dw_2.IsSelected(ll_recorre) THEN 
-		PersonalVigente(ll_recorre)
+		wf_PersonalVigente(ll_recorre)
 		dw_2.SelectRow(ll_recorre, False)
 	END IF
 NEXT
@@ -643,7 +719,7 @@ LOOP WHILE respuesta = 1
 
 dw_6.Reset()
 FOR ll_fila = 1 TO dw_2.RowCount()
-	PersonalVigente(ll_fila)
+	wf_PersonalVigente(ll_fila)
 NEXT
 
 IF respuesta = 2 THEN Close(This)
@@ -661,40 +737,34 @@ lstr_info.titulo	= "PERSONAL POR ZONAS"
 lstr_info.copias	= 1
 
 OpenWithParm(vinf,lstr_info)
-
 vinf.dw_1.DataObject = "dw_info_casino_personacolacion"
-
 vinf.dw_1.SetTransObject(sqlca)
-
 fila = vinf.dw_1.Retrieve()
 
-IF fila = -1 THEN
-	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
-					"de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
-ELSEIF fila = 0 THEN
-	MessageBox( "No Existe información", "No existe información para este informe.", &
-					StopSign!, Ok!)
-ELSE
+If fila = -1 Then
+	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base de datos : ~n" + sqlca.SQLErrText, StopSign!, Ok!)
+ElseIf fila = 0 Then
+	MessageBox( "No Existe información", "No existe información para este informe.", StopSign!, Ok!)
+Else
 	F_Membrete(vinf.dw_1)
-	vinf.dw_1.Modify('DataWindow.Print.Preview = Yes')
-	vinf.dw_1.Modify('DataWindow.Print.Preview.Zoom = 75')
+	vinf.dw_1.ModIfy('DataWindow.Print.Preview = Yes')
+	vinf.dw_1.ModIfy('DataWindow.Print.Preview.Zoom = 75')
 	
 	vinf.dw_1.Sort()
 			
 	vinf.Visible	= True
 	vinf.Enabled	= True
-END IF
+End If
 
 SetPointer(Arrow!)
 end event
 
-event closequery;call super::closequery;IF dw_errores.Visible THEN
-	MessageBox("Advertencia", "No se puede cerrar la ventana mientras se~r~n" + &
-									  "este realizando Consolidación de Datos", Exclamation!)
+event closequery;call super::closequery;If dw_errores.Visible Then
+	MessageBox("Advertencia", "No se puede cerrar la ventana mientras se~r~neste realizando Consolidación de Datos", Exclamation!)
 	Return 1
-ELSE
+Else
 	Return 0
-END IF
+End If
 end event
 
 event ue_ordenar;String ls_info
@@ -1044,7 +1114,7 @@ dw_6.Reset()
 
 FOR ll_fila = 1 TO dw_2.RowCount()
 	IF dw_2.IsSelected(ll_fila) THEN 
-		PersonalVigente(ll_fila)
+		wf_PersonalVigente(ll_fila)
 	END IF
 NEXT
 end event
@@ -1095,5 +1165,29 @@ integer y = 112
 integer width = 2162
 integer height = 1540
 string text = "Muestra"
+end type
+
+type dw_contratista from uo_dw within w_maed_rgtopersonalcolacion
+boolean visible = false
+integer x = 3474
+integer y = 1888
+integer width = 146
+integer height = 128
+integer taborder = 11
+boolean bringtotop = true
+string dataobject = "dw_carga_contratistapersonal"
+boolean vscrollbar = false
+end type
+
+type dw_personal from uo_dw within w_maed_rgtopersonalcolacion
+boolean visible = false
+integer x = 3474
+integer y = 2048
+integer width = 146
+integer height = 128
+integer taborder = 21
+boolean bringtotop = true
+string dataobject = "dw_mues_remupersonal"
+boolean vscrollbar = false
 end type
 

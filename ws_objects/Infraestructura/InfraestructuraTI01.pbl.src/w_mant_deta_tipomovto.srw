@@ -73,7 +73,7 @@ END IF
 
 If Not istr_mant.Agrega Then
 	dw_1.Object.tpmv_codigo.Protect					=	1
-	dw_1.Object.tpmv_codigo.Color					=	0
+	dw_1.Object.tpmv_codigo.Color					=	RGB(255,255,255)
 	dw_1.Object.tpmv_codigo.BackGround.Color	=	553648127
 End If
 

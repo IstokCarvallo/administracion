@@ -459,7 +459,7 @@ IF of_DatosEmpresa() Then
 		of_InsertaRegistro('Tasa Iva', '')
 		of_InsertaRegistro('xMontoEscrito', '')			
 	
-		If IsNull(ids_Source.Object.tpmv_glosas[1]) Then
+		If IsNull(ids_Source.Object.tpmv_glosas[1]) Or ids_Source.Object.tpmv_glosas[1] = '' Then
 			ls_Referencia = ''
 		Else	
 			ls_Referencia = Trim(ids_Source.Object.tpmv_glosas[1])

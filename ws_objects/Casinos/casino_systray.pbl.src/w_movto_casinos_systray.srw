@@ -61,7 +61,7 @@ end type
 global w_movto_casinos_systray w_movto_casinos_systray
 
 type variables
-uo_movtocasino		iuo_casino
+uo_movtocasino	iuo_casino
 
 Integer				ii_tipocolacion, ii_clasif, ii_control
 String					is_rut, is_nombre, is_apepat, is_apemat, is_eleccion
@@ -83,13 +83,12 @@ end prototypes
 event ue_antesguardar();Long	ll_fila = 1
 
 DO WHILE ll_fila <= dw_1.RowCount()
-	IF dw_1.GetItemStatus(ll_fila, 0, Primary!) = New! OR &
-		dw_1.Object.zona_codigo[ll_fila] < 1 OR &
-		IsNull(dw_1.Object.zona_codigo[ll_fila] < 1) THEN
+	If dw_1.GetItemStatus(ll_fila, 0, Primary!) = New! Or  dw_1.Object.zona_codigo[ll_fila] < 1 Or &
+		IsNull(dw_1.Object.zona_codigo[ll_fila] < 1) Then
 		dw_1.DeleteRow(ll_fila)
-	ELSE
+	Else
 		ll_fila ++
-	END IF
+	End If
 LOOP
 end event
 
@@ -220,12 +219,12 @@ Integer	zona_codigo, caar_codigo, camv_secuen
 
 it_ahora	=	time(f_fechahora())
 
-IF dw_1.RowCount() > 0 THEN
+If dw_1.RowCount() > 0 Then
 	zona_codigo = dw_1.Object.zona_codigo[1] 
 	caar_codigo = dw_1.Object.caar_codigo[1] 
 	camv_fechac = dw_1.Object.camv_fechac[1] 
 	camv_secuen = dw_1.Object.camv_secuen[1]
-END IF
+End If
 
 lb_AutoCommit		=	sqlca.AutoCommit
 sqlca.AutoCommit	=	False
@@ -238,30 +237,30 @@ Update dbo.Casino_MovtoColaciones
    and camv_fechac = :camv_fechac 
    and camv_secuen = :camv_secuen;
 
-IF sqlca.SQLCode = 0 then 
+If sqlca.SQLCode = 0 Then 
 	Commit;
 	
-	IF dw_1.RowCount() > 0 THEN
-		IF Not IsNull(dw_1.Object.zona_codigo[1]) AND dw_1.Object.zona_codigo[1] > 0 THEN
+	If dw_1.RowCount() > 0 Then
+		If Not IsNull(dw_1.Object.zona_codigo[1]) AND dw_1.Object.zona_codigo[1] > 0 Then
 			dw_ticket.Print(False, False)
-		END IF
-	END IF
+		End If
+	End If
 	
-	IF sqlca.SQLCode <> 0 THEN
+	If sqlca.SQLCode <> 0 Then
 		F_ErrorBaseDatos(sqlca, This.Title)
 		lb_Retorno	=	False
-	ELSE
+	Else
 		lb_Retorno	=	True
 			
 		dw_1.ResetUpdate()
-	END IF
-ELSE
+	End If
+Else
 	RollBack;
 	
-	IF sqlca.SQLCode <> 0 THEN F_ErrorBaseDatos(sqlca, This.Title)
+	If sqlca.SQLCode <> 0 Then F_ErrorBaseDatos(sqlca, This.Title)
 	
 	lb_Retorno	=	False
-END IF
+End If
 
 sqlca.AutoCommit	=	lb_AutoCommit
 
@@ -308,12 +307,12 @@ destroy(this.st_encabe)
 destroy(this.sle_1)
 end on
 
-event open;call super::open;x												= 	0
-y												= 	0
-This.Width									= 	dw_1.width + 540
-This.Height									= 	2500
+event open;call super::open;x				= 	0
+y				= 	0
+This.Width	= 	dw_1.width + 540
+This.Height	= 	2500
 
-iuo_casino									=	Create uo_movtocasino
+iuo_casino	=	Create uo_movtocasino
 
 dw_1.SetTransObject(sqlca)
 dw_2.SetTransObject(sqlca)
@@ -350,14 +349,12 @@ Integer			li_filas
 DataStore		lds_pruebaconexion
 
 Timer(0)
-st_estado.Text	=	"Sin Conexión A La Base de Datos"
+st_estado.Text		=	"Sin Conexión A La Base de Datos"
 st_Mensaje.Text	=	""
 
-IF NOT ib_connected THEN
-	Conexion()
-END IF
+If Not ib_connected Then Conexion()
 
-IF ib_connected THEN
+If ib_connected Then
 	st_estado.Text	=	"Conectado Exitosamente A La Base de Datos"
 	
 	dw_1.Reset()
@@ -373,10 +370,10 @@ IF ib_connected THEN
 	lds_pruebaconexion.DataObject		=	dw_horarios.DataObject
 	lds_pruebaconexion.SetTransObject(sqlca)
 	
-	li_filas									=	lds_pruebaconexion.Retrieve(-1, Date('19000101'))
+	li_filas	=	lds_pruebaconexion.Retrieve(-1, Date('19000101'))
 	
 	DO
-		IF li_filas = -1 THEN
+		If li_filas = -1 Then
 			st_estado.Text	=	"Sin Conexión A La Base de Datos"
 			Conexion()
 	
@@ -387,7 +384,7 @@ IF ib_connected THEN
 			lds_pruebaconexion.SetTransObject(sqlca)
 			li_filas	=	lds_pruebaconexion.Retrieve(-1, Date('19000101'))
 			
-		END IF
+		End If
 	LOOP WHILE li_filas = -1
 	
 	st_estado.Text	=	"Conectado Exitosamente A La Base de Datos"
@@ -396,13 +393,13 @@ IF ib_connected THEN
 	id_fecha			=	Date(ld_fechahora)
 	li_filas			=	dw_horarios.Retrieve(-1, id_fecha)
 	
-	IF dw_horarios.RowCount() < 1 THEN
+	If dw_horarios.RowCount() < 1 Then
 		st_Mensaje.Text = "No Existen colaciones creadas para el dia en curso."
 		Halt
-	END IF
+	End If
 
 	li_filas	=	dw_horarios.find(String(it_time) + " between cahc_horini and cahc_horter", 1, dw_horarios.RowCount())
-	il_fila 	= 	dw_1.InsertRow(0)
+	il_fila 		= 	dw_1.InsertRow(0)
 	
 	dw_1.ScrollToRow(il_fila)
 	dw_1.SetRow(il_fila)
@@ -411,35 +408,34 @@ IF ib_connected THEN
 
 	ii_control++
 
-	IF li_filas > 0 THEN
-		ii_tipocolacion						= 	dw_horarios.Object.tico_codigo[li_filas]
+	If li_filas > 0 Then
+		ii_tipocolacion	= 	dw_horarios.Object.tico_codigo[li_filas]
 		dw_1.Object.tico_nombre[il_fila]	=	dw_horarios.Object.tico_nombre[li_filas]
 		
-		IF ii_control < 5 THEN
-			dw_1.Object.camv_invcur[il_fila] = 	ii_clasif
+		If ii_control < 5 Then
+			dw_1.Object.camv_invcur[il_fila]	= 	ii_clasIf
 			dw_1.Object.cape_apepat[il_fila]	=	is_apepat
 			dw_1.Object.cape_apemat[il_fila]	=	is_apemat
 			dw_1.Object.cape_nombre[il_fila]	=	is_nombre
 			dw_1.Object.caco_nombre[il_fila]	=	is_eleccion
 			
-		ELSE
+		Else
 			ii_control = 0
-			SetNull(ii_clasif)
+			SetNull(ii_clasIf)
 			SetNull(is_apepat)
 			SetNull(is_apemat)
 			SetNull(is_nombre)
 			SetNull(is_eleccion)
-			
-		END IF
-	ELSE
-		ii_tipocolacion						= 	-1
-		dw_1.Object.tico_nombre[il_fila]	=	"Horario No Asignado"
-		
-	END IF
+		End If
+	Else
+		ii_tipocolacion = 	-1
+		dw_1.Object.tico_nombre[il_fila]	=	"Horario No Asignado"		
+	End If
+	
 	dw_1.Object.camv_fechac[il_fila]	=	id_fecha
 	dw_1.Object.camv_horaco[il_fila]	=	it_time
 	
-END IF
+End If
 
 Timer(5)
 end event
@@ -527,6 +523,12 @@ st_mensaje.Text = ''
 
 Choose Case ls_columna
 	Case "lectura"
+		Data = F_Global_Replace(Data, '.', '')
+		Data = F_Global_Replace(Data, '-', '')
+		
+		Data = Fill('0', 10 - Len(Data)) + Data
+		
+		
 		If IsNumber(Left(data, 3)) Then 
 			data = 'INV' + Data
 		End If
@@ -553,10 +555,9 @@ event itemerror;Return 1
 end event
 
 type dw_2 from datawindow within w_movto_casinos_systray
-integer x = 32
-integer y = 816
-integer width = 3707
-integer height = 936
+integer y = 800
+integer width = 3767
+integer height = 992
 integer taborder = 20
 boolean titlebar = true
 string title = "DETALLE DEL PERSONAL"

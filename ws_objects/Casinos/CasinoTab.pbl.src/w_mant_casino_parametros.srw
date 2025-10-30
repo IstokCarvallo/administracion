@@ -146,16 +146,16 @@ CHOOSE CASE ls_columna
 		This.Object.caar_codigo[row] = li_area
 		This.Object.caar_nombre[row] = String(li_area)
 			
-	CASE "caar_codigo"
-		IF NOT iuo_areas.Existe(This.Object.zona_codigo[row], Integer(data), True, Sqlca) THEN
-			This.Object.caar_codigo[row] = li_area
-			This.Object.caar_nombre[row] = String(li_area)
-			Return 1
-			
-		ELSE
-			This.Object.caar_codigo[row] = iuo_areas.caar_codigo
-			This.Object.caar_nombre[row] = iuo_areas.caar_nombre
-		END IF
+//	CASE "caar_codigo"
+//		IF NOT iuo_areas.Existe(This.Object.zona_codigo[row], Integer(data), True, Sqlca) THEN
+//			This.Object.caar_codigo[row] = li_area
+//			This.Object.caar_nombre[row] = String(li_area)
+//			Return 1
+//			
+//		ELSE
+//			This.Object.caar_codigo[row] = iuo_areas.caar_codigo
+//			This.Object.caar_nombre[row] = iuo_areas.caar_nombre
+//		END IF
 	
 	CASE "capa_activa"
 		FOR li_fila = 1 TO dw_1.RowCount()

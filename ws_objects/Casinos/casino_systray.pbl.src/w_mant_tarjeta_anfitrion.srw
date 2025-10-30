@@ -37,44 +37,44 @@ end type
 global w_mant_tarjeta_anfitrion w_mant_tarjeta_anfitrion
 
 type variables
-String		ls_pers_codigo, ls_pers_apepat, ls_pers_apemat, ls_pers_nombre
+String		ls_pers_codigo, ls_pers_apepat, ls_pers_apemat, ls_pers_nombre, ls_Empresa
 Long		ll_pers_nrotar
-Integer	li_cape_invita, li_cape_topein, li_zona_codigo, li_caar_codigo, ii_zona, ii_area
+Integer	li_cape_invita, li_cape_topein, li_zona_codigo, li_caar_codigo, ii_zona, ii_area, li_Costo
 end variables
 
 forward prototypes
-public function boolean existetarjeta (string as_tarjeta)
+public function boolean wf_existetarjeta (string as_tarjeta)
 end prototypes
 
-public function boolean existetarjeta (string as_tarjeta);Integer	li_zona, li_colacion, li_invitados
+public function boolean wf_existetarjeta (string as_tarjeta);Integer	li_zona, li_colacion, li_invitados
 
-SELECT  pers_codigo, 	 pers_apepat, 		pers_apemat, 	  
-		  pers_nombre, 	 pers_nrotar
+SELECT  pers_codigo, pers_apepat, pers_apemat, 	  
+		  pers_nombre, pers_nrotar, ccos_codigo
   INTO :ls_pers_codigo, :ls_pers_apepat, :ls_pers_apemat, 
-  		 :ls_pers_nombre, :ll_pers_nrotar
+  		 :ls_pers_nombre, :ll_pers_nrotar, :li_Costo
   FROM dbo.remupersonal
  WHERE :as_tarjeta = pers_codigo
- USING sqlca;
+ USING SQLCA;
  
-If sqlca.SQLCode = -1 Then
-	F_ErrorBaseDatos(sqlca, "Lectura de Tabla RemuPersonal")
+If SQLCA.SQLCode = -1 Then
+	F_ErrorBaseDatos(sqlca, "Lectura de Tabla Personal")
 	Return False
-ElseIf sqlca.SQLCode = 100 Then
+ElseIf SQLCA.SQLCode = 100 Then
 	istr_Mant.Argumento[98] = "Error"
 	istr_Mant.Argumento[99] = "La tarjeta ingresada no pertenece a Personal Rio Blanco."
 	Return False
 Else
-	SELECT IsNull(cape_invita, 0), IsNull(cape_topein, 0), zona_codigo, caar_codigo
-	  INTO :li_cape_invita, :li_cape_topein, :ii_zona, :ii_area
+	SELECT IsNull(cape_invita, 0), IsNull(cape_topein, 0), zona_codigo, caar_codigo, empr_codigo
+	  INTO :li_cape_invita, :li_cape_topein, :ii_Zona, :ii_Area, :ls_Empresa
 	  FROM dbo.Casino_PersonaColacion
 	 WHERE cape_codigo = :ls_pers_codigo;
 	
-	If sqlca.SQLCode = -1 Then
-		F_ErrorBaseDatos(sqlca, "Lectura de Tabla Casino PersonaColacion")
+	If SQLCA.SQLCode = -1 Then
+		F_ErrorBaseDatos(SQLCA, "Lectura de Tabla Casino PersonaColacion")
 		Return False
-	ElseIf sqlca.SQLCode = 100 OR li_cape_invita = 0 Then
+	ElseIf SQLCA.SQLCode = 100 OR li_cape_invita = 0 Then
 		istr_Mant.Argumento[98] = "Error"
-		istr_Mant.Argumento[99] = "La persona no puede realizar invitaciones de almuerzo."
+		istr_Mant.Argumento[99] = "La persona no puede realizar invitaciones."
 		Return False
 	Else
 		li_zona			=	Integer(istr_mant.Argumento[1])
@@ -89,8 +89,8 @@ Else
 			 And cape_codigo = :ls_pers_codigo
               And camv_tipope = 1;
 
-		If sqlca.SQLCode = -1 Then
-			F_ErrorBaseDatos(sqlca, "Lectura de Tabla RemuPersonal")
+		If SQLCA.SQLCode = -1 Then
+			F_ErrorBaseDatos(SQLCA, "Lectura de Tabla Personal")
 			Return False
 		ElseIf li_invitados >= li_cape_topein Then
 			istr_Mant.Argumento[98] = "Error"
@@ -222,12 +222,12 @@ dw_1.AcceptText()
 
 ls_tarjeta	=	dw_1.Object.cape_codigo[1]
 
-IF Left(ls_tarjeta, 1) = 'E' OR Left(ls_tarjeta, 1) = 'I' THEN
-	ls_tarjeta	=	Right(ls_tarjeta, Len(ls_tarjeta) - 3)
-END IF
+//If Left(ls_tarjeta, 1) = 'E' OR Left(ls_tarjeta, 1) = 'I' Then
+//	ls_tarjeta	=	Right(ls_tarjeta, Len(ls_tarjeta) - 3)
+//End If
 
-IF NOT IsNull(ls_tarjeta) THEN
-	IF ExisteTarjeta(ls_tarjeta) THEN
+If Not IsNull(ls_tarjeta) Then
+	If wf_ExisteTarjeta(ls_tarjeta) Then
 		istr_mant.Argumento[04]	=	ls_pers_codigo
 		istr_mant.Argumento[05]	=	ls_pers_apepat
 		istr_mant.Argumento[06]	=	ls_pers_apemat
@@ -237,12 +237,14 @@ IF NOT IsNull(ls_tarjeta) THEN
 		istr_mant.Argumento[10]	=	String(li_cape_topein)
 		istr_mant.Argumento[11]	=	String(ii_zona)
 		istr_mant.Argumento[12]	=	String(ii_area)
+		istr_mant.Argumento[13]	=	String(li_Costo)
+		istr_mant.Argumento[14]	=	ls_Empresa
 		
 		CloseWithReturn(Parent, istr_mant)
-	ELSE
+	Else
 		pb_cancela.TriggerEvent(Clicked!)
-	END IF
-END IF
+	End If
+End If
 end event
 
 type dw_1 from datawindow within w_mant_tarjeta_anfitrion

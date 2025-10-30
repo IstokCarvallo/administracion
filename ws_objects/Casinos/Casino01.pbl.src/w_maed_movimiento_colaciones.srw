@@ -29,6 +29,12 @@ type dw_3 from datawindow within w_maed_movimiento_colaciones
 end type
 type dw_4 from datawindow within w_maed_movimiento_colaciones
 end type
+type pb_asistencia from picturebutton within w_maed_movimiento_colaciones
+end type
+type dw_asistencia from datawindow within w_maed_movimiento_colaciones
+end type
+type dw_tipocomida from datawindow within w_maed_movimiento_colaciones
+end type
 end forward
 
 global type w_maed_movimiento_colaciones from w_mant_directo
@@ -45,6 +51,9 @@ tab_1 tab_1
 dw_2 dw_2
 dw_3 dw_3
 dw_4 dw_4
+pb_asistencia pb_asistencia
+dw_asistencia dw_asistencia
+dw_tipocomida dw_tipocomida
 end type
 global w_maed_movimiento_colaciones w_maed_movimiento_colaciones
 
@@ -52,6 +61,7 @@ type variables
 Integer								ii_zona, ii_area, ii_tipoco
 Date									id_fecha
 Long									il_tabs
+String									is_Filter
 
 DataWindowChild					idwc_colaciones, idwc_horarios, idwc_colacionesimp, idwc_horariosimp
 
@@ -60,38 +70,15 @@ vuo_tab_movtocasino				iuo_tab[]
 end variables
 
 forward prototypes
-public function boolean cargatabs ()
 public function integer cargasecuencia ()
+public function boolean wf_cargatabs ()
 end prototypes
-
-public function boolean cargatabs ();Boolean 	lb_retorno = True
-Integer	li_filas, li_fila
-
-FOR li_filas =	1 TO dw_2.RowCount()
-	il_tabs ++
-	iuo_tab[il_tabs]					=	Create vuo_tab_movtocasino
-	tab_1.OpenTab(iuo_tab[il_tabs], 0)
-	Tab_1.Control[il_tabs].Text	=	"Nombre"
-	Tab_1.SelectTab(il_tabs)
-	iuo_tab[il_tabs].Referencias(This, gstr_us.Nombre, dw_2.Object.tico_codigo[li_filas],Date(em_fecha.Text))
-	
-	IF NOT iuo_tab[il_tabs].Filtra() THEN 
-		lb_retorno	=	False
-		EXIT
-	END IF
-	
-	Tab_1.Control[il_tabs].Text	=	dw_2.Object.tico_abrevi[li_filas]
-	
-NEXT
-
-Return lb_retorno
-end function
 
 public function integer cargasecuencia ();Integer	li_secuencia, li_zona, li_area
 Date		ld_fecha
 
-li_zona	=	iuo_percasino.zona_codigo
-li_area	=	iuo_percasino.caar_codigo
+li_zona	=	iuo_percasino.Zona
+li_area	=	iuo_percasino.Area
 ld_fecha	=	Date(em_fecha.Text)
 
 select max(IsNull(camv_secuen, 0))
@@ -106,7 +93,33 @@ IF sqlca.SqlCode = -1 THEN
 	RETURN -1
 END IF
 
-Return li_secuencia + 1
+Return li_secuencia + 1 
+end function
+
+public function boolean wf_cargatabs ();Boolean 	lb_retorno = True
+Integer	li_filas, li_fila
+
+If il_tabs = 0 Then
+	For li_filas = 1 To dw_2.RowCount()
+		il_tabs ++
+		iuo_tab[il_tabs]					=	Create vuo_tab_movtocasino
+		tab_1.OpenTab(iuo_tab[il_tabs], 0)
+		Tab_1.Control[il_tabs].Text	=	"Nombre"
+		Tab_1.SelectTab(il_tabs)
+		iuo_tab[il_tabs].Referencias(This, gstr_us.Nombre, dw_2.Object.tico_codigo[li_filas],Date(em_fecha.Text))
+		
+		If Not iuo_tab[il_tabs].Filtra() Then 
+			lb_Retorno	=	False
+			Exit
+		End If
+		
+		Tab_1.Control[il_tabs].Text	=	dw_2.Object.tico_abrevi[li_filas]
+	Next
+Else
+	Tab_1.SelectTab(il_tabs)
+End If
+
+Return lb_retorno
 end function
 
 on w_maed_movimiento_colaciones.create
@@ -121,6 +134,9 @@ this.tab_1=create tab_1
 this.dw_2=create dw_2
 this.dw_3=create dw_3
 this.dw_4=create dw_4
+this.pb_asistencia=create pb_asistencia
+this.dw_asistencia=create dw_asistencia
+this.dw_tipocomida=create dw_tipocomida
 iCurrent=UpperBound(this.Control)
 this.Control[iCurrent+1]=this.tab_2
 this.Control[iCurrent+2]=this.st_1
@@ -131,6 +147,9 @@ this.Control[iCurrent+6]=this.tab_1
 this.Control[iCurrent+7]=this.dw_2
 this.Control[iCurrent+8]=this.dw_3
 this.Control[iCurrent+9]=this.dw_4
+this.Control[iCurrent+10]=this.pb_asistencia
+this.Control[iCurrent+11]=this.dw_asistencia
+this.Control[iCurrent+12]=this.dw_tipocomida
 end on
 
 on w_maed_movimiento_colaciones.destroy
@@ -144,6 +163,9 @@ destroy(this.tab_1)
 destroy(this.dw_2)
 destroy(this.dw_3)
 destroy(this.dw_4)
+destroy(this.pb_asistencia)
+destroy(this.dw_asistencia)
+destroy(this.dw_tipocomida)
 end on
 
 event open;call super::open;iuo_percasino			=	Create uo_personacasino
@@ -166,8 +188,7 @@ em_fecha.Text		=	String(Today(), 'dd/mm/yyyy')
 buscar			= "Estado:Ncamv_estado,Rut:Scape_codigo,Ape.Pat.:Scape_apepat,Ape.Mat.:Scape_apemat,Nombre:Scape_nombre"
 ordenar			= "Estado:camv_estado,Rut:cape_codigo,Ape.Pat.:cape_apepat,Ape.Mat.:cape_apemat,Nombre:cape_nombre"
 
-IF NOT iuo_percasino.Existe(gstr_us.Nombre, True, sqlca) THEN Close(This)
-
+//If Not iuo_percasino.Existe(gstr_us.Nombre, True, SQLCA) Then Close(This)
 end event
 
 event ue_recuperadatos;Date		ld_Fecha
@@ -189,14 +210,14 @@ ll_Filas	=	dw_1.Retrieve(gstr_us.Nombre, ld_Fecha)
 If ll_Filas = -1 Then
 	F_ErrorBaseDatos(sqlca, "Lectura de Tabla Movimiento Casino")
 	dw_1.SetRedraw(True)
-	RETURN
+	Return
 Else
 	pb_Grabar.Enabled			=	True
-	ll_Filas	=	dw_2.Retrieve(iuo_percasino.zona_codigo, ld_Fecha)
+	ll_Filas	=	dw_2.Retrieve(iuo_percasino.zona, ld_Fecha)
 
 	If ll_Filas = -1 Then
 		F_ErrorBaseDatos(sqlca, "Lectura de Tabla Horarios de Colaciones")
-		RETURN
+		Return
 	Else
 		If ll_filas < 1 Then
 			Messagebox("Error", "No Existen eventos para el dia ingresado", Exclamation!)
@@ -205,17 +226,18 @@ Else
 			ll_Filas	=	dw_3.Retrieve(gstr_us.Nombre)		
 			If ll_Filas = -1 Then
 				F_ErrorBaseDatos(sqlca, "Lectura de Tabla de Personal Colación")
-				RETURN
+				Return
 			Else
 				If ll_filas < 1 Then
 					Messagebox("Error", "No Existe Personal asociado al usuario ingresado", Exclamation!)
 					Return
 				Else
-					If NOT CargaTabs() Then
+					If Not wf_CargaTabs() Then
 						Close(This)
 					Else
 						pb_lectura.Enabled	=	False
 						pb_imprimir.Enabled	=	True
+						
 					End If
 				End If
 			End If
@@ -236,62 +258,70 @@ dw_1.x					=	78
 tab_1.x					=	dw_1.x
 tab_2.x					=	dw_1.x
 st_encabe.x				=	dw_1.x
-st_encabe.width		=	dw_1.width
+st_encabe.Width		=	dw_1.Width
 
 li_posic_x				=	This.WorkSpaceWidth() - 370
 li_posic_y				=	30
 
 pb_lectura.x				=	li_posic_x
 pb_lectura.y				=	li_posic_y
-pb_lectura.width		=	li_Ancho
-pb_lectura.height		=	li_Alto
+pb_lectura.Width		=	li_Ancho
+pb_lectura.Height		=	li_Alto
 
 li_posic_y 				+= li_Siguiente * 1.25
 
-IF pb_nuevo.Visible THEN
+If pb_nuevo.Visible Then
 	pb_nuevo.x			=	li_posic_x
 	pb_nuevo.y			=	li_posic_y
-	pb_nuevo.width	=	li_Ancho
-	pb_nuevo.height	=	li_Alto
+	pb_nuevo.Width	=	li_Ancho
+	pb_nuevo.Height	=	li_Alto
 	li_posic_y 			+= li_Siguiente
-END IF
+End If
 
-IF pb_insertar.Visible THEN
+If pb_insertar.Visible Then
 	pb_insertar.x		=	li_posic_x
 	pb_insertar.y		=	li_posic_y
-	pb_insertar.width	=	li_Ancho
-	pb_insertar.height	=	li_Alto
+	pb_insertar.Width	=	li_Ancho
+	pb_insertar.Height	=	li_Alto
 	li_posic_y += li_Siguiente
-END IF
+End If
 
-IF pb_eliminar.Visible THEN
+If pb_eliminar.Visible Then
 	pb_eliminar.x			=	li_posic_x
 	pb_eliminar.y			=	li_posic_y
-	pb_eliminar.width		=	li_Ancho
-	pb_eliminar.height	=	li_Alto
+	pb_eliminar.Width		=	li_Ancho
+	pb_eliminar.Height	=	li_Alto
 	li_posic_y += li_Siguiente
-END IF
+End If
 
-IF pb_grabar.Visible THEN
+If pb_grabar.Visible Then
 	pb_grabar.x				=	li_posic_x
 	pb_grabar.y				=	li_posic_y
-	pb_grabar.width		=	li_Ancho
-	pb_grabar.height		=	li_Alto
+	pb_grabar.Width		=	li_Ancho
+	pb_grabar.Height		=	li_Alto
 	li_posic_y += li_Siguiente
-END IF
+End If
 
-IF pb_imprimir.Visible THEN
+If pb_imprimir.Visible Then
 	pb_imprimir.x			=	li_posic_x
 	pb_imprimir.y			=	li_posic_y
-	pb_imprimir.width		=	li_Ancho
-	pb_imprimir.height	=	li_Alto
+	pb_imprimir.Width		=	li_Ancho
+	pb_imprimir.Height	=	li_Alto
 	li_posic_y += li_Siguiente
-END IF
+End If
+
+If pb_Asistencia.Visible Then
+	pb_Asistencia.x			=	li_posic_x
+	pb_Asistencia.y			=	li_posic_y
+	pb_Asistencia.Width	=	li_Ancho
+	pb_Asistencia.Height	=	li_Alto
+	li_posic_y += li_Siguiente
+End If
 
 pb_salir.x				=	li_posic_x
 pb_salir.y				=	dw_1.y + dw_1.Height - li_Siguiente
-pb_salir.width			=	li_Ancho
-pb_salir.height			=	li_Alto
+pb_salir.Width			=	li_Ancho
+pb_salir.Height			=	li_Alto
 end event
 
 event ue_antesguardar;Integer	li_secuencia, li_filas = 1, li_area, li_invitados
@@ -439,7 +469,6 @@ integer height = 212
 end type
 
 type pb_nuevo from w_mant_directo`pb_nuevo within w_maed_movimiento_colaciones
-boolean visible = false
 integer x = 3493
 integer y = 1456
 end type
@@ -447,6 +476,7 @@ end type
 event pb_nuevo::clicked;dw_1.Reset()
 dw_2.Reset()
 dw_3.Reset()
+
 Pb_Lectura. Enabled = True
 
 
@@ -487,8 +517,8 @@ end type
 
 type dw_1 from w_mant_directo`dw_1 within w_maed_movimiento_colaciones
 boolean visible = false
-integer x = 64
-integer y = 272
+integer x = 37
+integer y = 384
 integer width = 3282
 integer height = 1632
 string dataobject = "dw_mues_movtocolaciones"
@@ -499,9 +529,9 @@ end event
 
 type tab_2 from tab within w_maed_movimiento_colaciones
 boolean visible = false
-integer x = 59
-integer y = 256
-integer width = 3264
+integer x = 37
+integer y = 384
+integer width = 3255
 integer height = 1632
 integer taborder = 10
 boolean enabled = false
@@ -529,9 +559,8 @@ end on
 
 type tabpage_1 from vuo_tab_movtocasino within tab_2
 integer x = 18
-integer y = 116
-integer width = 3227
-integer height = 1500
+integer y = 112
+integer width = 3218
 long backcolor = 16711680
 string text = "Colación"
 long tabtextcolor = 0
@@ -633,15 +662,17 @@ end type
 
 event selectionchanged;Integer	li_area
 
-li_area	=	iuo_tab[NewIndex].iuo_percas.caar_codigo
+li_area	=	iuo_tab[NewIndex].iuo_percas.Area
 iuo_tab[NewIndex].Referencias(Parent, gstr_us.Nombre, dw_2.Object.tico_codigo[NewIndex],Date(em_fecha.Text))
 iuo_tab[NewIndex].Filtra()
+is_Filter = iuo_tab[NewIndex].of_GetFilter()
+
 end event
 
 type dw_2 from datawindow within w_maed_movimiento_colaciones
 boolean visible = false
-integer x = 3497
-integer y = 1108
+integer x = 3328
+integer y = 320
 integer width = 155
 integer height = 132
 integer taborder = 90
@@ -654,8 +685,8 @@ end type
 
 type dw_3 from datawindow within w_maed_movimiento_colaciones
 boolean visible = false
-integer x = 3497
-integer y = 1288
+integer x = 3328
+integer y = 480
 integer width = 155
 integer height = 132
 integer taborder = 40
@@ -676,6 +707,107 @@ integer taborder = 30
 boolean bringtotop = true
 string title = "none"
 string dataobject = "dw_genera_valesinvitado"
+boolean livescroll = true
+borderstyle borderstyle = stylelowered!
+end type
+
+type pb_asistencia from picturebutton within w_maed_movimiento_colaciones
+string tag = "Carga Asistencia Contratista"
+integer x = 3474
+integer y = 1152
+integer width = 329
+integer height = 288
+integer taborder = 50
+boolean bringtotop = true
+integer textsize = -10
+integer weight = 400
+fontcharset fontcharset = ansi!
+fontpitch fontpitch = variable!
+fontfamily fontfamily = swiss!
+string facename = "Tahoma"
+boolean originalsize = true
+string picturename = "\Desarrollo 17\Imagenes\Botones\lista.png"
+alignment htextalign = left!
+end type
+
+event clicked;Transaction		lt_Tran
+uo_coneccion	luo_Conecta
+
+Long				ll_Fila, ll_Find, ll_FilaD
+String				ls_Rut, ls_Find
+
+SetPointer(HourGlass!)
+
+luo_Conecta	=	Create uo_coneccion
+lt_Tran		=	Create Transaction
+
+luo_Conecta.of_Conecta(lt_Tran, 90)
+dw_TipoComida.SetTransObject(SQLCA)
+dw_TipoComida.Retrieve(-1)
+
+If luo_Conecta.Conectado Then
+	
+	dw_1.SetRedraw(False)
+	dw_1.SetFilter("")
+	dw_1.Filter()
+
+	dw_Asistencia.SetTransObject(lt_Tran)
+	
+	ll_Fila = dw_Asistencia.Retrieve(Date(em_Fecha.Text), '-1')
+	
+	If ll_Fila = -1 Then
+		F_ErrorBaseDatos(lt_Tran, "Lectura de Asistencia Contratista.")
+		Return 
+	Else
+		For ll_Fila = 1 To dw_Asistencia.RowCount()
+			ls_Rut			=	Mid(dw_Asistencia.Object.aspe_identi[ll_Fila], 1, 10)
+			ls_Rut	 		= Fill('0', 10 - Len(ls_Rut)) + ls_Rut
+			
+			For ll_FilaD = 1 To dw_TipoComida.RowCount()
+				ls_Find = "cape_codigo = '" + ls_Rut + "' and tico_codigo = " + String(dw_TipoComida.Object.tico_codigo[ll_FilaD])
+				ll_Find = dw_1.Find(ls_Find, 1, dw_1.RowCount(), Primary!)			
+				If ll_Find > 0 Then dw_1.Object.camv_estado[ll_Find]	=	3
+			Next
+		Next
+	End If
+	
+	dw_1.SetFilter(is_Filter)
+	dw_1.Filter()
+	dw_1.SetRedraw(True)
+	
+End If
+
+Destroy lt_Tran
+Destroy luo_Conecta
+
+SetPointer(Arrow!)
+
+end event
+
+type dw_asistencia from datawindow within w_maed_movimiento_colaciones
+boolean visible = false
+integer x = 3328
+integer y = 640
+integer width = 155
+integer height = 132
+integer taborder = 50
+boolean bringtotop = true
+string title = "none"
+string dataobject = "dw_cargaasistencia"
+boolean livescroll = true
+borderstyle borderstyle = stylelowered!
+end type
+
+type dw_tipocomida from datawindow within w_maed_movimiento_colaciones
+boolean visible = false
+integer x = 3328
+integer y = 800
+integer width = 155
+integer height = 132
+integer taborder = 60
+boolean bringtotop = true
+string title = "none"
+string dataobject = "dw_mues_tipocolacion"
 boolean livescroll = true
 borderstyle borderstyle = stylelowered!
 end type

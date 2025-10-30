@@ -1136,8 +1136,8 @@ End If
 end event
 
 type pb_cierre from picturebutton within w_maed_despachos
-integer x = 3886
-integer y = 1196
+integer x = 3877
+integer y = 1008
 integer width = 302
 integer height = 244
 integer taborder = 50

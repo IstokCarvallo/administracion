@@ -14,7 +14,7 @@ global variables
 str_aplicacion	   gstr_apl
 str_usuario		   gstr_us 
 str_paramcontabilidad gstr_parcontab
-str_parametros	gstr_param
+str_parametros		gstr_param
 
 String			nom_empresa, rut_empresa, dir_empresa, tel_empresa, gs_base, &
 				gs_CodEmbalaje, gs_disco, gs_password, gs_arreglo1, gs_traspasa,&
@@ -47,8 +47,13 @@ string appicon = "\Desarrollo 17\Imagenes\Sistemas\Casinos.ico"
 string appruntimeversion = "22.0.0.1892"
 boolean manualsession = false
 boolean unsupportedapierror = false
+boolean ultrafast = false
 boolean bignoreservercertificate = false
 uint ignoreservercertificate = 0
+long webview2distribution = 0
+boolean webview2checkx86 = false
+boolean webview2checkx64 = false
+string webview2url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/"
 end type
 global control_casinos control_casinos
 

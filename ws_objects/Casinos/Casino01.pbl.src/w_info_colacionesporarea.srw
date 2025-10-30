@@ -8,7 +8,7 @@ end forward
 
 global type w_info_colacionesporarea from w_para_informes
 integer width = 2354
-integer height = 1224
+integer height = 1304
 string title = "INFORME DE COLACIONES POR AREA"
 dw_1 dw_1
 end type
@@ -21,6 +21,7 @@ uo_zona						iuo_zona
 uo_casino_areas			iuo_area
 uo_centrocosto				iuo_ccosto
 uo_clienprove				iuo_contra
+uo_Empresa					iuo_Empresas
 uo_casino_tipocolacion	uo_tico
 uo_casino_colacion		uo_caco
 
@@ -51,15 +52,17 @@ ldwc_caco.SetTransObject(sqlca)
 dw_1.SetTransObject(sqlca)
 
 dw_1.InsertRow(0)
+ldwc_area.Retrieve(-1, '*')
 ldwc_contratista.Retrieve(1)
 
-iuo_zona		=	Create uo_zona						
-iuo_area		=	Create uo_casino_areas		
-uo_tico		=	Create uo_casino_tipocolacion	
+iuo_zona			=	Create uo_zona						
+iuo_area			=	Create uo_casino_areas		
+uo_tico			=	Create uo_casino_tipocolacion	
 
-iuo_ccosto	=	Create uo_centrocosto			
-iuo_contra	=	Create uo_clienprove				
-uo_caco		=	Create uo_casino_colacion		
+iuo_ccosto		=	Create uo_centrocosto			
+iuo_contra		=	Create uo_clienprove				
+uo_caco			=	Create uo_casino_colacion
+iuo_Empresas	=	Create uo_Empresa	
 
 dw_1.Object.Desde[1]	=	Today()
 dw_1.Object.Hasta[1]		=	Today()
@@ -103,7 +106,7 @@ end type
 
 event pb_acepta::clicked;Integer 	li_Zona, li_Area, li_CCosto, li_Tico, li_Caco, li_Estado, li_Filtro, li_ConsPer
 Date 		ld_FechaIni, ld_FechaTer
-String 	ls_RutCont, ls_filtro
+String 	ls_RutCont, ls_filtro, ls_Empresa
 Long		fila
 
 SetPointer(HourGlass!)
@@ -227,6 +230,18 @@ Else
 	ls_filtro	=	ls_filtro + "Todos Pers./"
 End If
 
+If dw_1.Object.todos[1] = 1 Then
+	ls_Empresa 	= '*'
+	ls_filtro	=	ls_filtro + "Todos Empresa/"
+Else
+	ls_Empresa = dw_1.Object.empresa[1]
+	If IsNull(ls_Empresa) Then
+		MessageBox( "Estado Erróneo", "Falta seleccionar una Empresa.", StopSign!, Ok!)
+		Return				 
+   End If
+	ls_filtro	=	ls_filtro + "Empresa " + ls_Empresa + "/"
+End If
+
 ld_FechaIni	=	dw_1.Object.desde[1]
 ld_FechaTer	=	dw_1.Object.hasta[1]
 
@@ -246,7 +261,7 @@ Else
 End If
 
 vinf.dw_1.SetTransObject(sqlca)
-fila = vinf.dw_1.Retrieve(ld_FechaIni, li_Area, li_Tico, ld_FechaTer)
+fila = vinf.dw_1.Retrieve(ld_FechaIni, li_Area, li_Tico, ld_FechaTer, ls_Empresa)
 
 If fila = -1 Then
 	MessageBox( "Error en Base de Datos", "Se ha producido un error en Base " + &
@@ -271,7 +286,7 @@ type dw_1 from datawindow within w_info_colacionesporarea
 integer x = 251
 integer y = 440
 integer width = 1577
-integer height = 604
+integer height = 696
 integer taborder = 10
 boolean bringtotop = true
 string dataobject = "dw_encab_info_colaciones_por_area"
@@ -293,22 +308,30 @@ CHOOSE Case ls_columna
 			This.Object.zona[Row]		=	li_nulo
 			Return 1
 		Else
-			ldwc_area.Retrieve(Integer(data))
+			ldwc_area.Retrieve(Integer(data), iuo_Empresas.Rut)
 			ldwc_tico.Retrieve(Integer(data))
 			This.Object.area[row]		=	li_nulo
 			This.Object.area[row]		=	li_nulo
 			This.Object.tico[row]		=	li_nulo
 			This.Object.caco[row]		=	li_nulo
 		End If
+	
+	Case "empresa"
+		If NOT iuo_Empresas.of_Existe(data, True, sqlca) Then
+			This.Object.empresa[Row]		=	String(li_nulo)
+			Return 1
+		Else
+			ldwc_area.Retrieve(This.Object.zona[1], data)
+		End If 
 
 	Case "area"
-		If NOT iuo_area.Existe(This.Object.zona[row], Integer(data), True, sqlca) Then
+		If NOT iuo_area.Existe(This.Object.zona[row], iuo_Empresas.Rut, Integer(data), True, sqlca) Then
 			This.Object.area[Row]		=	li_nulo
 			Return 1
 		End If
 
 	Case "ccosto"
-		If NOT iuo_ccosto.Existe(Integer(data), True, sqlca) Then
+		If NOT iuo_ccosto.of_Existe('', Integer(data), True, sqlca) Then
 			This.Object.ccosto[Row]		=	li_nulo
 			Return 1
 		End If
@@ -329,7 +352,7 @@ CHOOSE Case ls_columna
 		End If
 
 	Case "caco"
-		If NOT uo_caco.Existe(This.Object.zona[row], This.Object.tico[row], Integer(data), True, sqlca) Then
+		If NOT uo_caco.of_Existe(This.Object.zona[row], This.Object.tico[row], Integer(data), True, sqlca) Then
 			This.Object.caco[Row]		=	li_nulo
 			Return 1
 		End If
@@ -345,6 +368,13 @@ CHOOSE Case ls_columna
 			This.Object.todostico[row]		=	1
 			This.Object.todoscaco[row]		=	1
 			
+		End If
+		
+	Case "todos"
+		If Data = '1' Then
+			This.Object.zona[row]			=	li_nulo
+			This.Object.area[row]			=	li_nulo
+			This.Object.Empresa[row]		=	String(li_nulo)
 		End If
 		
 	Case "todosarea"

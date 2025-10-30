@@ -229,18 +229,18 @@ ls_columna	=	dwo.name
 
 Choose Case ls_columna
 	Case "caar_codigo"
-		If Not iuo_area.Existe(iuo_Zona.Codigo, Integer(Data), True, SQLCa) Or Duplicado(Data)Then
-			This.Object.caar_codigo[row]	=	Integer(ls_Nulo)
-			This.Object.ccos_codigo[row]	=	Integer(ls_Nulo)
-			This.Object.caar_nombre[row]	=	ls_nulo
-			Return 1
-		Else
-			This.Object.caar_codigo[row]	=	iuo_area.caar_codigo
-			This.Object.caar_nombre[row]	=	iuo_area.caar_nombre
-			This.Object.ccos_codigo[row]	=	iuo_area.ccos_codigo
-			This.Object.zona_codigo[row]	=	iuo_Zona.Codigo
-			This.Object.cape_codigo[row]	=	iuo_persona.Codigo			
-		End If
+//		If Not iuo_area.Existe(iuo_Zona.Codigo, Integer(Data), True, SQLCa) Or Duplicado(Data)Then
+//			This.Object.caar_codigo[row]	=	Integer(ls_Nulo)
+//			This.Object.ccos_codigo[row]	=	Integer(ls_Nulo)
+//			This.Object.caar_nombre[row]	=	ls_nulo
+//			Return 1
+//		Else
+//			This.Object.caar_codigo[row]	=	iuo_area.caar_codigo
+//			This.Object.caar_nombre[row]	=	iuo_area.caar_nombre
+//			This.Object.ccos_codigo[row]	=	iuo_area.ccos_codigo
+//			This.Object.zona_codigo[row]	=	iuo_Zona.Codigo
+//			This.Object.cape_codigo[row]	=	iuo_persona.Codigo			
+//		End If
 End Choose
 end event
 

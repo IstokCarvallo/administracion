@@ -28,5 +28,6 @@ global type str_parempresa from structure
 	integer		conecion_guiaelectronica_comer
 	string		ubicacion_dte_comercial
 	string		ubicacion_pdfdte_comercial
+	integer		EnviaCorreo
 end type
 

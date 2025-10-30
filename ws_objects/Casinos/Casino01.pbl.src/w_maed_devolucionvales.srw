@@ -394,12 +394,12 @@ CHOOSE CASE ls_columna
 		END IF
 
 	CASE "caar_codigo"
-		IF NOT iuo_area.Existe(Integer(istr_mant.argumento[1]), Integer(data), True, Sqlca) THEN
-			This.Object.caar_codigo[row]	=	li_null
-			Return 1
-		ELSE
-			istr_mant.argumento[2]			=	data
-		END IF
+//		IF NOT iuo_area.of_Existe('', Integer(istr_mant.argumento[1]), Integer(data), True, Sqlca) THEN
+//			This.Object.caar_codigo[row]	=	li_null
+//			Return 1
+//		ELSE
+//			istr_mant.argumento[2]			=	data
+//		END IF
 
 	CASE "clpr_rut"
 		IF NOT iuo_rut.existe(data, True, Sqlca) THEN

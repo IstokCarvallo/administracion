@@ -87,11 +87,19 @@ iuo_Comuna.Codigo	=	dw_1.GetItemNumber(il_fila, "comu_codigo")
 If Not istr_mant.Agrega Then
 	dw_1.Object.prov_codigo.Protect				=	1
 	dw_1.Object.prov_nrorut.Protect				=	1
-	dw_1.Object.prov_codigo.Color					=	0
-	dw_1.Object.prov_nrorut.Color					=	0
+	dw_1.Object.prov_codigo.Color					=	RGB(255,255,255)
+	dw_1.Object.prov_nrorut.Color					=	RGB(255,255,255)
 	dw_1.Object.prov_codigo.BackGround.Color	=	553648127
 	dw_1.Object.prov_nrorut.BackGround.Color	=	553648127
 End If
+
+dw_1.GetChild("regi_codigo", idwc_Region)
+idwc_Region.SetTransObject(Sqlca)
+If idwc_Region.Retrieve(dw_1.Object.pais_codigo[il_Fila]) = 0 Then idwc_Region.InsertRow(0)
+
+dw_1.GetChild("comu_codigo", idwc_Comuna)
+idwc_Comuna.SetTransObject(Sqlca)
+If idwc_Comuna.Retrieve(dw_1.Object.pais_codigo[il_Fila], dw_1.Object.regi_codigo[il_Fila]) = 0 Then idwc_Comuna.InsertRow(0)
 
 dw_1.SetFocus()
 end event

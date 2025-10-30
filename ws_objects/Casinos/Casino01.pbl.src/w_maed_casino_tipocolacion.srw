@@ -186,7 +186,7 @@ end event
 event ue_antesguardar;call super::ue_antesguardar;Long		ll_Fila
 Integer	li_Secuencia
 
-li_Secuencia	=	iuo_TipoColacion.Secuencias(iuo_TipoColacion.Codigo, sqlca)
+li_Secuencia	=	iuo_TipoColacion.of_Secuencias(iuo_TipoColacion.Codigo, sqlca)
 
 FOR ll_Fila = 1 TO dw_1.RowCount()
 	IF dw_1.GetItemStatus(ll_Fila, 0, Primary!) = NewModified! THEN
@@ -230,7 +230,7 @@ end event
 event ue_guardar;call super::ue_guardar;//iuo_TipoColacion.Existe(dw_2.Object.tico_codigo[1], False, sqlca)
 end event
 
-event ue_seleccion;call super::ue_seleccion;IF iuo_TipoColacion.Busqueda(sqlca, iuo_Zona.Codigo) THEN
+event ue_seleccion;call super::ue_seleccion;IF iuo_TipoColacion.of_Busqueda(sqlca, iuo_Zona.Codigo) THEN
 	This.TriggerEvent("ue_recuperadatos")
 ELSE
 	pb_buscar.SetFocus()
@@ -332,7 +332,7 @@ CHOOSE CASE ls_Columna
 		END IF
 		
 	CASE "tico_codigo"
-		IF iuo_TipoColacion.Existe(This.Object.zona_codigo[row], Integer(Data), False, sqlca) THEN
+		IF iuo_TipoColacion.of_Existe(This.Object.zona_codigo[row], Integer(Data), False, sqlca) THEN
 			This.AcceptText()
 			Parent.TriggerEvent("ue_recuperadatos")
 		Else

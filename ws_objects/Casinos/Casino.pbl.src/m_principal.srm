@@ -3,7 +3,17 @@ $PBExportComments$Menú de Sistema
 forward
 global type m_principal from m_sys_frame
 end type
+type m_empresas from menu within m_aplicacion
+end type
+type m_sucursal from menu within m_aplicacion
+end type
+type m_zonasucursal from menu within m_aplicacion
+end type
 type m_conectividad from menu within m_aplicacion
+end type
+type m_turno from menu within m_aplicacion
+end type
+type m_cargaturnos from menu within m_aplicacion
 end type
 type m_proveedoresyservicios from menu within m_aplicacion
 end type
@@ -19,6 +29,8 @@ type m_personalparacolación from menu within m_aplicacion
 end type
 type m_contactoporarea from menu within m_aplicacion
 end type
+type m_cargaplantillacolacion from menu within m_aplicacion
+end type
 type m_colaciones from menu within m_aplicacion
 end type
 type m_valorcolación from menu within m_aplicacion
@@ -28,10 +40,16 @@ end type
 type m_parametroscasino from menu within m_aplicacion
 end type
 type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_empresas m_empresas
+m_sucursal m_sucursal
+m_zonasucursal m_zonasucursal
 m_conectividad m_conectividad
+m_turno m_turno
+m_cargaturnos m_cargaturnos
 m_proveedoresyservicios m_proveedoresyservicios
 m_personalparacolación m_personalparacolación
 m_contactoporarea m_contactoporarea
+m_cargaplantillacolacion m_cargaplantillacolacion
 m_colaciones m_colaciones
 m_valorcolación m_valorcolación
 m_horariosdecolaciones m_horariosdecolaciones
@@ -45,7 +63,13 @@ type m_movimientos from m_sys_frame`m_movimientos within m_principal
 m_0 m_0
 m_pedidos m_pedidos
 end type
+type m_regularizacion from menu within m_procesos
+end type
+type m_2 from menu within m_procesos
+end type
 type m_controlcolaciones from menu within m_procesos
+end type
+type m_desasignafiniquitados from menu within m_procesos
 end type
 type m_aprobaciondepedidos from menu within m_procesos
 end type
@@ -63,7 +87,10 @@ m_entrega m_entrega
 m_recepciona m_recepciona
 end type
 type m_procesos from m_sys_frame`m_procesos within m_principal
+m_regularizacion m_regularizacion
+m_2 m_2
 m_controlcolaciones m_controlcolaciones
+m_desasignafiniquitados m_desasignafiniquitados
 m_aprobaciondepedidos m_aprobaciondepedidos
 m_valescontratista m_valescontratista
 end type
@@ -411,10 +438,16 @@ call super::destroy
 end on
 
 type m_aplicacion from m_sys_frame`m_aplicacion within m_principal
+m_empresas m_empresas
+m_sucursal m_sucursal
+m_zonasucursal m_zonasucursal
 m_conectividad m_conectividad
+m_turno m_turno
+m_cargaturnos m_cargaturnos
 m_proveedoresyservicios m_proveedoresyservicios
 m_personalparacolación m_personalparacolación
 m_contactoporarea m_contactoporarea
+m_cargaplantillacolacion m_cargaplantillacolacion
 m_colaciones m_colaciones
 m_valorcolación m_valorcolación
 m_horariosdecolaciones m_horariosdecolaciones
@@ -423,18 +456,30 @@ end type
 
 on m_aplicacion.create
 call super::create
+this.m_empresas=create m_empresas
+this.m_sucursal=create m_sucursal
+this.m_zonasucursal=create m_zonasucursal
 this.m_conectividad=create m_conectividad
+this.m_turno=create m_turno
+this.m_cargaturnos=create m_cargaturnos
 this.m_proveedoresyservicios=create m_proveedoresyservicios
 this.m_personalparacolación=create m_personalparacolación
 this.m_contactoporarea=create m_contactoporarea
+this.m_cargaplantillacolacion=create m_cargaplantillacolacion
 this.m_colaciones=create m_colaciones
 this.m_valorcolación=create m_valorcolación
 this.m_horariosdecolaciones=create m_horariosdecolaciones
 this.m_parametroscasino=create m_parametroscasino
+this.Item[UpperBound(this.Item)+1]=this.m_empresas
+this.Item[UpperBound(this.Item)+1]=this.m_sucursal
+this.Item[UpperBound(this.Item)+1]=this.m_zonasucursal
 this.Item[UpperBound(this.Item)+1]=this.m_conectividad
+this.Item[UpperBound(this.Item)+1]=this.m_turno
+this.Item[UpperBound(this.Item)+1]=this.m_cargaturnos
 this.Item[UpperBound(this.Item)+1]=this.m_proveedoresyservicios
 this.Item[UpperBound(this.Item)+1]=this.m_personalparacolación
 this.Item[UpperBound(this.Item)+1]=this.m_contactoporarea
+this.Item[UpperBound(this.Item)+1]=this.m_cargaplantillacolacion
 this.Item[UpperBound(this.Item)+1]=this.m_colaciones
 this.Item[UpperBound(this.Item)+1]=this.m_valorcolación
 this.Item[UpperBound(this.Item)+1]=this.m_horariosdecolaciones
@@ -443,10 +488,16 @@ end on
 
 on m_aplicacion.destroy
 call super::destroy
+destroy(this.m_empresas)
+destroy(this.m_sucursal)
+destroy(this.m_zonasucursal)
 destroy(this.m_conectividad)
+destroy(this.m_turno)
+destroy(this.m_cargaturnos)
 destroy(this.m_proveedoresyservicios)
 destroy(this.m_personalparacolación)
 destroy(this.m_contactoporarea)
+destroy(this.m_cargaplantillacolacion)
 destroy(this.m_colaciones)
 destroy(this.m_valorcolación)
 destroy(this.m_horariosdecolaciones)
@@ -473,24 +524,36 @@ destroy(this.m_pedidos)
 end on
 
 type m_procesos from m_sys_frame`m_procesos within m_principal
+m_regularizacion m_regularizacion
+m_2 m_2
 m_controlcolaciones m_controlcolaciones
+m_desasignafiniquitados m_desasignafiniquitados
 m_aprobaciondepedidos m_aprobaciondepedidos
 m_valescontratista m_valescontratista
 end type
 
 on m_procesos.create
 call super::create
+this.m_regularizacion=create m_regularizacion
+this.m_2=create m_2
 this.m_controlcolaciones=create m_controlcolaciones
+this.m_desasignafiniquitados=create m_desasignafiniquitados
 this.m_aprobaciondepedidos=create m_aprobaciondepedidos
 this.m_valescontratista=create m_valescontratista
+this.Item[UpperBound(this.Item)+1]=this.m_regularizacion
+this.Item[UpperBound(this.Item)+1]=this.m_2
 this.Item[UpperBound(this.Item)+1]=this.m_controlcolaciones
+this.Item[UpperBound(this.Item)+1]=this.m_desasignafiniquitados
 this.Item[UpperBound(this.Item)+1]=this.m_aprobaciondepedidos
 this.Item[UpperBound(this.Item)+1]=this.m_valescontratista
 end on
 
 on m_procesos.destroy
 call super::destroy
+destroy(this.m_regularizacion)
+destroy(this.m_2)
 destroy(this.m_controlcolaciones)
+destroy(this.m_desasignafiniquitados)
 destroy(this.m_aprobaciondepedidos)
 destroy(this.m_valescontratista)
 end on
@@ -916,12 +979,113 @@ on m_about.destroy
 call super::destroy
 end on
 
+type m_empresas from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_empresas, w_main, ii_Columna, Original!)
+end event
+
+on m_empresas.create
+call super::create
+this.text = "Empresas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_empresas.destroy
+call super::destroy
+end on
+
+type m_sucursal from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_sucursal, w_main, ii_Columna, Original!)
+end event
+
+on m_sucursal.create
+call super::create
+this.text = "Sucursal"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_sucursal.destroy
+call super::destroy
+end on
+
+type m_zonasucursal from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_zonasucursal, w_main, ii_Columna, Original!)
+end event
+
+on m_zonasucursal.create
+call super::create
+this.text = "Zona - Sucursal"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_zonasucursal.destroy
+call super::destroy
+end on
+
 type m_conectividad from menu within m_aplicacion
 end type
 
 on m_conectividad.create
 call super::create
+this.visible = false
 this.text = "Conecti&vidad"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -944,11 +1108,76 @@ call super::destroy
 end on
 
 event clicked;SetPointer(HourGlass!)
-
 gstr_us.OpcionActiva	=	This.ClassName()
 
 OpenSheet(w_mant_mues_contempresascons, w_main, ii_Columna, Original!)
 end event
+
+type m_turno from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_mues_turno, w_main, ii_Columna, Original!)
+end event
+
+on m_turno.create
+call super::create
+this.text = "Turno"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_turno.destroy
+call super::destroy
+end on
+
+type m_cargaturnos from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_carga_turnos, w_main, ii_Columna, Original!)
+end event
+
+on m_cargaturnos.create
+call super::create
+this.text = "Carga Turnos"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cargaturnos.destroy
+call super::destroy
+end on
 
 type m_proveedoresyservicios from menu within m_aplicacion
 m_proveedores m_proveedores
@@ -1062,7 +1291,9 @@ end event
 
 on m_personalparacolación.create
 call super::create
+this.visible = false
 this.text = "&Personal para Colación"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -1095,7 +1326,9 @@ end event
 
 on m_contactoporarea.create
 call super::create
+this.visible = false
 this.text = "Contacto por &Area"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -1114,6 +1347,39 @@ this.bitmapgradient = true
 end on
 
 on m_contactoporarea.destroy
+call super::destroy
+end on
+
+type m_cargaplantillacolacion from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_carga_plantillacolacion, w_main, ii_Columna, Original!)
+end event
+
+on m_cargaplantillacolacion.create
+call super::create
+this.text = "Carga Plantilla Colacion"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_cargaplantillacolacion.destroy
 call super::destroy
 end on
 
@@ -1260,7 +1526,9 @@ end event
 
 on m_0.create
 call super::create
+this.visible = false
 this.text = "&Colaciones"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -1293,7 +1561,9 @@ end event
 
 on m_pedidos.create
 call super::create
+this.visible = false
 this.text = "Pedidos"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -1312,6 +1582,72 @@ this.bitmapgradient = true
 end on
 
 on m_pedidos.destroy
+call super::destroy
+end on
+
+type m_regularizacion from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_carga_regularizacion, w_main, ii_Columna, Original!)
+end event
+
+on m_regularizacion.create
+call super::create
+this.text = "Regularizacion "
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_regularizacion.destroy
+call super::destroy
+end on
+
+type m_2 from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_carga_regularizamarcas, w_main, ii_Columna, Original!)
+end event
+
+on m_2.create
+call super::create
+this.text = "Carga no Marcas"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_2.destroy
 call super::destroy
 end on
 
@@ -1350,6 +1686,41 @@ on m_controlcolaciones.destroy
 call super::destroy
 end on
 
+type m_desasignafiniquitados from menu within m_procesos
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_mant_desasigna, w_main, ii_Columna, Original!)
+end event
+
+on m_desasignafiniquitados.create
+call super::create
+this.visible = false
+this.text = "Desasigna Finiquitados"
+this.enabled = false
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_desasignafiniquitados.destroy
+call super::destroy
+end on
+
 type m_aprobaciondepedidos from menu within m_procesos
 end type
 
@@ -1361,7 +1732,9 @@ end event
 
 on m_aprobaciondepedidos.create
 call super::create
+this.visible = false
 this.text = "Aprobacion de &Pedidos"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
@@ -1391,7 +1764,9 @@ end type
 
 on m_valescontratista.create
 call super::create
+this.visible = false
 this.text = "&Vales Contratista"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
