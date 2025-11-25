@@ -65,6 +65,8 @@ Else
 		
 	If ll_Filas > 0 Then
 		pb_imprimir.Enabled	=	True
+		pb_eliminar.Enabled	=	True
+		pb_grabar.Enabled	=	True
 		
 		dw_1.SetRow(1)
 		dw_1.SetFocus()

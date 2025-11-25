@@ -17,7 +17,7 @@ end forward
 global type w_carga_plantillacolacion from w_para_informes
 integer width = 2693
 integer height = 1608
-string title = "INFORME DE CONSUMOS DIARIOS"
+string title = "Plantilla Colacion"
 dw_asignacion dw_asignacion
 mle_msg mle_msg
 dw_carga dw_carga
@@ -115,6 +115,7 @@ End If
 end event
 
 type pb_excel from w_para_informes`pb_excel within w_carga_plantillacolacion
+string tag = "Carga Plantilla Excel"
 boolean visible = true
 integer x = 2304
 integer y = 768
@@ -267,6 +268,7 @@ string text = "Carga Plantilla Colaciones"
 end type
 
 type pb_acepta from w_para_informes`pb_acepta within w_carga_plantillacolacion
+string tag = "Genera Plantilla Excel"
 integer x = 2304
 integer y = 480
 string picturename = "\Desarrollo 17\Imagenes\Botones\Subir Nube.png "

@@ -25,6 +25,8 @@ type m_proveedoresyservicios from menu within m_aplicacion
 m_proveedores m_proveedores
 m_proveedoresserviciocasino m_proveedoresserviciocasino
 end type
+type m_3 from menu within m_aplicacion
+end type
 type m_personalparacolación from menu within m_aplicacion
 end type
 type m_contactoporarea from menu within m_aplicacion
@@ -47,6 +49,7 @@ m_conectividad m_conectividad
 m_turno m_turno
 m_cargaturnos m_cargaturnos
 m_proveedoresyservicios m_proveedoresyservicios
+m_3 m_3
 m_personalparacolación m_personalparacolación
 m_contactoporarea m_contactoporarea
 m_cargaplantillacolacion m_cargaplantillacolacion
@@ -445,6 +448,7 @@ m_conectividad m_conectividad
 m_turno m_turno
 m_cargaturnos m_cargaturnos
 m_proveedoresyservicios m_proveedoresyservicios
+m_3 m_3
 m_personalparacolación m_personalparacolación
 m_contactoporarea m_contactoporarea
 m_cargaplantillacolacion m_cargaplantillacolacion
@@ -463,6 +467,7 @@ this.m_conectividad=create m_conectividad
 this.m_turno=create m_turno
 this.m_cargaturnos=create m_cargaturnos
 this.m_proveedoresyservicios=create m_proveedoresyservicios
+this.m_3=create m_3
 this.m_personalparacolación=create m_personalparacolación
 this.m_contactoporarea=create m_contactoporarea
 this.m_cargaplantillacolacion=create m_cargaplantillacolacion
@@ -477,6 +482,7 @@ this.Item[UpperBound(this.Item)+1]=this.m_conectividad
 this.Item[UpperBound(this.Item)+1]=this.m_turno
 this.Item[UpperBound(this.Item)+1]=this.m_cargaturnos
 this.Item[UpperBound(this.Item)+1]=this.m_proveedoresyservicios
+this.Item[UpperBound(this.Item)+1]=this.m_3
 this.Item[UpperBound(this.Item)+1]=this.m_personalparacolación
 this.Item[UpperBound(this.Item)+1]=this.m_contactoporarea
 this.Item[UpperBound(this.Item)+1]=this.m_cargaplantillacolacion
@@ -495,6 +501,7 @@ destroy(this.m_conectividad)
 destroy(this.m_turno)
 destroy(this.m_cargaturnos)
 destroy(this.m_proveedoresyservicios)
+destroy(this.m_3)
 destroy(this.m_personalparacolación)
 destroy(this.m_contactoporarea)
 destroy(this.m_cargaplantillacolacion)
@@ -1277,6 +1284,39 @@ this.bitmapgradient = true
 end on
 
 on m_proveedoresserviciocasino.destroy
+call super::destroy
+end on
+
+type m_3 from menu within m_aplicacion
+end type
+
+event clicked;SetPointer(HourGlass!)
+gstr_us.OpcionActiva	=	This.ClassName()
+
+OpenSheet(w_carga_colaboradores_fuerazona, w_main, ii_Columna, Original!)
+end event
+
+on m_3.create
+call super::create
+this.text = "Colaboradores Fuera Zona"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_3.destroy
 call super::destroy
 end on
 

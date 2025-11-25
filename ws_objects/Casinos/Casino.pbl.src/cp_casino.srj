@@ -120,6 +120,7 @@ OBJ:C:\Desarrollo 22\ObjePubl.pbl,w_password,w
 OBJ:C:\Desarrollo 22\Tablas Estandares\TablasTab.pbl,str_clienprove,s
 OBJ:C:\Desarrollo 22\Administracion\Casinos\Casino01.pbl,dw_encab_info_proforma,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admausuarios,d
+OBJ:C:\Desarrollo 22\Administracion\Casinos\Casino01.pbl,dw_carga_colaboradores_fuerazona,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mant_admaunidadadmini,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,uo_admasistemas,u
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,dw_mues_actualizador,d
@@ -229,6 +230,7 @@ OBJ:C:\Desarrollo 22\Administracion\Casinos\Casino01.pbl,dw_mant_empresa,d
 OBJ:C:\Desarrollo 22\Administracion\Casinos\CasinoTab.pbl,uo_seleccion_empresa,u
 OBJ:C:\Desarrollo 22\Administracion\Casinos\Casino01.pbl,dw_mues_parametros_casino,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dddw_admagrupos,d
+OBJ:C:\Desarrollo 22\Administracion\Casinos\Casino01.pbl,w_carga_colaboradores_fuerazona,w
 OBJ:C:\Desarrollo 22\ObjePubl.pbl,dw_errorbasedatos,d
 OBJ:C:\Desarrollo 22\AdmUsuar.pbl,dw_mues_admagruposistema,d
 OBJ:C:\Desarrollo 22\Administracion\Casinos\Casino01.pbl,dw_mues_horariocolaciones,d

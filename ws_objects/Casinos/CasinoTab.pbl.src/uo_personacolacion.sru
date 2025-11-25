@@ -18,6 +18,7 @@ end variables
 forward prototypes
 public function boolean existe (string as_codigo, boolean ab_mensaje, transaction at_transaccion)
 public function boolean busqueda (transaction at_transaccion)
+public function boolean of_carga (string rut, string paterno, string materno, string nombre, integer zona, integer area_c, string rutempresa, boolean ab_mensaje, transaction at_transaccion)
 end prototypes
 
 public function boolean existe (string as_codigo, boolean ab_mensaje, transaction at_transaccion);Boolean	lb_Retorno = True
@@ -68,6 +69,30 @@ If UpperBound(lstr_Busq.Argum) > 2 Then
 End If
 
 RETURN lb_Retorno	
+end function
+
+public function boolean of_carga (string rut, string paterno, string materno, string nombre, integer zona, integer area_c, string rutempresa, boolean ab_mensaje, transaction at_transaccion);Boolean lb_Retorno = True
+
+Insert Into dbo.Casino_PersonaColacion(cape_codigo, cape_apepat, cape_apemat, cape_nombre, cape_usuari, zona_codigo, 
+											caar_codigo, empr_codigo, cape_tipope, cape_invita, cape_topein, cape_pedcas)
+Values(:Rut, :Paterno, :Materno, :Nombre, 
+		RTrim(SubString(:Nombre, 1, IIf(CharIndex(' ', :Nombre) > 0, CharIndex(' ', :Nombre), Len(:Nombre)))) + '.' + Rtrim(:Paterno), 
+		:Zona, :Area_C, :RutEmpresa, 0, 0, 0, 0)
+Using at_Transaccion;
+
+If at_Transaccion.SQLCode = -1 Then
+	F_ErrorBaseDatos(at_Transaccion, "Lectura de Tabla Personal de Colación")
+	
+	lb_Retorno	=	False
+ElseIf at_Transaccion.SQLCode = 100 Then
+	lb_Retorno	=	False
+
+	If ab_Mensaje Then
+		MessageBox("Atención", "Registri, no ha sido Ingresado.")	
+	End If
+End If
+							
+Return lb_Retorno
 end function
 
 on uo_personacolacion.create
