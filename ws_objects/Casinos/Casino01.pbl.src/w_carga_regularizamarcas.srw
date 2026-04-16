@@ -23,7 +23,7 @@ end type
 end forward
 
 global type w_carga_regularizamarcas from w_para_informes
-integer width = 4037
+integer width = 4046
 integer height = 2156
 string title = "INFORME DE CONSUMOS DIARIOS"
 boolean center = true
@@ -169,10 +169,17 @@ Else
 End If
 end event
 
+event resize;call super::resize;dw_1.Resize(This.WorkSpaceWidth() - 490,This.WorkSpaceHeight() - dw_1.y - 75)
+
+dw_1.x					=	78
+
+
+end event
+
 type pb_excel from w_para_informes`pb_excel within w_carga_regularizamarcas
 boolean visible = true
-integer x = 3602
-integer y = 728
+integer x = 3666
+integer y = 900
 integer taborder = 40
 integer weight = 400
 fontcharset fontcharset = ansi!
@@ -223,8 +230,8 @@ string text = "Carga Regularizacion Alimentacion"
 end type
 
 type pb_acepta from w_para_informes`pb_acepta within w_carga_regularizamarcas
-integer x = 3607
-integer y = 476
+integer x = 3671
+integer y = 648
 integer height = 240
 integer taborder = 50
 string picturename = "\Desarrollo 17\Imagenes\Botones\Busqueda.png"
@@ -261,8 +268,8 @@ uo_SelTipo.Habilita(False)
 end event
 
 type pb_salir from w_para_informes`pb_salir within w_carga_regularizamarcas
-integer x = 3602
-integer y = 1072
+integer x = 3666
+integer y = 1244
 integer taborder = 60
 end type
 
@@ -415,7 +422,7 @@ end type
 type dw_1 from uo_dw within w_carga_regularizamarcas
 integer x = 242
 integer y = 716
-integer width = 3168
+integer width = 3319
 integer height = 1228
 integer taborder = 11
 boolean bringtotop = true

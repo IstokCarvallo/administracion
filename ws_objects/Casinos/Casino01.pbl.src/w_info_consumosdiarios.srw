@@ -375,7 +375,7 @@ Choose Case ls_columna
 		End If
 		
 	Case "todosempr"
-		If Data = '1' Then This.Object.empresa[Row]	=	li_Null
+		If Data = '1' Then This.Object.empresa[Row]	=	String(li_Null)
 		
 	Case "todosarea"
 		If Data = '1' Then This.Object.area[Row] =	li_Null

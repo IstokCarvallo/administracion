@@ -1500,7 +1500,9 @@ end event
 
 on m_horariosdecolaciones.create
 call super::create
+this.visible = false
 this.text = "&Horarios de Colaciones"
+this.enabled = false
 this.menutextcolor = 134217735
 this.menubackcolor = 134217732
 this.menuhighlightcolor = 134217741
